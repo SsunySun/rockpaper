@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/common}">
+
+<!-- 해당 page 고유 pre-css 추가 -->
+<th:block layout:fragment="pre-css">
+	<!--begin::Page Vendors Styles(used by this page)-->
+	<link th:href="@{/assets/plugins/custom/datatables/datatables.bundle.css}" href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Page Vendors Styles-->
+</th:block>
+
+<!-- 해당 page 고유 post-css 추가 -->
+<th:block layout:fragment="post-css"></th:block>
+
+<!-- Content -->
+<div class="d-flex flex-column flex-root" layout:fragment="content">
+	<!--begin::Page-->
+	<div class="d-flex flex-row flex-column-fluid page">
+		<!-- aside fragment 사용 -->
+		<th:block th:if="${isAside}">
+			<th:block th:replace="@{'fragments/common/aside'} :: asideFragment"></th:block>
+		</th:block>
+		<!--begin::Wrapper-->
+		<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+			<!--begin::Content-->
+			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+				<!--begin::Entry-->
+				<div class="d-flex flex-column-fluid">
+					<!--begin::Container-->
+					<div class="container mt-5">
+						<!--begin::Card-->
+						<div class="card card-custom">
+							<!-- cardHeader fragment 사용 -->
+							<th:block th:replace="@{'fragments/common/cardHeader'} :: cardHeaderFragment"></th:block>
+							<div class="card-body">
+								<!--begin: Search Form-->
+								<form class="mb-5" id="searchForm">
+									<th:block th:each="filter : ${config.filter}">
+										<div class="row mb-6">
+											<th:block th:each="sub_filter : ${filter}">
+												<th:block th:replace="@{'fragments/common/list/uiitem/' + __${sub_filter.uiitem}__} :: fragment"></th:block>
+											</th:block>
+										</div>
+									</th:block>
+									<div class="row mt-2 justify-content-end">
+										<div class="mr-2">
+											<button class="btn btn-primary btn-primary-icon" id="kt_search">
+												<span>
+													<i class="la la-search"></i>
+													<span>조회</span>
+												</span>
+											</button>
+										</div>
+									</div>
+								</form>
+								<!--end: Search Form-->
+								<!--begin: Datatable-->
+								<table class="table table-bordered table-hover table-checkable" id="kt_datatable">
+								</table>
+								<!--end: Datatable-->
+							</div>
+						</div>
+						<!--end::Card-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Entry-->
+			</div>
+			<!--end::Content-->
+			<!-- footer fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/footer'} :: footerFragment"></th:block>
+		</div>
+		<!--end::Wrapper-->
+	</div>
+	<!--end::Page-->
+</div>
+
+<!-- 해당 page 고유 pre-script 추가 -->
+<th:block layout:fragment="pre-script"></th:block>
+
+<!-- 해당 page 고유 post-script 추가 -->
+<th:block layout:fragment="post-script">
+	<!--begin::Page Vendors(used by this page)-->
+	<script th:src="@{/assets/plugins/custom/datatables/datatables.bundle.js}" src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<!--end::Page Vendors-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:inline="javascript">
+
+		/*<![CDATA[*/
+		var object = /*[[${object}]]*/ '';
+		var config = /*[[${config}]]*/ '';
+
+		// List Script
+		/*[(${script})]*/
+		/*]]>*/
+
+	</script>
+	<script th:src="@{/assets/js/common/list-search.js}" src="/assets/js/common/list-search.js"></script>
+	<!--end::Page Scripts-->
+</th:block>
+</html>

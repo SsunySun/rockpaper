@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<!--begin::Head-->
+	<head>
+		<meta charset="utf-8" />
+		<title>rockPLACE Paper</title>
+		<meta name="description" content="Updates and statistics" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!--begin::Fonts-->
+		<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700}" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+
+		<!-- css fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/css'} :: cssFragment"></th:block>
+	</head>
+	<!--end::Head-->
+
+	<!-- body fragment 사용 -->
+	<th:block th:replace="@{'fragments/rshm/body'} :: bodyFragment"></th:block>
+</html>

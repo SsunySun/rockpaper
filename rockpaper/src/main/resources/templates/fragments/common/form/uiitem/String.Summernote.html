@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--String.TextArea Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<textarea class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" rows="3" th:disabled="${field.readonly}" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+					<!-- <div class="summernote-div">
+						<div th:id="${field.id} + '-summernote'" id="id" th:name="${field.id}" name="name" 
+							th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}">
+						</div>
+					</div> -->
+
+					<script th:inline="javascript">
+	
+						if(/*[[${!field.readonly}]]*/ true) {
+							
+							$('#[(${field.id})]').summernote({
+							// $('#[(${field.id})]-summernote').summernote({
+								lang: 'ko-KR',
+								toolbar: [
+									['style', ['style']],
+									['font', ['bold', 'underline', 'clear']],
+									['fontname', ['fontname']],
+									['color', ['color']],
+									['para', ['ul', 'ol', 'paragraph']],
+									['table', ['table']],
+									['insert', ['link', 'picture', 'video']],
+									['view', ['codeview']],
+									// ['view', ['fullscreen', 'codeview', 'help']],
+								],
+								// height: 150,
+								minHeight: 150,
+								// maxHeight: null,
+								tabsize: 2,
+								placeholder: '[(${field.placeholder})]',
+								// airMode: true,
+								disableDragAndDrop: false,
+								shortcuts: true,
+								codeviewFilter: false,
+								codeviewIframeFilter: true,
+								codeviewFilterRegex: 'custom-regex',
+								codeviewIframeWhitelistSrc: ['my-own-domainname'],
+								callbacks: {
+									onChange: function(contents, $editable) {
+										// $('#[(${field.id})]').text(contents);
+									}
+								}
+							});
+						}
+					</script>
+				</th:block>
+
+				<th:block th:unless="${auth}">
+				<!--/* 권한이 없을 경우 */-->
+					<textarea class="form-control hide" th:name="${field.id}" name="name" th:id="${field.id}" id="id" th:rows="${field.rows}" rows="3" disabled="disabled" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+					<div class="summernote-div">
+						<div th:id="${field.id} + '-summernote'" id="id" th:name="${field.id}" name="name" 
+							th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}">
+						</div>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.rockplace.rshm.db.mapper.rshm.FormMapper">
+
+	<select id="getObjectById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		  FROM ${table}
+		 WHERE ID = #{key}
+	</select>
+
+	<insert id="saveForm" parameterType="java.util.Map">
+		INSERT INTO ${table}
+		(
+			create_date, create_emp_id,
+			<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+				${key}
+			</foreach>
+		)
+		VALUES
+		(
+			current_timestamp(), #{user.id},
+			<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+				#{value}
+			</foreach>
+		)
+		ON DUPLICATE KEY
+		UPDATE
+		 update_date = current_timestamp(), update_emp_id = #{user.id},
+		<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+			${key} = #{value}
+		</foreach>
+	</insert>
+
+	<insert id="saveWorkflowFlow" parameterType="java.util.Map">
+		INSERT INTO TAB_WFF
+		(
+			id, create_date, create_emp_id, name, used, 
+			order_by, ent_id, src_id, src_ent_id, org_id, 
+			dpt_id, emp_id, tas_id, next_tas_id
+		)
+		VALUES
+		(
+			#{map.id}, current_timestamp(), #{user.id}, 'WorkflowFlow', true, 
+			1, 'WFF', #{map.srcId}, #{map.srcEntId}, #{user.orgId}, 
+			#{user.deptId}, #{user.id}, #{map.tasId}, #{map.nextTasId}
+		)
+	</insert>
+
+	<delete id="deleteForm" parameterType="java.util.Map">
+		DELETE FROM ${table} WHERE ID = #{map.key}
+	</delete>
+
+	<select id="getObjectList" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT *
+		  FROM ${table}
+		 ORDER BY ORDER_BY ASC, ID ASC 
+	</select>
+
+	<select id="getObjectListById" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT *
+		  FROM ${table}
+		 WHERE id = #{id}
+		 ORDER BY ORDER_BY ASC, ID ASC 
+	</select>
+
+	<select id="getFormById" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT *
+		  FROM TAB_FORM
+		 WHERE ID = #{key}
+	</select>
+
+	<select id="getFormListByTaskId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		  FROM TAB_FORM
+		 WHERE TAS_ID = (
+			SELECT TAS_ID
+			  FROM ${table}
+			 WHERE ID = #{key}
+			  AND ENT_ID = #{entId}
+		 )
+		  AND ENT_ID = #{entId}
+	</select>
+
+	<select id="getRelationObjectListBySrcId" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT *
+		  FROM ${table}
+		 WHERE SRC_ID = #{key}
+	</select>
+</mapper>

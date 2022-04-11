@@ -1,0 +1,195 @@
+rshm:
+  init-collect:
+    code: true
+    organization: true
+    department: true
+    employee: true
+  schedule:
+    crm: 
+      crm: 0 0 2,12 * * *  # Sugar CRM(Default: 0 0 2,12 * * *)- 초 분 시 일 월 요일
+      product: 0 20 2,12 * * *  # Sugar CRM Product(Default: 0 20 2,12 * * *)- 초 분 시 일 월 요일
+    insa:
+      code: 0 0 1 * * *  # Code(Default: 0 0 1 * * *)- 초 분 시 일 월 요일
+      organization: 0 10 1 * * *  # Organization(Default: 0 10 1 * * *)- 초 분 시 일 월 요일
+      department: 0 20 1 * * *  # Department(Default: 0 20 1 * * *)- 초 분 시 일 월 요일
+      employee: 0 30 1 * * *  # Employee(Default: 0 30 1 * * *)- 초 분 시 일 월 요일
+      vacation: 0 40 1 * * *  # Vacation(Default: 0 40 1 * * *)- 초 분 시 일 월 요일
+    maintenance:
+      monthly: 0 5 0 1 * *  # SHM Monthly Maintenance(Default: 0 5 0 1 * *)- 초 분 시 일 월 요일
+      bimonthly: 0 10 0 1 1,3,5,7,9,11 *  # SHM Bimonthly Maintenance(Default: 0 10 0 1 1,3,5,7,9,11 *)- 초 분 시 일 월 요일
+      quarterly: 0 15 0 1 1,4,7,10 *  # SHM Quarterly Maintenance(Default: 0 15 0 1 1,4,7,10 *)- 초 분 시 일 월 요일
+      half: 0 20 0 1 1,6 *  # SHM Half Maintenance(Default: 0 20 0 1 1,6 *)- 초 분 시 일 월 요일
+      year: 0 25 0 1 1 *  # SHM Year Maintenance(Default: 0 25 0 1 1 *)- 초 분 시 일 월 요일
+    holiday: 0 0 3 * * 7  # 공휴일(Defaul: 0 0 1 * * 7)- 초 분 시 일 월 요일
+    ticket:
+      close: 0 30 0 * * *  # SHM, Workorder: 종료된지 7일 지난 티켓 권한 삭제 (Default: 0 30 0 * * *)- 초 분 시 일 월 요일
+  collect:
+    holiday:
+      key: uR8hx9Q7Sjc%2FlK2uXIoC9CIyPs0fjMLbrYKdKWahRY5zuGteNMLHsXYlMJ98shbe0nsXXDihnxhj297hSjHqrQ%3D%3D  # 2023-12-27 만료예정, 공공데이터 포털에서 갱신 필요
+
+spring:
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    check-template-location: true  # templates 디렉토리에 파일이 있는지 없는지 체크, 없으면 에러를 발생시킨다.
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: true  # 개발에서 false, 운영에서는 true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.65.252.112:3306/rshm?useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true 
+    username: rshm
+    password: rplinux
+    initialization-mode: always
+#    schema: 
+#       - classpath:db/schema/schema.sql
+    data:
+##       - classpath:db/data/delete.sql
+#       - classpath:db/data/code.sql
+#       - classpath:db/data/entity.sql
+#       - classpath:db/data/table.sql
+#       - classpath:db/data/field_type.sql
+#       - classpath:db/data/table_field.sql
+#       - classpath:db/data/sequence.sql
+#       - classpath:db/data/employee.sql
+#       - classpath:db/data/menu.sql
+#       - classpath:db/data/content.sql
+#       - classpath:db/data/form.sql
+#       - classpath:db/data/list.sql
+#       - classpath:db/data/sql.sql
+##       - classpath:db/schema/req.sql
+##       - classpath:db/schema/crm.sql
+##       - classpath:db/schema/shm.sql
+##       - classpath:db/schema/workorder.sql
+#       - classpath:db/data/workflow/req.sql
+#       - classpath:db/data/workflow/crm.sql
+#       - classpath:db/data/workflow/shm.sql
+#       - classpath:db/data/workflow/workorder.sql
+#       - classpath:db/data/workflow/statistics.sql
+    hikari:
+      auto-commit: true  # 자동커밋 여부. (default: true)
+      connection-test-query: SELECT 1  # connection 유효성 검사 쿼리
+      minimum-idle: 10  # pool에 유지할 유휴 connection 최소 개수
+      maximum-pool-size: 50  # pool에 유지시킬 수 있는 최대 connection 수
+      max-lifetime: 43200000
+      idle-timeout: 1200000
+      connection-timeout: 5000
+      transaction-isolation: TRANSACTION_READ_UNCOMMITTED  # 트랜잭션 격리 수준
+      pool-name: rshm-pool  # connection pool 이름
+    rshm:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://10.65.252.112:3306/rshm?useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true 
+      username: rshm
+      password: rplinux
+      connection-test-query: SELECT 1  # connection 유효성 검사 쿼리
+      minimum-idle: 10  # pool에 유지할 유휴 connection 최소 개수
+      maximum-pool-size: 50  # pool에 유지시킬 수 있는 최대 connection 수
+      max-lifetime: 43200000
+      idle-timeout: 1200000
+      connection-timeout: 5000
+      pool-name: rshm-pool  # connection pool 이름
+    crm:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://10.65.252.84:3306/rockplace?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&autoReconnect=true 
+      username: tech_user
+      password: Rockplace1!
+      connection-test-query: SELECT 1  # connection 유효성 검사 쿼리
+      minimum-idle: 10  # pool에 유지할 유휴 connection 최소 개수
+      maximum-pool-size: 50  # pool에 유지시킬 수 있는 최대 connection 수
+      max-lifetime: 43200000
+      idle-timeout: 1200000
+      connection-timeout: 5000
+      pool-name: crm-pool  # connection pool 이름
+    insa:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://35.200.62.210:3306/SUN_SIGN?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&autoReconnect=true 
+      username: rpuser1
+      password: '!rpuser@'
+      connection-test-query: SELECT 1  # connection 유효성 검사 쿼리
+      minimum-idle: 10  # pool에 유지할 유휴 connection 최소 개수
+      maximum-pool-size: 50  # pool에 유지시킬 수 있는 최대 connection 수
+      max-lifetime: 43200000
+      idle-timeout: 1200000
+      connection-timeout: 5000
+      pool-name: insa-pool  # connection pool 이름
+
+  jpa:
+    database: mysql # MySQL 을 사용할 것.
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  # MySQL 상세 지정
+                                                                  # 접속할 database의 SQL Dialect 설정
+                                                                  # JPA를 활용하여 동적 쿼리 생성시, database에 맞는 방언 sql을 생성합니다.
+    generate-ddl: true  # Entity 어노테이션(@Entity)이 명시된 클래스를 찾아서 ddl을 생성하고 실행 
+    show-sql: true  # API 호출시, SQL 문을 콘솔에 출력한다.
+    hibernate:
+      ddl-auto: update  # none: 아무것도 실행하지 않음 (대부분의 DB에서 기본값이다)
+                        # create: 항상 다시 생성
+                        # create-drop: 시작 시 생성 후 종료 시 제거
+                        # update: 시작 시 Entity 클래스와 DB 스키마 구조를 비교해서 DB쪽에 생성되지 않은 테이블, 컬럼 추가 (제거는 하지 않음)
+                        # validate: 시작 시 Entity 클래스와 DB 스키마 구조를 비교해서 같은지만 확인 (다르면 예외 발생)
+    properties:
+      hibernate:
+        format_sql: true  
+        use_sql_comments: true
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE  # 2차 캐시 설정
+
+  mail:
+    host: smtp.office365.com
+    port: 587
+    username: rshmadmin@rockplace.co.kr
+    password: fkrvmffpdltm1!
+    properties:
+      mail:
+        used: true
+        debug: false  # 개발에서 true, 운영에서는 false
+        type: TLS
+        test: false  # 개발에서 true, 운영에서는 false
+        test_to:
+        smtp:
+          auth: true
+          ssl:
+            port: 465
+          starttls:
+            enable: true
+
+server:
+  scheme: https   # 개발 및 운영에 맞게 설정
+  host: rshm.rockplace.co.kr  # 개발 및 운영에 맞게 설정
+  port: 8443  # 개발 및 운영에 맞게 설정
+  error:
+    include-exception: true  # 오류 응답에 exception의 내용을 포함할지 여부 (true, false)
+    include-stacktrace: always  # 오류 응답에 stacktrace 내용을 포함할지 여부 (always, never, on_trace_param)
+    path: /error # 오류 응답을 처리할 핸들러(ErrorController)의 path 
+    whitelabel:
+      enabled: false  # 브라우저 요청에 대해 서버 오류시 기본으로 노출할 페이지를 사용할지 여부 (true, false)
+  ssl:
+    key-store: ./key/rshm-keystore.p12
+    key-store-type: PKCS12
+    key-store-password: rplinux
+    key-alias: rshm-keystore
+  servlet:
+    session:
+      timeout: -1
+
+mybatis:
+  type-aliases-package: kr.co.rockplace.rshm.controller.rest.table.vo
+  type-handlers-package: kr.co.rockplace.rshm.db.handler
+  mapper-locations: /mapper/**/*.xml
+
+azure:
+  activedirectory:
+    tenant-id: 385d6dde-e0aa-4ea7-ac62-062343879529
+    client-id: dad32fc8-6588-48c5-a6d7-d6414a6e9ff1
+    client-secret: 1~~~5Yh6EnYh_YaGh8fN86cRaYjVr.8J.-
+
+logging:
+  config: ./config/logback-spring.xml
+  level:
+    org:
+      springframework: info
+      hibernate:
+        type: info # 개발에서 trace, 운영에서는 info
+    '[kr.co.rockplace.rshm.db.mapper]': info # 개발에서 debug, 운영에서는 info

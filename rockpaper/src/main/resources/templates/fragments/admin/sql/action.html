@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--createFragment 선언-->
+<th:block th:fragment="createFragment(form_id, form_action, isModal)">
+	<!--begin::Container-->
+	<div class="container">
+		<!--begin::Card-->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-custom">
+					<div class="card-header" th:unless="${isModal}">
+						<h3 class="card-title">SQL Create</h3>
+					</div>
+					<div class="card-body">
+						<!--begin::Form-->
+						<form class="form" th:id="${form_id}" id="ticket_form" th:action="${form_action}" action="#">
+							<!-- hidden variable -->
+							<input type="hidden" name="var/entId" id="var/entId" value="SQL" />
+							<!--begin::Accordion(Group #1)-->
+							<div class="accordion accordion-solid accordion-toggle-plus" id="groudId_1">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title" data-toggle="collapse" data-target="#groudId_1_Collapse_1">
+										<i class="flaticon-pie-chart-1"></i>Group Name #1</div>
+									</div>
+									<div id="groudId_1_Collapse_1" class="collapse show" data-parent="#groudId_1">
+										<div class="card-body">
+											<div class="form-group row">
+												<div class="col-lg-6">
+													<label for="id" class="col-form-label">ID:</label>
+													<input type="text" class="form-control" name="id" id="id" oninput="toUpperCase(this);" placeholder="Enter ID(if not input, auto input)" />
+												</div>
+												<div class="col-lg-6">
+													<label for="name" class="col-form-label">* Name:</label>
+													<input type="text" class="form-control" name="name" id="name" placeholder="Enter name" />
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-lg-6">
+													<label for="label" class="col-form-label">Label:</label>
+													<div class="input-group">
+														<input type="text" class="form-control" name="label" id="label" placeholder="Enter label" />
+														<div class="input-group-append">
+															<span class="input-group-text">
+																<i class="la la-map-marker"></i>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6">
+													<label for="descr" class="col-form-label">Description:</label>
+													<textarea class="form-control" name="descr" id="descr" placeholder="Enter description"></textarea>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-lg-6">
+													<label class="col-form-label">Used:</label>
+													<div class="radio-inline">
+														<label class="radio radio-solid">
+															<input type="radio" name="isUsed" value="true" />
+															<span></span>Y
+														</label>
+														<label class="radio radio-solid">
+															<input type="radio" name="isUsed" value="false" />
+															<span></span>N
+														</label>
+													</div>
+												</div>
+												<div class="col-lg-6">
+													<label for="orderBy" class="col-form-label">Order By:</label>
+													<input type="number" class="form-control" name="orderBy" id="orderBy" placeholder="Input order by" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="my-4"></div>
+							<!--end::Accordion(Group #1)-->
+							<!--begin::Accordion(Group #2)-->
+							<div class="accordion accordion-solid accordion-toggle-plus" id="groudId_2">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title" data-toggle="collapse" data-target="#groudId_2_Collapse_1">
+										<i class="flaticon2-notification"></i>Group Name #2</div>
+									</div>
+									<div id="groudId_2_Collapse_1" class="collapse show" data-parent="#groudId_2">
+										<div class="card-body">
+											<div class="form-group row">
+												<div class="col-lg-12">
+													<label for="query" class="col-form-label">Query:</label>
+													<textarea class="form-control" name="query" id="query" placeholder="Enter query"></textarea>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-lg-12">
+													<label for="config" class="col-form-label">Config:</label>
+													<textarea class="form-control" name="config" id="config" placeholder="Enter description"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="my-4"></div>
+							<!--end::Accordion(Group #2)-->
+							<!--begin::Action Button-->
+							<div class="card-footer">
+								<div class="row">
+									<div class="col-lg-12 text-right">
+										<button type="submit" class="btn btn-primary mr-2">Save</button>
+										<button type="reset" class="btn btn-secondary">Cancel</button>
+									</div>
+								</div>
+							</div>
+							<!--end::Action Button-->
+						</form>
+						<!--end::Form-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end::Card-->
+	</div>
+	<!--end::Container-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:src="@{/assets/js/common/valid-form.js}" src="/assets/js/common/valid-form.js"></script>
+	<!--end::Page Scripts-->
+
+	<script th:inline="javascript">
+
+		// 필수값 체크 로직
+		var fields = new Object();
+		fields['name'] = getFieldsType('Name', 'text', '');
+		fields['used'] = getFieldsType('Used', 'text', '');
+		fields['orderBy'] = getFieldsType('Order By', 'number', '');
+		fields['query'] = getFieldsType('Query', 'text', '');
+
+		jQuery(document).ready(function() {
+			_Form.init('ticket_form', fields);
+		});
+	</script>
+</th:block>
+
+<!--updateFragment 선언-->
+<th:block th:fragment="updateFragment(form_id, form_action, delete_action, isModal)">
+	<!--begin::Container-->
+	<div class="container">
+		<!--begin::Card-->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-custom">
+					<div class="card-header" th:unless="${isModal}">
+						<h3 class="card-title">SQL Update</h3>
+					</div>
+					<!--begin::Form-->
+					<form class="form" method="POST" th:id="${form_id}" id="ticket_form" th:action="${form_action}" action="#">
+						<!-- hidden variable -->
+						<input type="hidden" name="var/entId" id="var/entId" value="SQL" />
+						<!--begin::Accordion(Group #1)-->
+						<div class="accordion accordion-solid accordion-toggle-plus" id="groudId_1">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title" data-toggle="collapse" data-target="#groudId_1_Collapse_1">
+									<i class="flaticon-pie-chart-1"></i>Group Name #1</div>
+								</div>
+								<div id="groudId_1_Collapse_1" class="collapse show" data-parent="#groudId_1">
+									<div class="card-body">
+										<div class="form-group row">
+											<div class="col-lg-6">
+												<label for="id" class="col-form-label">ID:</label>
+												<input type="text" class="form-control" th:value="${object.id}" placeholder="Enter ID(if not input, auto input)" disabled="disabled" />
+												<input type="hidden" class="form-control" name="id" id="id" th:value="${object.id}" />
+											</div>
+											<div class="col-lg-6">
+												<label for="name" class="col-form-label">* Name:</label>
+												<input type="text" class="form-control" name="name" id="name" th:value="${object.name}" placeholder="Enter name" />
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-lg-6">
+												<label for="label" class="col-form-label">Label:</label>
+												<div class="input-group">
+													<input type="text" class="form-control" name="label" id="label" th:value="${object.label}" placeholder="Enter label" />
+													<div class="input-group-append">
+														<span class="input-group-text">
+															<i class="la la-map-marker"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<label for="descr" class="col-form-label">Description:</label>
+												<textarea class="form-control" name="descr" id="descr" th:text="${object.descr}" placeholder="Enter description"></textarea>
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-lg-6">
+												<label class="col-form-label">Used:</label>
+												<div class="radio-inline">
+													<label class="radio radio-solid">
+														<input type="radio" name="isUsed" value="true" th:checked="${object.used == true}" />
+														<span></span>Y
+													</label>
+													<label class="radio radio-solid">
+														<input type="radio" name="isUsed" value="false" th:checked="${object.used == false}"/>
+														<span></span>N
+													</label>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<label for="orderBy" class="col-form-label">Order By:</label>
+												<input type="number" class="form-control" name="orderBy" id="orderBy" th:value="${object.orderBy}" placeholder="Input order by" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="my-4"></div>
+						<!--end::Accordion(Group #1)-->
+						<!--begin::Accordion(Group #2)-->
+						<div class="accordion accordion-solid accordion-toggle-plus" id="groudId_2">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title" data-toggle="collapse" data-target="#groudId_2_Collapse_1">
+									<i class="flaticon2-notification"></i>Group Name #2</div>
+								</div>
+								<div id="groudId_2_Collapse_1" class="collapse show" data-parent="#groudId_2">
+									<div class="card-body">
+										<div class="form-group row">
+											<div class="col-lg-12">
+												<label for="query" class="col-form-label">Query:</label>
+												<textarea class="form-control" name="query" id="query" th:text="${object.query}" placeholder="Enter query"></textarea>
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-lg-12">
+												<label for="config" class="col-form-label">Config:</label>
+												<textarea class="form-control" name="config" id="config" th:text="${object.config}" placeholder="Enter config"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="my-4"></div>
+						<!--end::Accordion(Group #2)-->
+						<!--begin::Action Button -->
+						<div class="card-footer">
+							<div class="row">
+								<div class="col-lg-6">
+									<button id="deleteBtn" type="button" class="btn btn-danger" th:value="${object.id}" th:remote="${delete_action}">Delete</button>
+								</div>
+								<div class="col-lg-6 text-right">
+									<button type="submit" class="btn btn-primary mr-2">Save</button>
+									<button type="reset" class="btn btn-secondary">Cancel</button>
+								</div>
+							</div>
+						</div>
+						<!--end::Action Button-->
+					</form>
+					<!--end::Form-->
+				</div>
+			</div>
+		</div>
+		<!--end::Card-->
+	</div>
+	<!--end::Container-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:src="@{/assets/js/common/valid-form.js}" src="/assets/js/common/valid-form.js"></script>
+	<!--end::Page Scripts-->
+
+	<script th:inline="javascript">
+
+		// 필수값 체크 로직
+		var fields = new Object();
+		fields['name'] = getFieldsType('Name', 'text', '');
+		fields['used'] = getFieldsType('Used', 'text', '');
+		fields['orderBy'] = getFieldsType('Order By', 'number', '');
+		fields['query'] = getFieldsType('Query', 'text', '');
+
+		jQuery(document).ready(function() {
+			_Form.init('ticket_form', fields);
+		});
+	</script>
+</th:block>
+</html>

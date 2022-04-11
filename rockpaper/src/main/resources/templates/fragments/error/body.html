@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--bodyFragment 선언-->
+<th:block th:fragment="bodyFragment">
+
+	<!--begin::Body-->
+	<body id="kt_body" th:style="|background-image: url(@{/assets/media/error/bg3.jpg});|" style="background-image: url(/assets/media/error/bg3.jpg)" class="bg-white bgi-no-repeat bgi-size-cover bgi-position-center quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+		<!--begin::Main-->
+		<!-- content fragment 사용 -->
+		<div layout:fragment="content"></div>
+		<!--end::Main-->
+	</body>
+	<!--end::Body-->
+</th:block>
+</html>

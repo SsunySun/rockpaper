@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org">
+
+<!--workflowFragment 선언-->
+<th:block th:fragment="workflowFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="workflow-table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Entity</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="workflow : ${list}" class="active">
+					<td scope="row" th:text="${workflow.id}" onclick="getActivityList(this, this.getAttribute('wofId'))" th:wofId="${workflow.id}" style="cursor: pointer;">id</td>
+					<td th:text="${workflow.entityEntity.name}">entity</td>
+					<td th:text="${workflow.name}">name</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td scope="row" colspan="3">데이터가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+</th:block>
+
+<!--activityFragment 선언-->
+<th:block th:fragment="activityFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="activity-table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="activity : ${list}">
+					<td scope="row" th:text="${activity.id}" onclick="getTaskList(this, this.getAttribute('actId'))" th:actId="${activity.id}" style="cursor: pointer;">id</td>
+					<td th:text="${activity.name}">name</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td scope="row" colspan="2">데이터가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+</th:block>
+
+<!--taskFragment 선언-->
+<th:block th:fragment="taskFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="task-table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="task : ${list}">
+					<td scope="row" th:text="${task.id}" onclick="getTaskSubList(this, this.getAttribute('tasId'))" th:tasId="${task.id}" style="cursor: pointer;">id</td>
+					<td th:text="${task.name}">name</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td scope="row" colspan="2">데이터가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+</th:block>
+
+<!--formFragment 선언-->
+<th:block th:fragment="formFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="form-table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="form : ${list}">
+					<td scope="row" th:text="${form.id}">id</td>
+					<td th:text="${form.name}">name</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td scope="row" colspan="2">데이터가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+</th:block>
+
+<!--controlFragment 선언-->
+<th:block th:fragment="controlFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="control-table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="control : ${list}">
+					<td scope="row" th:text="${control.id}">id</td>
+					<td th:text="${control.name}">name</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td scope="row" colspan="2">데이터가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+</th:block>
+
+<!--tableFieldByTableListFragment 선언-->
+<th:block th:fragment="tableFieldByTableListFragment">
+	<!--begin::Table-->
+	<div class="table-responsive">
+		<table class="table table-hover mb-6" id="table-field-table">
+			<thead>
+				<tr>
+					<th scope="col">
+						<label class="checkbox checkbox-outline form-control">
+							<input type="checkbox" />
+							<span></span>
+						</label>
+					</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Label</th>
+					<th>Entity ID</th>
+					<th>Table ID</th>
+					<th>Field Type</th>
+					<th>Type</th>
+					<th>Reference Entity</th>
+					<th>Reference Code Type</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="tableField, index : ${list}">
+					<tr th:id="${'form_' + index.index}">
+						<!-- hidden variable -->
+						<input type="hidden" name="var/entId" value="TFD" />
+						<input type="hidden" name="isProduct" value="false" />
+						<td scope="row">
+							<label class="checkbox checkbox-outline form-control">
+								<input type="checkbox" />
+								<span></span>
+							</label>
+						</td>
+						<td>
+							<input type="text" name="id" class="form-control" placeholder="ID" th:value="${tableField.id}" disabled="disabled" />
+						</td>
+						<td>
+							<input type="text" name="name" class="form-control" placeholder="Name" th:value="${tableField.name}" oninput="toUpperCase(this);" onchange="changeNameAndTableId(this);" disabled="disabled" />
+						</td>
+						<td >
+							<input type="text" name="label" class="form-control" placeholder="Label" th:value="${tableField.label}" />
+						</td>
+						<td>
+							<select name="entId" class="form-control" disabled="disabled">
+								<option value="">Please select...</option>
+								<option th:each="entity : ${entityList}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(tableField.entId, entity.id)}"></option>
+							</select>
+						</td>
+						<td>
+							<select name="tabId" class="form-control" onchange="changeNameAndTableId(this);" disabled="disabled">
+								<option value="" entid="">Please select...</option>
+								<option th:each="table : ${tableList}" th:value="${table.id}" th:entid="${table.entId}" th:utext="|${table.name}(${table.id})|" th:selected="${#strings.equals(tableField.tabId, table.id)}"></option>
+							</select>
+						</td>
+						<td>
+							<select name="tfdId" class="form-control" onchange="changeFieldType(this);">
+								<option value="">Please select...</option>
+								<option th:each="fieldType : ${fieldTypeList}" th:value="${fieldType.id}" th:utext="|${fieldType.name}(${fieldType.id})|" th:selected="${#strings.equals(tableField.tfdId, fieldType.id)}"></option>
+							</select>
+						</td>
+						<td>
+							<select name="type" class="form-control">
+								<option value="">Please select...</option>
+								<option th:each="type : ${tableField.typeCodeEntity.parentCodeEntity.subCodeEntityList}" th:value="${type.id}" th:utext="|${type.name}(${type.id})|" th:selected="${#strings.equals(tableField.type, type.id)}"></option>
+							</select>
+						</td>
+						<td>
+							<select name="refEntId" class="form-control" th:disabled="${!#strings.equals(tableField.tfdId, 'FLT_TYPE_ENTITY')}">
+								<option value="null">Please select...</option>
+								<option th:each="entity : ${entityList}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(tableField.refEntId, entity.id)}"></option>
+							</select>
+						</td>
+						<td >
+							<input type="text" name="refCtyId" class="form-control" oninput="toUpperCase(this);" placeholder="Code Type ID" th:value="${tableField.refCtyId}" th:readonly="${!#strings.equals(tableField.tfdId, 'FLT_TYPE_CODE')}" />
+						</td>
+						<td>
+							<div class="btn-group mr-2" role="group" aria-label="action">
+								<button type="button" class="btn btn-outline-secondary btn-icon" name="update">
+									<i class="la la-save"></i>
+								</button>
+								<button type="button" class="btn btn-outline-secondary btn-icon" name="delete">
+									<i class="la la-trash"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</th:block>
+				<tr id="form" class="active">
+					<!-- hidden variable -->
+					<input type="hidden" name="var/entId" value="TFD" />
+					<input type="hidden" name="isProduct" value="false" />
+					<td scope="row">
+						<label class="checkbox checkbox-outline form-control">
+							<input type="checkbox" checked="checked" />
+							<span></span>
+						</label>
+					</td>
+					<td>
+						<input type="text" name="id" class="form-control" placeholder="ID" disabled="disabled" />
+					</td>
+					<td>
+						<input type="text" name="name" class="form-control" placeholder="Name" oninput="toUpperCase(this);" onchange="changeNameAndTableId(this);" />
+					</td>
+					<td >
+						<input type="text" name="label" class="form-control" placeholder="Label" />
+					</td>
+					<td>
+						<select name="entId" class="form-control" disabled="disabled">
+							<option value="">Please select...</option>
+							<option th:each="entity : ${entityList}" th:value="${entity.id}" th:selected="${#strings.equals(entity.id, tableEntity.entId)}" th:utext="|${entity.name}(${entity.id})|"></option>
+						</select>
+					</td>
+					<td>
+						<select name="tabId" class="form-control" onchange="changeNameAndTableId(this);" th:disabled="${!#strings.equals(tableId, '')}">
+							<option value="" entid="">Please select...</option>
+							<option th:each="table : ${tableList}" th:value="${table.id}" th:entid="${table.entId}" th:utext="|${table.name}(${table.id})|" th:selected="${#strings.equals(table.id, tableEntity.id)}"></option>
+						</select>
+					</td>
+					<td>
+						<select name="tfdId" class="form-control" onchange="changeFieldType(this);">
+							<option value="">Please select...</option>
+							<option th:each="fieldType : ${fieldTypeList}" th:value="${fieldType.id}" th:utext="|${fieldType.name}(${fieldType.id})|"></option>
+						</select>
+					</td>
+					<td>
+						<select name="type" class="form-control">
+							<option value="">Please select...</option>
+						</select>
+					</td>
+					<td>
+						<select name="refEntId" class="form-control" disabled="disabled">
+							<option value="null">Please select...</option>
+							<option th:each="entity : ${entityList}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|"></option>
+						</select>
+					</td>
+					<td>
+						<input type="text" name="refCtyId" class="form-control" oninput="toUpperCase(this);" placeholder="Code Type ID" disabled="disabled" />
+					</td>
+					<td>
+						<div class="btn-group mr-2" role="group" aria-label="action">
+							<button type="button" class="btn btn-outline-secondary btn-icon" name="create">
+								<i class="la la-save"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--end::Table-->
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+	
+			checkHeaderCheckbox();
+			setButtonScript();
+		});
+	</script>
+</th:block>
+</html>

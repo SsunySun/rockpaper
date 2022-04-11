@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--String.TextArea Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<textarea th:if="${#strings.isEmpty(field.action.type)}" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" rows="3" th:disabled="${field.readonly}" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+					<textarea th:unless="${#strings.isEmpty(field.action.type)}" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" rows="3" th:disabled="${field.readonly}" th:attr="${!#strings.isEmpty(field.action.type)} ? ${field.action.type}=${field.action.event}" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<textarea class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" th:rows="${field.rows}" rows="3" disabled="disabled" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+				</th:block>
+
+				<script th:inline="javascript">
+					setAutoSize(/*[[${field.id}]]*/);
+				</script>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

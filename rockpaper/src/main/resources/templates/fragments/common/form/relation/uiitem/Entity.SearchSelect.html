@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Entity.SearchSelect Fragment 선언-->
+<th:block th:fragment="fragment" 
+	th:with="id=${index == 99 ? field.id + '_' + relationField.id + '_' + index + '_' + subIndex.index : field.id + '_' + relationField.id + '_' + index.index + '_' + subIndex.index}, 
+			uiidx=${index == 99 ? 99 : index.index}">
+
+	<th:block th:if="${relationField.hidden}">
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${relationField.hidden}">
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'vertical')}">
+			<th:block th:replace=":: verticalFragment"></th:block>
+		</th:block>
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'horizontal')}">
+			<th:block th:replace=":: horizontalFragment"></th:block>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Entity.SearchSelect vertical Fragment 선언-->
+<th:block th:fragment="verticalFragment">
+	<div class="row">
+		<div class="col-12">
+			<label th:classappend="${auth && !relationField.readonly && relationField.require && isEdit} ? 'text-primary'" class="col-form-label" th:for="${relationField.id}" for="id" th:utext="${relationField.require} ? ${'* ' + relationField.label} : ${relationField.label}">Label</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<!--/* 권한이 있을 경우 */-->
+			<th:block th:if="${auth && isEdit}">
+				<select th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:id="${id}" id="id" th:placeholder="${relationField.placeholder}" th:disabled="${relationField.readonly}">
+					<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+					<option th:each="entity : ${relationRefListMap.get(relationField.id + uiidx)}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), entity.id)}"></option>
+				</select>
+				<th:block th:unless="${relationField.readonly}">
+					<script th:inline="javascript">
+						$("#[(${id})]").select2({
+							placeholder: "[(${relationField.placeholder})]",
+							allowClear: true,
+							minimumInputLength: 2,
+							language: {
+								inputTooShort: function(args) {
+									var remainingChars = args.minimum - args.input.length;
+									var message = remainingChars + '자 이상 입력하세요';
+									return message;
+								},
+								noResults: function () {
+									return '결과값이 없습니다.';
+								},
+								searching: function () {
+									return '조회 중…';
+								}
+							},
+							ajax: {
+								url: '/api/common/sqlList',
+								method: 'POST',
+								delay: 500,
+								data: function(params) {
+
+									var query = new Object();
+									var config = /*[[${relationField.config}]]*/ '[]';
+									if(Array.isArray(config)) {
+										config.forEach(field => {
+											query[field.id] = field.value;
+										});
+									}
+									query['search'] = params.term;
+									return query;
+								},
+								processResults: function (data) {
+									return { results: data };
+								},
+							}
+						});
+					</script>
+				</th:block>
+			</th:block>
+
+			<!--/* 권한이 없을 경우 */-->
+			<th:block th:unless="${auth && isEdit}">
+				<select class="form-control" th:name="${relationField.id}" name="name" th:id="${id}" id="id" th:placeholder="${relationField.placeholder}" disabled="disabled">
+					<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+					<option th:each="entity : ${relationRefListMap.get(relationField.id + uiidx)}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), entity.id)}"></option>
+				</select>
+			</th:block>
+		</div>
+	</div>
+</th:block>
+
+<!--Entity.SearchSelect horizontal Fragment 선언-->
+<th:block th:fragment="horizontalFragment">
+
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth && isEdit}">
+		<select th:classappend="${relationField.require} ? 'require'" class="form-control" th:style="|width: ${relationField.width};|" style="width: 100%;" th:name="${relationField.id}" name="name" th:id="${id}" id="id" th:placeholder="${relationField.placeholder}" th:disabled="${relationField.readonly}">
+			<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+			<option th:each="entity : ${relationRefListMap.get(relationField.id + uiidx)}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), entity.id)}"></option>
+		</select>
+		<th:block th:unless="${relationField.readonly}">
+			<script th:inline="javascript">
+				$("#[(${id})]").select2({
+					placeholder: "[(${relationField.placeholder})]",
+					allowClear: true,
+					minimumInputLength: 2,
+					language: {
+						inputTooShort: function(args) {
+							var remainingChars = args.minimum - args.input.length;
+							var message = remainingChars + '자 이상 입력하세요';
+							return message;
+						},
+						noResults: function () {
+							return '결과값이 없습니다.';
+						},
+						searching: function () {
+							return '조회 중…';
+						}
+					},
+					ajax: {
+						url: '/api/common/sqlList',
+						method: 'POST',
+						delay: 500,
+						data: function(params) {
+
+							var query = new Object();
+							var config = /*[[${relationField.config}]]*/ '[]';
+							if(Array.isArray(config)) {
+								config.forEach(field => {
+									query[field.id] = field.value;
+								});
+							}
+							query['search'] = params.term;
+							return query;
+						},
+						processResults: function (data) {
+							return { results: data };
+						},
+					}
+				});
+			</script>
+		</th:block>
+	</th:block>
+
+	<!--/* 권한이 없을 경우 */-->
+	<th:block th:unless="${auth && isEdit}">
+		<select class="form-control" th:style="|width: ${relationField.width};|" style="width: 100%;" th:name="${relationField.id}" name="name" th:id="${id}" id="id" th:placeholder="${relationField.placeholder}" disabled="disabled">
+			<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+			<option th:each="entity : ${relationRefListMap.get(relationField.id + uiidx)}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), entity.id)}"></option>
+		</select>
+	</th:block>
+</th:block>
+</html>

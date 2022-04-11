@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Code.Select Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<select th:if="${#strings.isEmpty(field.action.type)}" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="name" th:disabled="${field.readonly}">
+						<option value="" th:utext="|== ${field.placeholder} ==|">Please select...</option>
+						<option th:each="code : ${refListMap.get(field.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), code.id)}"></option>
+					</select>
+					<select th:unless="${#strings.isEmpty(field.action.type)}" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="name" th:disabled="${field.readonly}" th:attr="${!#strings.isEmpty(field.action.type)} ? ${field.action.type}=${field.action.event}">
+						<option value="" th:utext="|== ${field.placeholder} ==|">Please select...</option>
+						<option th:each="code : ${refListMap.get(field.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), code.id)}"></option>
+					</select>
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<select class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="name" disabled="disabled">
+						<option value="" th:utext="|== ${field.placeholder} ==|">Please select...</option>
+						<option th:each="code : ${refListMap.get(field.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), code.id)}"></option>
+					</select>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

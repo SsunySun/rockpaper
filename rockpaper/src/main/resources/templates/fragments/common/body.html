@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--bodyFragment 선언-->
+<th:block th:fragment="bodyFragment">
+	<!--begin::Body-->
+	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+
+		<!--begin::Main-->
+		<!-- mobile header fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/headerMobile'} :: headerMobileFragment"></th:block>
+
+		<!-- content fragment 사용 -->
+		<div layout:fragment="content"></div>
+		<!--end::Main-->
+
+		<!-- User Panel fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/user'} :: userPanelFragment"></th:block>
+
+		<!-- Scrolltop fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/etc'} :: scrolltopFragment"></th:block>
+	</body>
+	<!--end::Body-->
+</th:block>
+
+<!--bodyNoAsideFragment 선언-->
+<th:block th:fragment="bodyNoAsideFragment">
+	<!--begin::Body-->
+	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-mobile-fixed subheader-enabled page-loading">
+
+		<!--begin::Main-->
+		<!-- mobile header fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/headerMobile'} :: headerMobileFragment"></th:block>
+
+		<!-- content fragment 사용 -->
+		<div layout:fragment="content"></div>
+		<!--end::Main-->
+
+		<!-- User Panel fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/user'} :: userPanelFragment"></th:block>
+
+		<!-- Scrolltop fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/etc'} :: scrolltopFragment"></th:block>
+	</body>
+	<!--end::Body-->
+</th:block>
+</html>

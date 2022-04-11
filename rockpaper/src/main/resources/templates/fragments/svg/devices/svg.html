@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--Airpods 선언-->
+<th:block th:fragment="Airpods">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Airpods.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M17,12.9170416 L17,20.5 C17,21.3284271 16.3284271,22 15.5,22 C14.6715729,22 14,21.3284271 14,20.5 L14,11.472213 C14.8261591,12.2116454 15.8584259,12.7255217 17,12.9170416 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M10,11.472213 L10,20.5 C10,21.3284271 9.32842712,22 8.5,22 C7.67157288,22 7,21.3284271 7,20.5 L7,12.9170416 C8.14157414,12.7255217 9.17384092,12.2116454 10,11.472213 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M18,12 C15.2385763,12 13,9.76142375 13,7 C13,4.23857625 15.2385763,2 18,2 C20.7614237,2 23,4.23857625 23,7 C23,9.76142375 20.7614237,12 18,12 Z M14.75,6.5 C14.3357864,6.5 14,6.83578644 14,7.25 C14,7.66421356 14.3357864,8 14.75,8 L15.25,8 C15.6642136,8 16,7.66421356 16,7.25 C16,6.83578644 15.6642136,6.5 15.25,6.5 L14.75,6.5 Z M21,5 C20.4477153,5 20,5.44771525 20,6 L20,8 C20,8.55228475 20.4477153,9 21,9 C21.5522847,9 22,8.55228475 22,8 L22,6 C22,5.44771525 21.5522847,5 21,5 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M6,12 C3.23857625,12 1,9.76142375 1,7 C1,4.23857625 3.23857625,2 6,2 C8.76142375,2 11,4.23857625 11,7 C11,9.76142375 8.76142375,12 6,12 Z M8.75,6.5 C8.33578644,6.5 8,6.83578644 8,7.25 C8,7.66421356 8.33578644,8 8.75,8 L9.25,8 C9.66421356,8 10,7.66421356 10,7.25 C10,6.83578644 9.66421356,6.5 9.25,6.5 L8.75,6.5 Z M3,5 C2.44771525,5 2,5.44771525 2,6 L2,8 C2,8.55228475 2.44771525,9 3,9 C3.55228475,9 4,8.55228475 4,8 L4,6 C4,5.44771525 3.55228475,5 3,5 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Android 선언-->
+<th:block th:fragment="Android">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Android.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M7.5,4 L7.5,19 L16.5,19 L16.5,4 L7.5,4 Z M7.71428571,2 L16.2857143,2 C17.2324881,2 18,2.8954305 18,4 L18,20 C18,21.1045695 17.2324881,22 16.2857143,22 L7.71428571,22 C6.76751186,22 6,21.1045695 6,20 L6,4 C6,2.8954305 6.76751186,2 7.71428571,2 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="7.5 4 7.5 19 16.5 19 16.5 4"></polygon>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Apple-Watch 선언-->
+<th:block th:fragment="Apple-Watch">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Apple-Watch.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M16.4505,4.17581303 C16.9303324,4.44927096 17.0976321,5.05993348 16.8241742,5.53976596 C16.5507162,6.01959844 15.9400537,6.18689808 15.4602212,5.91344015 C14.4147959,5.31764923 13.2316866,5 12,5 C8.13400675,5 5,8.13400675 5,12 C5,15.8659932 8.13400675,19 12,19 C13.219344,19 14.3911317,18.6887023 15.4290477,18.10422 C15.9102758,17.8332257 16.5200726,18.0036539 16.7910669,18.4848821 C17.0620612,18.9661102 16.891633,19.575907 16.4104049,19.8469013 C15.0748371,20.5990004 13.5653933,21 12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C13.5812651,3 15.1053118,3.40918641 16.4505,4.17581303 Z" id="Oval-16" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M18.5,6 C19.8807119,6 21,7.11928813 21,8.5 L21,15.5 C21,16.8807119 19.8807119,18 18.5,18 C17.1192881,18 16,16.8807119 16,15.5 L16,8.5 C16,7.11928813 17.1192881,6 18.5,6 Z M18.5,12 C19.3284271,12 20,11.3284271 20,10.5 C20,9.67157288 19.3284271,9 18.5,9 C17.6715729,9 17,9.67157288 17,10.5 C17,11.3284271 17.6715729,12 18.5,12 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Battery-charging 선언-->
+<th:block th:fragment="Battery-charging">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Battery-charging.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M4,9 L4,15 L17,15 L17,9 L4,9 Z M4,7 L17,7 C18.1045695,7 19,7.8954305 19,9 L19,15 C19,16.1045695 18.1045695,17 17,17 L4,17 C2.8954305,17 2,16.1045695 2,15 L2,9 C2,7.8954305 2.8954305,7 4,7 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<path d="M10.3561738,14.0547828 L11.7400488,12.324939 C11.8090507,12.2386866 11.7950664,12.1128281 11.708814,12.0438262 C11.6733514,12.0154562 11.6292893,12 11.583875,12 L11,12 L11,10.1605551 C11,10.0500982 10.9104569,9.96055513 10.8,9.96055513 C10.7331294,9.96055513 10.6706831,9.99397535 10.6335899,10.0496151 L9.20729336,12.18906 C9.14602287,12.2809657 9.17085764,12.4051396 9.26276338,12.4664101 C9.29561688,12.4883124 9.33421842,12.5 9.37370342,12.5 L10,12.5 L10,13.9298438 C10,14.0403007 10.0895431,14.1298438 10.2,14.1298438 C10.2607567,14.1298438 10.3182193,14.1022258 10.3561738,14.0547828 Z" id="Path-3" fill="#000000" opacity="0.3"></path>
+			<path d="M20,10 L21,10 C21.5522847,10 22,10.4477153 22,11 L22,13 C22,13.5522847 21.5522847,14 21,14 L20,14 L20,10 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Battery-empty 선언-->
+<th:block th:fragment="Battery-empty">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Battery-empty.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M4,9 L4,15 L17,15 L17,9 L4,9 Z M4,7 L17,7 C18.1045695,7 19,7.8954305 19,9 L19,15 C19,16.1045695 18.1045695,17 17,17 L4,17 C2.8954305,17 2,16.1045695 2,15 L2,9 C2,7.8954305 2.8954305,7 4,7 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<path d="M20,10 L21,10 C21.5522847,10 22,10.4477153 22,11 L22,13 C22,13.5522847 21.5522847,14 21,14 L20,14 L20,10 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Battery-full 선언-->
+<th:block th:fragment="Battery-full">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Battery-full.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" x="2" y="7" width="17" height="10" rx="2"></rect>
+			<path d="M20,10 L21,10 C21.5522847,10 22,10.4477153 22,11 L22,13 C22,13.5522847 21.5522847,14 21,14 L20,14 L20,10 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Battery-half 선언-->
+<th:block th:fragment="Battery-half">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Battery-half.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M11,9 L11,15 L17,15 L17,9 L11,9 Z M4,7 L17,7 C18.1045695,7 19,7.8954305 19,9 L19,15 C19,16.1045695 18.1045695,17 17,17 L4,17 C2.8954305,17 2,16.1045695 2,15 L2,9 C2,7.8954305 2.8954305,7 4,7 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<path d="M20,10 L21,10 C21.5522847,10 22,10.4477153 22,11 L22,13 C22,13.5522847 21.5522847,14 21,14 L20,14 L20,10 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Bluetooth 선언-->
+<th:block th:fragment="Bluetooth">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/v.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M12,13.8453624 L12,18.758963 L15.3125397,16.8266482 L12,13.8453624 Z M10,12.0453624 L6.33103527,8.74329415 C5.92052525,8.37383513 5.88724683,7.74154529 6.25670585,7.33103527 C6.62616487,6.92052525 7.25845471,6.88724683 7.66896473,7.25670585 L17.6689647,16.2567059 C18.172608,16.7099848 18.0891527,17.5223646 17.503871,17.8637789 L11.503871,21.3637789 C10.8372144,21.7526619 10,21.2717908 10,20.5 L10,12.0453624 Z" id="Path-20-Copy" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M12,10.4375595 L15.3984747,7.54885603 L12,5 L12,10.4375595 Z M10,3 C10,2.17595468 10.9407637,1.70557281 11.6,2.2 L17.6,6.7 C18.1131546,7.08486597 18.1363893,7.84650959 17.6476484,8.26193932 L7.64764842,16.7619393 C7.22684095,17.1196257 6.59574703,17.0684559 6.23806068,16.6476484 C5.88037434,16.226841 5.93154411,15.595747 6.35235158,15.2380607 L10,12.1375595 L10,3 Z" id="Path-20" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Camera 선언-->
+<th:block th:fragment="Camera">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Camera.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M5,7 L19,7 C20.1045695,7 21,7.8954305 21,9 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,9 C3,7.8954305 3.8954305,7 5,7 Z M12,17 C14.209139,17 16,15.209139 16,13 C16,10.790861 14.209139,9 12,9 C9.790861,9 8,10.790861 8,13 C8,15.209139 9.790861,17 12,17 Z" id="Combined-Shape" fill="#000000"></path>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="9" y="4" width="6" height="2" rx="1"></rect>
+			<circle id="Oval-2" fill="#000000" opacity="0.3" cx="12" cy="13" r="2"></circle>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Cardboard-vr 선언-->
+<th:block th:fragment="Cardboard-vr">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Cardboard-vr.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<polygon id="Rectangle" fill="#000000" opacity="0.3" points="6 4 18 4 20 6.5 4 6.5"></polygon>
+			<path d="M5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L20.999994,17.0000172 C20.999994,18.1045834 20.1045662,19.0000112 19,19.0000112 C17.4805018,19.0000037 16.4805051,19 16,19 C15,19 14.5,17 12,17 C9.5,17 9.5,19 8,19 C7.31386312,19 6.31387037,19.0000034 5.00002173,19.0000102 L5.00002173,19.0000216 C3.89544593,19.0000273 3.00000569,18.1045963 3,17.0000205 C3,17.000017 3,17.0000136 3,17.0000102 L3,8 C3,6.8954305 3.8954305,6 5,6 Z M8,14 C9.1045695,14 10,13.1045695 10,12 C10,10.8954305 9.1045695,10 8,10 C6.8954305,10 6,10.8954305 6,12 C6,13.1045695 6.8954305,14 8,14 Z M16,14 C17.1045695,14 18,13.1045695 18,12 C18,10.8954305 17.1045695,10 16,10 C14.8954305,10 14,10.8954305 14,12 C14,13.1045695 14.8954305,14 16,14 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Cassete 선언-->
+<th:block th:fragment="Cassete">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Cassete.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Rectangle-2" fill="#000000" opacity="0.3" x="5" y="15" width="14" height="2" rx="1"></rect>
+			<path d="M6.5,15 C7.88071187,15 9,13.8807119 9,12.5 C9,11.1192881 7.88071187,10 6.5,10 C5.11928813,10 4,11.1192881 4,12.5 C4,13.8807119 5.11928813,15 6.5,15 Z M6.5,17 C4.01471863,17 2,14.9852814 2,12.5 C2,10.0147186 4.01471863,8 6.5,8 C8.98528137,8 11,10.0147186 11,12.5 C11,14.9852814 8.98528137,17 6.5,17 Z" id="Oval-Copy" fill="#000000" fill-rule="nonzero"></path>
+			<path d="M17.5,15 C18.8807119,15 20,13.8807119 20,12.5 C20,11.1192881 18.8807119,10 17.5,10 C16.1192881,10 15,11.1192881 15,12.5 C15,13.8807119 16.1192881,15 17.5,15 Z M17.5,17 C15.0147186,17 13,14.9852814 13,12.5 C13,10.0147186 15.0147186,8 17.5,8 C19.9852814,8 22,10.0147186 22,12.5 C22,14.9852814 19.9852814,17 17.5,17 Z" id="Oval" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--CPU1 선언-->
+<th:block th:fragment="CPU1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/CPU1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="4" y="4" width="16" height="16" rx="2"></rect>
+			<rect id="Rectangle-2" fill="#000000" opacity="0.3" x="9" y="9" width="6" height="6"></rect>
+			<path d="M20,7 L21,7 C21.5522847,7 22,7.44771525 22,8 L22,8 C22,8.55228475 21.5522847,9 21,9 L20,9 L20,7 Z" id="Rectangle-3" fill="#000000"></path>
+			<path d="M20,11 L21,11 C21.5522847,11 22,11.4477153 22,12 L22,12 C22,12.5522847 21.5522847,13 21,13 L20,13 L20,11 Z" id="Rectangle-3-Copy-6" fill="#000000"></path>
+			<path d="M20,15 L21,15 C21.5522847,15 22,15.4477153 22,16 L22,16 C22,16.5522847 21.5522847,17 21,17 L20,17 L20,15 Z" id="Rectangle-3-Copy-7" fill="#000000"></path>
+			<path d="M3,7 L4,7 L4,9 L3,9 C2.44771525,9 2,8.55228475 2,8 L2,8 C2,7.44771525 2.44771525,7 3,7 Z" id="Rectangle-3-Copy-5" fill="#000000"></path>
+			<path d="M3,11 L4,11 L4,13 L3,13 C2.44771525,13 2,12.5522847 2,12 L2,12 C2,11.4477153 2.44771525,11 3,11 Z" id="Rectangle-3-Copy-8" fill="#000000"></path>
+			<path d="M3,15 L4,15 L4,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,16 C2,15.4477153 2.44771525,15 3,15 Z" id="Rectangle-3-Copy-9" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--CPU2 선언-->
+<th:block th:fragment="CPU2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/CPU2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="3" y="3" width="18" height="18" rx="1"></rect>
+			<path d="M11,11 L11,13 L13,13 L13,11 L11,11 Z M10,9 L14,9 C14.5522847,9 15,9.44771525 15,10 L15,14 C15,14.5522847 14.5522847,15 14,15 L10,15 C9.44771525,15 9,14.5522847 9,14 L9,10 C9,9.44771525 9.44771525,9 10,9 Z" id="Rectangle-2" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<rect id="Rectangle-3" fill="#000000" opacity="0.3" x="5" y="5" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-8" fill="#000000" opacity="0.3" x="5" y="9" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-9" fill="#000000" opacity="0.3" x="5" y="13" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy" fill="#000000" opacity="0.3" x="9" y="5" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-2" fill="#000000" opacity="0.3" x="13" y="5" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-3" fill="#000000" opacity="0.3" x="17" y="5" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-10" fill="#000000" opacity="0.3" x="17" y="9" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-11" fill="#000000" opacity="0.3" x="17" y="13" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-7" fill="#000000" opacity="0.3" x="5" y="17" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-6" fill="#000000" opacity="0.3" x="9" y="17" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-5" fill="#000000" opacity="0.3" x="13" y="17" width="2" height="2" rx="0.5"></rect>
+			<rect id="Rectangle-3-Copy-4" fill="#000000" opacity="0.3" x="17" y="17" width="2" height="2" rx="0.5"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Diagnostics 선언-->
+<th:block th:fragment="Diagnostics">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Diagnostics.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" opacity="0.3" x="2" y="3" width="20" height="18" rx="2"></rect>
+			<path d="M9.9486833,13.3162278 C9.81256925,13.7245699 9.43043041,14 9,14 L5,14 C4.44771525,14 4,13.5522847 4,13 C4,12.4477153 4.44771525,12 5,12 L8.27924078,12 L10.0513167,6.68377223 C10.367686,5.73466443 11.7274983,5.78688777 11.9701425,6.75746437 L13.8145063,14.1349195 L14.6055728,12.5527864 C14.7749648,12.2140024 15.1212279,12 15.5,12 L19,12 C19.5522847,12 20,12.4477153 20,13 C20,13.5522847 19.5522847,14 19,14 L16.118034,14 L14.3944272,17.4472136 C13.9792313,18.2776054 12.7550291,18.143222 12.5298575,17.2425356 L10.8627389,10.5740611 L9.9486833,13.3162278 Z" id="Path-108" fill="#000000" fill-rule="nonzero"></path>
+			<circle id="Oval" fill="#000000" opacity="0.3" cx="19" cy="6" r="1"></circle>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Display1 선언-->
+<th:block th:fragment="Display1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Display1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M11,20 L11,17 C11,16.4477153 11.4477153,16 12,16 C12.5522847,16 13,16.4477153 13,17 L13,20 L15.5,20 C15.7761424,20 16,20.2238576 16,20.5 C16,20.7761424 15.7761424,21 15.5,21 L8.5,21 C8.22385763,21 8,20.7761424 8,20.5 C8,20.2238576 8.22385763,20 8.5,20 L11,20 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,16 C22,16.5522847 21.5522847,17 21,17 L3,17 C2.44771525,17 2,16.5522847 2,16 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M4.5,8 C4.22385763,8 4,8.22385763 4,8.5 C4,8.77614237 4.22385763,9 4.5,9 L13.5,9 C13.7761424,9 14,8.77614237 14,8.5 C14,8.22385763 13.7761424,8 13.5,8 L4.5,8 Z M4.5,10 C4.22385763,10 4,10.2238576 4,10.5 C4,10.7761424 4.22385763,11 4.5,11 L7.5,11 C7.77614237,11 8,10.7761424 8,10.5 C8,10.2238576 7.77614237,10 7.5,10 L4.5,10 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Display2 선언-->
+<th:block th:fragment="Display2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Display2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="6 7 6 15 18 15 18 7"></polygon>
+			<path d="M11,19 L11,16 C11,15.4477153 11.4477153,15 12,15 C12.5522847,15 13,15.4477153 13,16 L13,19 L14.5,19 C14.7761424,19 15,19.2238576 15,19.5 C15,19.7761424 14.7761424,20 14.5,20 L9.5,20 C9.22385763,20 9,19.7761424 9,19.5 C9,19.2238576 9.22385763,19 9.5,19 L11,19 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M6,7 L6,15 L18,15 L18,7 L6,7 Z M6,5 L18,5 C19.1045695,5 20,5.8954305 20,7 L20,15 C20,16.1045695 19.1045695,17 18,17 L6,17 C4.8954305,17 4,16.1045695 4,15 L4,7 C4,5.8954305 4.8954305,5 6,5 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Display3 선언-->
+<th:block th:fragment="Display3">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Display3.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="5 7 5 15 19 15 19 7"></polygon>
+			<path d="M11,19 L11,16 C11,15.4477153 11.4477153,15 12,15 C12.5522847,15 13,15.4477153 13,16 L13,19 L14.5,19 C14.7761424,19 15,19.2238576 15,19.5 C15,19.7761424 14.7761424,20 14.5,20 L9.5,20 C9.22385763,20 9,19.7761424 9,19.5 C9,19.2238576 9.22385763,19 9.5,19 L11,19 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M5,7 L5,15 L19,15 L19,7 L5,7 Z M5.25,5 L18.75,5 C19.9926407,5 21,5.8954305 21,7 L21,15 C21,16.1045695 19.9926407,17 18.75,17 L5.25,17 C4.00735931,17 3,16.1045695 3,15 L3,7 C3,5.8954305 4.00735931,5 5.25,5 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Gameboy 선언-->
+<th:block th:fragment="Gameboy">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Gameboy.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M11,16 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,16 L19,16 C20.1045695,16 21,16.8954305 21,18 L21,19 C21,20.1045695 20.1045695,21 19,21 L5,21 C3.8954305,21 3,20.1045695 3,19 L3,18 C3,16.8954305 3.8954305,16 5,16 L11,16 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<circle id="Oval" fill="#000000" cx="12" cy="7" r="3"></circle>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Gamepad1 선언-->
+<th:block th:fragment="Gamepad1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Gamepad1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M12.9486833,9.31622777 L11.0513167,8.68377223 C11.8160243,6.38964935 13.0426772,4.95855428 14.7574644,4.5298575 C15.650287,4.30665184 17,2.86951059 17,2 L19,2 C19,3.79715607 17.0163797,6.02668149 15.2425356,6.4701425 C14.2906561,6.70811238 13.517309,7.61035065 12.9486833,9.31622777 Z" id="Path-21" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M7.05661608,8.02781729 C7.20182559,8.00946022 7.34980802,8 7.5,8 L16.5,8 C16.650192,8 16.7981744,8.00946022 16.9433839,8.02781729 C17.1264244,8.00942131 17.312112,8 17.5,8 C20.5375661,8 23,10.4624339 23,13.5 C23,16.5375661 20.5375661,19 17.5,19 C15.7920631,19 14.2659538,18.2215033 13.2571621,17 L10.7428379,17 C9.73404624,18.2215033 8.20793694,19 6.5,19 C3.46243388,19 1,16.5375661 1,13.5 C1,10.4624339 3.46243388,8 6.5,8 C6.68788804,8 6.87357561,8.00942131 7.05661608,8.02781729 Z M5.5,10 C5.22385763,10 5,10.2238576 5,10.5 L5,11.5 C5,11.7761424 5.22385763,12 5.5,12 L6.5,12 C6.77614237,12 7,11.7761424 7,11.5 L7,10.5 C7,10.2238576 6.77614237,10 6.5,10 L5.5,10 Z M7.5,12 C7.22385763,12 7,12.2238576 7,12.5 L7,13.5 C7,13.7761424 7.22385763,14 7.5,14 L8.5,14 C8.77614237,14 9,13.7761424 9,13.5 L9,12.5 C9,12.2238576 8.77614237,12 8.5,12 L7.5,12 Z M19,12 C19.5522847,12 20,11.5522847 20,11 C20,10.4477153 19.5522847,10 19,10 C18.4477153,10 18,10.4477153 18,11 C18,11.5522847 18.4477153,12 19,12 Z M18,15 C18.5522847,15 19,14.5522847 19,14 C19,13.4477153 18.5522847,13 18,13 C17.4477153,13 17,13.4477153 17,14 C17,14.5522847 17.4477153,15 18,15 Z M5.5,14 C5.22385763,14 5,14.2238576 5,14.5 L5,15.5 C5,15.7761424 5.22385763,16 5.5,16 L6.5,16 C6.77614237,16 7,15.7761424 7,15.5 L7,14.5 C7,14.2238576 6.77614237,14 6.5,14 L5.5,14 Z M3.5,12 C3.22385763,12 3,12.2238576 3,12.5 L3,13.5 C3,13.7761424 3.22385763,14 3.5,14 L4.5,14 C4.77614237,14 5,13.7761424 5,13.5 L5,12.5 C5,12.2238576 4.77614237,12 4.5,12 L3.5,12 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Gamepad2 선언-->
+<th:block th:fragment="Gamepad2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Gamepad2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M12.9486833,8.31622777 L11.0513167,7.68377223 C11.8160243,5.38964935 13.0426772,3.95855428 14.7574644,3.5298575 C15.650287,3.30665184 17,1.86951059 17,1 L19,1 C19,2.79715607 17.0163797,5.02668149 15.2425356,5.4701425 C14.2906561,5.70811238 13.517309,6.61035065 12.9486833,8.31622777 Z" id="Path-21" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M7.81798367,7 L16.2025685,7 C17.5586976,6.72948613 18.9494633,7.42723712 19.526457,8.72046451 L22.9501217,16.3939916 C23.4665806,17.5515411 23.1998005,18.9087734 22.2836331,19.7847233 L21.8392372,20.2096113 C21.8188115,20.2291404 21.7980738,20.2483405 21.7770321,20.2672042 C20.6904893,21.2412841 19.0200246,21.1501149 18.0459447,20.0635721 L15.2994684,17 L8.86456314,17 L6.11808685,20.0635721 C5.14400696,21.1501149 3.47354224,21.2412841 2.38699945,20.2672042 C2.36595778,20.2483405 2.34522009,20.2291404 2.3247944,20.2096113 L1.85770343,19.7630245 C0.952705301,18.8977536 0.680264004,17.5614241 1.17430192,16.4109277 L4.46146538,8.75590867 C5.02845054,7.43553556 6.44099515,6.71763226 7.81798367,7 Z M8,14 C9.1045695,14 10,13.1045695 10,12 C10,10.8954305 9.1045695,10 8,10 C6.8954305,10 6,10.8954305 6,12 C6,13.1045695 6.8954305,14 8,14 Z M17,12 C17.5522847,12 18,11.5522847 18,11 C18,10.4477153 17.5522847,10 17,10 C16.4477153,10 16,10.4477153 16,11 C16,11.5522847 16.4477153,12 17,12 Z M15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 C14.4477153,12 14,12.4477153 14,13 C14,13.5522847 14.4477153,14 15,14 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Generator 선언-->
+<th:block th:fragment="Generator">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Generator.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" opacity="0.3" x="2" y="6" width="20" height="14" rx="2"></rect>
+			<path d="M5,4 L7,4 C7.55228475,4 8,4.44771525 8,5 L8,6 L4,6 L4,5 C4,4.44771525 4.44771525,4 5,4 Z M17,4 L19,4 C19.5522847,4 20,4.44771525 20,5 L20,6 L16,6 L16,5 C16,4.44771525 16.4477153,4 17,4 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M7,12 L7,11 C7,10.4477153 7.44771525,10 8,10 C8.55228475,10 9,10.4477153 9,11 L9,12 L10,12 C10.5522847,12 11,12.4477153 11,13 C11,13.5522847 10.5522847,14 10,14 L9,14 L9,15 C9,15.5522847 8.55228475,16 8,16 C7.44771525,16 7,15.5522847 7,15 L7,14 L6,14 C5.44771525,14 5,13.5522847 5,13 C5,12.4477153 5.44771525,12 6,12 L7,12 Z" id="Combined-Shape" fill="#000000"></path>
+			<rect id="Rectangle-46-Copy" fill="#000000" x="14" y="12" width="4" height="2" rx="1"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Hard-drive 선언-->
+<th:block th:fragment="Hard-drive">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Hard-drive.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M2,13 L22,13 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,13 Z M18.5,18 C19.3284271,18 20,17.3284271 20,16.5 C20,15.6715729 19.3284271,15 18.5,15 C17.6715729,15 17,15.6715729 17,16.5 C17,17.3284271 17.6715729,18 18.5,18 Z M13.5,18 C14.3284271,18 15,17.3284271 15,16.5 C15,15.6715729 14.3284271,15 13.5,15 C12.6715729,15 12,15.6715729 12,16.5 C12,17.3284271 12.6715729,18 13.5,18 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M5.79268604,8 L18.207314,8 C18.5457897,8 18.8612922,8.17121884 19.0457576,8.45501165 L22,13 L2,13 L4.95424243,8.45501165 C5.13870775,8.17121884 5.45421032,8 5.79268604,8 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Headphones 선언-->
+<th:block th:fragment="Headphones">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Headphones.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M19,16 L19,12 C19,8.13400675 15.8659932,5 12,5 C8.13400675,5 5,8.13400675 5,12 L5,16 L19,16 Z M21,16 L3,16 L3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 L21,16 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M5,14 L6,14 C7.1045695,14 8,14.8954305 8,16 L8,19 C8,20.1045695 7.1045695,21 6,21 L5,21 C3.8954305,21 3,20.1045695 3,19 L3,16 C3,14.8954305 3.8954305,14 5,14 Z M18,14 L19,14 C20.1045695,14 21,14.8954305 21,16 L21,19 C21,20.1045695 20.1045695,21 19,21 L18,21 C16.8954305,21 16,20.1045695 16,19 L16,16 C16,14.8954305 16.8954305,14 18,14 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Homepod 선언-->
+<th:block th:fragment="Homepod">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Homepod.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M17.9284376,4.46474822 C19.1973992,5.56488124 20,7.18871188 20,9 L20,16 C20,19.3137085 17.3137085,22 14,22 L10,22 C6.6862915,22 4,19.3137085 4,16 L4,9 C4,7.18871188 4.80260084,5.56488124 6.07156236,4.46474822 C6.51827272,5.90091027 9.0024302,7 12,7 C14.9975698,7 17.4817273,5.90091027 17.9284376,4.46474822 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M15.3482135,3.66753404 C14.5236045,3.25522953 13.3167437,3 12,3 C10.6832563,3 9.47639552,3.25522953 8.6517865,3.66753404 C8.42616493,3.78034482 8.24918686,3.89542836 8.12520418,4 C8.24918686,4.10457164 8.42616493,4.21965518 8.6517865,4.33246596 C9.47639552,4.74477047 10.6832563,5 12,5 C13.3167437,5 14.5236045,4.74477047 15.3482135,4.33246596 C15.5738351,4.21965518 15.7508131,4.10457164 15.8747958,4 C15.7508131,3.89542836 15.5738351,3.78034482 15.3482135,3.66753404 Z" id="Oval-45" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--iMac 선언-->
+<th:block th:fragment="iMac">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/iMac.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M5,5 L5,16 L19,16 L19,5 L5,5 Z M5,3 L19,3 C20.4201608,3 21,3.7163444 21,4.6 L21,17.4 C21,18.2836556 20.4201608,19 19,19 L5,19 C3.57983921,19 3,18.2836556 3,17.4 L3,4.6 C3,3.7163444 3.57983921,3 5,3 Z M12,18 C12.2761424,18 12.5,17.7761424 12.5,17.5 C12.5,17.2238576 12.2761424,17 12,17 C11.7238576,17 11.5,17.2238576 11.5,17.5 C11.5,17.7761424 11.7238576,18 12,18 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="5 5 5 16 19 16 19 5"></polygon>
+			<rect id="Rectangle-4" fill="#000000" opacity="0.3" x="10" y="20" width="4" height="1" rx="0.5"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--iPhone-back 선언-->
+<th:block th:fragment="iPhone-back">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/iPhone-back.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M8,2 L16,2 C17.1045695,2 18,2.8954305 18,4 L18,20 C18,21.1045695 17.1045695,22 16,22 L8,22 C6.8954305,22 6,21.1045695 6,20 L6,4 C6,2.8954305 6.8954305,2 8,2 Z M8,3 C7.44771525,3 7,3.44771525 7,4 C7,4.55228475 7.44771525,5 8,5 L10,5 C10.5522847,5 11,4.55228475 11,4 C11,3.44771525 10.5522847,3 10,3 L8,3 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--iPhone-x-back 선언-->
+<th:block th:fragment="iPhone-x-back">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/iPhone-x-back.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M8,2 L16,2 C17.1045695,2 18,2.8954305 18,4 L18,20 C18,21.1045695 17.1045695,22 16,22 L8,22 C6.8954305,22 6,21.1045695 6,20 L6,4 C6,2.8954305 6.8954305,2 8,2 Z M8,3 C7.44771525,3 7,3.44771525 7,4 L7,6 C7,6.55228475 7.44771525,7 8,7 C8.55228475,7 9,6.55228475 9,6 L9,4 C9,3.44771525 8.55228475,3 8,3 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--iPhone-X 선언-->
+<th:block th:fragment="iPhone-X">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/iPhone-X.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M8,2.5 C7.30964406,2.5 6.75,3.05964406 6.75,3.75 L6.75,20.25 C6.75,20.9403559 7.30964406,21.5 8,21.5 L16,21.5 C16.6903559,21.5 17.25,20.9403559 17.25,20.25 L17.25,3.75 C17.25,3.05964406 16.6903559,2.5 16,2.5 L8,2.5 Z M8,1 L16,1 C17.5187831,1 18.75,2.23121694 18.75,3.75 L18.75,20.25 C18.75,21.7687831 17.5187831,23 16,23 L8,23 C6.48121694,23 5.25,21.7687831 5.25,20.25 L5.25,3.75 C5.25,2.23121694 6.48121694,1 8,1 Z M9.5,1.75 L14.5,1.75 C14.7761424,1.75 15,1.97385763 15,2.25 L15,3.25 C15,3.52614237 14.7761424,3.75 14.5,3.75 L9.5,3.75 C9.22385763,3.75 9,3.52614237 9,3.25 L9,2.25 C9,1.97385763 9.22385763,1.75 9.5,1.75 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Keyboard 선언-->
+<th:block th:fragment="Keyboard">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Keyboard.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M11.9486833,8.31622777 L10.0513167,7.68377223 C10.8160243,5.38964935 12.0426772,3.95855428 13.7574644,3.5298575 C14.650287,3.30665184 16,1.86951059 16,1 L18,1 C18,2.79715607 16.0163797,5.02668149 14.2425356,5.4701425 C13.2906561,5.70811238 12.517309,6.61035065 11.9486833,8.31622777 Z" id="Path-21" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M3,7 L21,7 C22.1045695,7 23,7.8954305 23,9 L23,19 C23,20.1045695 22.1045695,21 21,21 L3,21 C1.8954305,21 1,20.1045695 1,19 L1,9 C1,7.8954305 1.8954305,7 3,7 Z M7.5,9 C7.22385763,9 7,9.22385763 7,9.5 L7,10.5 C7,10.7761424 7.22385763,11 7.5,11 L8.5,11 C8.77614237,11 9,10.7761424 9,10.5 L9,9.5 C9,9.22385763 8.77614237,9 8.5,9 L7.5,9 Z M3.5,9 C3.22385763,9 3,9.22385763 3,9.5 L3,10.5 C3,10.7761424 3.22385763,11 3.5,11 L4.5,11 C4.77614237,11 5,10.7761424 5,10.5 L5,9.5 C5,9.22385763 4.77614237,9 4.5,9 L3.5,9 Z M5.5,13 C5.22385763,13 5,13.2238576 5,13.5 L5,14.5 C5,14.7761424 5.22385763,15 5.5,15 L6.5,15 C6.77614237,15 7,14.7761424 7,14.5 L7,13.5 C7,13.2238576 6.77614237,13 6.5,13 L5.5,13 Z M9.5,13 C9.22385763,13 9,13.2238576 9,13.5 L9,14.5 C9,14.7761424 9.22385763,15 9.5,15 L10.5,15 C10.7761424,15 11,14.7761424 11,14.5 L11,13.5 C11,13.2238576 10.7761424,13 10.5,13 L9.5,13 Z M13.5,13 C13.2238576,13 13,13.2238576 13,13.5 L13,14.5 C13,14.7761424 13.2238576,15 13.5,15 L14.5,15 C14.7761424,15 15,14.7761424 15,14.5 L15,13.5 C15,13.2238576 14.7761424,13 14.5,13 L13.5,13 Z M17.5,13 C17.2238576,13 17,13.2238576 17,13.5 L17,14.5 C17,14.7761424 17.2238576,15 17.5,15 L18.5,15 C18.7761424,15 19,14.7761424 19,14.5 L19,13.5 C19,13.2238576 18.7761424,13 18.5,13 L17.5,13 Z M11.5,9 C11.2238576,9 11,9.22385763 11,9.5 L11,10.5 C11,10.7761424 11.2238576,11 11.5,11 L12.5,11 C12.7761424,11 13,10.7761424 13,10.5 L13,9.5 C13,9.22385763 12.7761424,9 12.5,9 L11.5,9 Z M5.5,17 C5.22385763,17 5,17.2238576 5,17.5 L5,18.5 C5,18.7761424 5.22385763,19 5.5,19 L18.5,19 C18.7761424,19 19,18.7761424 19,18.5 L19,17.5 C19,17.2238576 18.7761424,17 18.5,17 L5.5,17 Z M15.5,9 C15.2238576,9 15,9.22385763 15,9.5 L15,10.5 C15,10.7761424 15.2238576,11 15.5,11 L16.5,11 C16.7761424,11 17,10.7761424 17,10.5 L17,9.5 C17,9.22385763 16.7761424,9 16.5,9 L15.5,9 Z M19.5,9 C19.2238576,9 19,9.22385763 19,9.5 L19,10.5 C19,10.7761424 19.2238576,11 19.5,11 L20.5,11 C20.7761424,11 21,10.7761424 21,10.5 L21,9.5 C21,9.22385763 20.7761424,9 20.5,9 L19.5,9 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Laptop-macbook 선언-->
+<th:block th:fragment="Laptop-macbook">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Laptop-macbook.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M5,6 L19,6 C19.5522847,6 20,6.44771525 20,7 L20,17 L4,17 L4,7 C4,6.44771525 4.44771525,6 5,6 Z" id="Combined-Shape" fill="#000000"></path>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="1" y="18" width="22" height="1" rx="0.5"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Laptop 선언-->
+<th:block th:fragment="Laptop">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Laptop.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M6,8 L6,16 L18,16 L18,8 L6,8 Z M20,16 L21.381966,16 C21.7607381,16 22.1070012,16.2140024 22.2763932,16.5527864 L22.5,17 C22.6706654,17.3413307 22.5323138,17.7563856 22.190983,17.927051 C22.0950363,17.9750244 21.9892377,18 21.881966,18 L2.11803399,18 C1.73641461,18 1.42705098,17.6906364 1.42705098,17.309017 C1.42705098,17.2017453 1.45202663,17.0959467 1.5,17 L1.7236068,16.5527864 C1.89299881,16.2140024 2.23926193,16 2.61803399,16 L4,16 L4,8 C4,6.8954305 4.8954305,6 6,6 L18,6 C19.1045695,6 20,6.8954305 20,8 L20,16 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="6 8 6 16 18 16 18 8"></polygon>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--LTE1 선언-->
+<th:block th:fragment="LTE1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/LTE1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M15.4508979,17.4029496 L14.1784978,15.8599014 C15.324501,14.9149052 16,13.5137472 16,12 C16,10.4912085 15.3289582,9.09418404 14.1893841,8.14910121 L15.466112,6.60963188 C17.0590936,7.93073905 18,9.88958759 18,12 C18,14.1173586 17.0528606,16.0819686 15.4508979,17.4029496 Z M18.0211112,20.4681628 L16.7438102,18.929169 C18.7927036,17.2286725 20,14.7140097 20,12 C20,9.28974232 18.7960666,6.77820732 16.7520315,5.07766256 L18.031149,3.54017812 C20.5271817,5.61676443 22,8.68922234 22,12 C22,15.3153667 20.523074,18.3916375 18.0211112,20.4681628 Z M8.54910207,17.4029496 C6.94713944,16.0819686 6,14.1173586 6,12 C6,9.88958759 6.94090645,7.93073905 8.53388797,6.60963188 L9.81061588,8.14910121 C8.67104182,9.09418404 8,10.4912085 8,12 C8,13.5137472 8.67549895,14.9149052 9.82150222,15.8599014 L8.54910207,17.4029496 Z M5.9788888,20.4681628 C3.47692603,18.3916375 2,15.3153667 2,12 C2,8.68922234 3.47281829,5.61676443 5.96885102,3.54017812 L7.24796852,5.07766256 C5.20393339,6.77820732 4,9.28974232 4,12 C4,14.7140097 5.20729644,17.2286725 7.25618985,18.929169 L5.9788888,20.4681628 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<circle id="Oval" fill="#000000" cx="12" cy="12" r="2"></circle>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--LTE2 선언-->
+<th:block th:fragment="LTE2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/LTE2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M16.4508979,17.4029496 L15.1784978,15.8599014 C16.324501,14.9149052 17,13.5137472 17,12 C17,10.4912085 16.3289582,9.09418404 15.1893841,8.14910121 L16.466112,6.60963188 C18.0590936,7.93073905 19,9.88958759 19,12 C19,14.1173586 18.0528606,16.0819686 16.4508979,17.4029496 Z M19.0211112,20.4681628 L17.7438102,18.929169 C19.7927036,17.2286725 21,14.7140097 21,12 C21,9.28974232 19.7960666,6.77820732 17.7520315,5.07766256 L19.031149,3.54017812 C21.5271817,5.61676443 23,8.68922234 23,12 C23,15.3153667 21.523074,18.3916375 19.0211112,20.4681628 Z M7.54910207,17.4029496 C5.94713944,16.0819686 5,14.1173586 5,12 C5,9.88958759 5.94090645,7.93073905 7.53388797,6.60963188 L8.81061588,8.14910121 C7.67104182,9.09418404 7,10.4912085 7,12 C7,13.5137472 7.67549895,14.9149052 8.82150222,15.8599014 L7.54910207,17.4029496 Z M4.9788888,20.4681628 C2.47692603,18.3916375 1,15.3153667 1,12 C1,8.68922234 2.47281829,5.61676443 4.96885102,3.54017812 L6.24796852,5.07766256 C4.20393339,6.77820732 3,9.28974232 3,12 C3,14.7140097 4.20729644,17.2286725 6.25618985,18.929169 L4.9788888,20.4681628 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M11,14.2919782 C10.1170476,13.9061998 9.5,13.0251595 9.5,12 C9.5,10.6192881 10.6192881,9.5 12,9.5 C13.3807119,9.5 14.5,10.6192881 14.5,12 C14.5,13.0251595 13.8829524,13.9061998 13,14.2919782 L13,20 C13,20.5522847 12.5522847,21 12,21 C11.4477153,21 11,20.5522847 11,20 L11,14.2919782 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Mic 선언-->
+<th:block th:fragment="Mic">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Mic.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M12.9975507,17.929461 C12.9991745,17.9527631 13,17.9762852 13,18 L13,21 C13,21.5522847 12.5522847,22 12,22 C11.4477153,22 11,21.5522847 11,21 L11,18 C11,17.9762852 11.0008255,17.9527631 11.0024493,17.929461 C7.60896116,17.4452857 5,14.5273206 5,11 L7,11 C7,13.7614237 9.23857625,16 12,16 C14.7614237,16 17,13.7614237 17,11 L19,11 C19,14.5273206 16.3910388,17.4452857 12.9975507,17.929461 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" transform="translate(12.000000, 8.000000) rotate(-360.000000) translate(-12.000000, -8.000000) " x="9" y="2" width="6" height="12" rx="3"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Midi 선언-->
+<th:block th:fragment="Midi">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Midi.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M4,6 L21,6 C21.5522847,6 22,6.44771525 22,7 L22,18 C22,18.5522847 21.5522847,19 21,19 L4,19 C3.44771525,19 3,18.5522847 3,18 L3,7 C3,6.44771525 3.44771525,6 4,6 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="7" y="13" width="1" height="6"></rect>
+			<rect id="Rectangle-Copy" fill="#000000" opacity="0.3" x="12" y="13" width="1" height="6"></rect>
+			<rect id="Rectangle-Copy-2" fill="#000000" opacity="0.3" x="17" y="13" width="1" height="6"></rect>
+			<path d="M6,6 L9,6 L9,12 C9,12.5522847 8.55228475,13 8,13 L7,13 C6.44771525,13 6,12.5522847 6,12 L6,6 Z" id="Rectangle-54" fill="#000000"></path>
+			<path d="M11,6 L14,6 L14,12 C14,12.5522847 13.5522847,13 13,13 L12,13 C11.4477153,13 11,12.5522847 11,12 L11,6 Z" id="Rectangle-54-Copy" fill="#000000"></path>
+			<path d="M16,6 L19,6 L19,12 C19,12.5522847 18.5522847,13 18,13 L17,13 C16.4477153,13 16,12.5522847 16,12 L16,6 Z" id="Rectangle-54-Copy-2" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Mouse 선언-->
+<th:block th:fragment="Mouse">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Mouse.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" opacity="0.3" x="6" y="5" width="12" height="18" rx="6"></rect>
+			<path d="M11.5,2 L12.5,2 C12.7761424,2 13,2.22385763 13,2.5 L13,5 L11,5 L11,2.5 C11,2.22385763 11.2238576,2 11.5,2 Z" id="Rectangle-2" fill="#000000"></path>
+			<rect id="Rectangle-33" fill="#000000" x="11" y="16" width="2" height="5" rx="1"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Phone 선언-->
+<th:block th:fragment="Phone">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Phone.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M7.13888889,4 L7.13888889,19 L16.8611111,19 L16.8611111,4 L7.13888889,4 Z M7.83333333,1 L16.1666667,1 C17.5729473,1 18.25,1.98121694 18.25,3.5 L18.25,20.5 C18.25,22.0187831 17.5729473,23 16.1666667,23 L7.83333333,23 C6.42705272,23 5.75,22.0187831 5.75,20.5 L5.75,3.5 C5.75,1.98121694 6.42705272,1 7.83333333,1 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="7 4 7 19 17 19 17 4"></polygon>
+			<circle id="Oval" fill="#000000" cx="12" cy="21" r="1"></circle>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Printer 선언-->
+<th:block th:fragment="Printer">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Printer.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M16,17 L16,21 C16,21.5522847 15.5522847,22 15,22 L9,22 C8.44771525,22 8,21.5522847 8,21 L8,17 L5,17 C3.8954305,17 3,16.1045695 3,15 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,15 C21,16.1045695 20.1045695,17 19,17 L16,17 Z M17.5,11 C18.3284271,11 19,10.3284271 19,9.5 C19,8.67157288 18.3284271,8 17.5,8 C16.6715729,8 16,8.67157288 16,9.5 C16,10.3284271 16.6715729,11 17.5,11 Z M10,14 L10,20 L14,20 L14,14 L10,14 Z" id="Combined-Shape" fill="#000000"></path>
+			<rect id="Combined-Shape-Copy" fill="#000000" opacity="0.3" x="8" y="2" width="8" height="2" rx="1"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Radio 선언-->
+<th:block th:fragment="Radio">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Radio.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M4,7 L20,7 C21.1045695,7 22,7.8954305 22,9 L22,19 C22,20.1045695 21.1045695,21 20,21 L4,21 C2.8954305,21 2,20.1045695 2,19 L2,9 C2,7.8954305 2.8954305,7 4,7 Z M16,18 C18.209139,18 20,16.209139 20,14 C20,11.790861 18.209139,10 16,10 C13.790861,10 12,11.790861 12,14 C12,16.209139 13.790861,18 16,18 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M20.6185961,7.09750181 C20.4238038,7.03420884 20.2158968,7 20,7 L17.2014013,7 L8.01276516,1.87327098 C7.53047091,1.60417861 7.35763664,0.995059403 7.62672902,0.512765158 C7.89582139,0.0304709116 8.5049406,-0.142363355 8.98723484,0.126729018 L20.1117466,6.33356496 C20.4052818,6.49734071 20.5841864,6.78706979 20.6185961,7.09750181 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M16,16 C17.1045695,16 18,15.1045695 18,14 C18,12.8954305 17.1045695,12 16,12 C14.8954305,12 14,12.8954305 14,14 C14,15.1045695 14.8954305,16 16,16 Z" id="Oval" fill="#000000"></path>
+			<rect id="Rectangle-51" fill="#000000" opacity="0.3" x="4" y="11" width="5" height="2" rx="1"></rect>
+			<rect id="Rectangle-51-Copy-2" fill="#000000" opacity="0.3" x="4" y="15" width="5" height="2" rx="1"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Router1 선언-->
+<th:block th:fragment="Router1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Router1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M15,15 L15,10 C15,9.44771525 15.4477153,9 16,9 C16.5522847,9 17,9.44771525 17,10 L17,15 L20,15 C21.1045695,15 22,15.8954305 22,17 L22,19 C22,20.1045695 21.1045695,21 20,21 L4,21 C2.8954305,21 2,20.1045695 2,19 L2,17 C2,15.8954305 2.8954305,15 4,15 L15,15 Z M5,17 C4.44771525,17 4,17.4477153 4,18 C4,18.5522847 4.44771525,19 5,19 L10,19 C10.5522847,19 11,18.5522847 11,18 C11,17.4477153 10.5522847,17 10,17 L5,17 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M20.5,7.7155722 L19.2133304,8.85714286 C18.425346,7.82897283 17.2569914,7.22292937 15.9947545,7.22292937 C14.7366498,7.22292937 13.571742,7.82497398 12.7836854,8.84737587 L11.5,7.70192243 C12.6016042,6.27273291 14.2349886,5.42857143 15.9947545,5.42857143 C17.7603123,5.42857143 19.3985009,6.27832502 20.5,7.7155722 Z M23.5,5.46053062 L22.1362873,6.57142857 C20.629466,4.78945909 18.4012066,3.73944576 15.9963045,3.73944576 C13.5947271,3.73944576 11.3692392,4.78653417 9.8623752,6.56427829 L8.5,5.45180053 C10.340077,3.28094376 13.0626024,2 15.9963045,2 C18.934073,2 21.6599771,3.28451636 23.5,5.46053062 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Router2 선언-->
+<th:block th:fragment="Router2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Router2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" x="3" y="13" width="18" height="7" rx="2"></rect>
+			<path d="M17.4029496,9.54910207 L15.8599014,10.8215022 C14.9149052,9.67549895 13.5137472,9 12,9 C10.4912085,9 9.09418404,9.67104182 8.14910121,10.8106159 L6.60963188,9.53388797 C7.93073905,7.94090645 9.88958759,7 12,7 C14.1173586,7 16.0819686,7.94713944 17.4029496,9.54910207 Z M20.4681628,6.9788888 L18.929169,8.25618985 C17.2286725,6.20729644 14.7140097,5 12,5 C9.28974232,5 6.77820732,6.20393339 5.07766256,8.24796852 L3.54017812,6.96885102 C5.61676443,4.47281829 8.68922234,3 12,3 C15.3153667,3 18.3916375,4.47692603 20.4681628,6.9788888 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--SD-card 선언-->
+<th:block th:fragment="SD-card">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/SD-card.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M5,5 C5,4.44771525 5.44771525,4 6,4 L15.75,4 C15.9073787,4 16.0555728,4.07409708 16.15,4.2 L18.9,7.86666667 C18.9649111,7.95321475 19,8.05848156 19,8.16666667 L19,19 C19,19.5522847 18.5522847,20 18,20 L6,20 C5.44771525,20 5,19.5522847 5,19 L5,5 Z M7,6 L7,9 L9,9 L9,6 L7,6 Z M10,6 L10,9 L12,9 L12,6 L10,6 Z M13,6 L13,9 L15,9 L15,6 L13,6 Z" id="Combined-Shape" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Server 선언-->
+<th:block th:fragment="Server">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Server.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M5,2 L19,2 C20.1045695,2 21,2.8954305 21,4 L21,6 C21,7.1045695 20.1045695,8 19,8 L5,8 C3.8954305,8 3,7.1045695 3,6 L3,4 C3,2.8954305 3.8954305,2 5,2 Z M11,4 C10.4477153,4 10,4.44771525 10,5 C10,5.55228475 10.4477153,6 11,6 L16,6 C16.5522847,6 17,5.55228475 17,5 C17,4.44771525 16.5522847,4 16,4 L11,4 Z M7,6 C7.55228475,6 8,5.55228475 8,5 C8,4.44771525 7.55228475,4 7,4 C6.44771525,4 6,4.44771525 6,5 C6,5.55228475 6.44771525,6 7,6 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M5,9 L19,9 C20.1045695,9 21,9.8954305 21,11 L21,13 C21,14.1045695 20.1045695,15 19,15 L5,15 C3.8954305,15 3,14.1045695 3,13 L3,11 C3,9.8954305 3.8954305,9 5,9 Z M11,11 C10.4477153,11 10,11.4477153 10,12 C10,12.5522847 10.4477153,13 11,13 L16,13 C16.5522847,13 17,12.5522847 17,12 C17,11.4477153 16.5522847,11 16,11 L11,11 Z M7,13 C7.55228475,13 8,12.5522847 8,12 C8,11.4477153 7.55228475,11 7,11 C6.44771525,11 6,11.4477153 6,12 C6,12.5522847 6.44771525,13 7,13 Z" id="Combined-Shape-Copy" fill="#000000"></path>
+			<path d="M5,16 L19,16 C20.1045695,16 21,16.8954305 21,18 L21,20 C21,21.1045695 20.1045695,22 19,22 L5,22 C3.8954305,22 3,21.1045695 3,20 L3,18 C3,16.8954305 3.8954305,16 5,16 Z M11,18 C10.4477153,18 10,18.4477153 10,19 C10,19.5522847 10.4477153,20 11,20 L16,20 C16.5522847,20 17,19.5522847 17,19 C17,18.4477153 16.5522847,18 16,18 L11,18 Z M7,20 C7.55228475,20 8,19.5522847 8,19 C8,18.4477153 7.55228475,18 7,18 C6.44771525,18 6,18.4477153 6,19 C6,19.5522847 6.44771525,20 7,20 Z" id="Combined-Shape-Copy-2" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Speaker 선언-->
+<th:block th:fragment="Speaker">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Speaker.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,20 C19,21.1045695 18.1045695,22 17,22 L7,22 C5.8954305,22 5,21.1045695 5,20 L5,4 C5,2.8954305 5.8954305,2 7,2 Z M12,19 C9.790861,19 8,17.209139 8,15 C8,12.790861 9.790861,11 12,11 C14.209139,11 16,12.790861 16,15 C16,17.209139 14.209139,19 12,19 Z M12,7 C11.1715729,7 10.5,6.32842712 10.5,5.5 C10.5,4.67157288 11.1715729,4 12,4 C12.8284271,4 13.5,4.67157288 13.5,5.5 C13.5,6.32842712 12.8284271,7 12,7 Z" id="Combined-Shape" fill="#000000"></path>
+			<path d="M12,17 C13.1045695,17 14,16.1045695 14,15 C14,13.8954305 13.1045695,13 12,13 C10.8954305,13 10,13.8954305 10,15 C10,16.1045695 10.8954305,17 12,17 Z" id="Oval" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Tablet 선언-->
+<th:block th:fragment="Tablet">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Tablet.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M6.5,4 L6.5,20 L17.5,20 L17.5,4 L6.5,4 Z M7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,20 C19,21.1045695 18.1045695,22 17,22 L7,22 C5.8954305,22 5,21.1045695 5,20 L5,4 C5,2.8954305 5.8954305,2 7,2 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="6.5 4 6.5 20 17.5 20 17.5 4"></polygon>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--TV1 선언-->
+<th:block th:fragment="TV1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/TV1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M4.5,6 L19.5,6 C20.8807119,6 22,6.97004971 22,8.16666667 L22,16.8333333 C22,18.0299503 20.8807119,19 19.5,19 L4.5,19 C3.11928813,19 2,18.0299503 2,16.8333333 L2,8.16666667 C2,6.97004971 3.11928813,6 4.5,6 Z M4,8 L4,17 L20,17 L20,8 L4,8 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<polygon id="Combined-Shape" fill="#000000" opacity="0.3" points="4 8 4 17 20 17 20 8"></polygon>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="7" y="20" width="10" height="1" rx="0.5"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--TV2 선언-->
+<th:block th:fragment="TV2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/TV2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,17 C22,17.5522847 21.5522847,18 21,18 L3,18 C2.44771525,18 2,17.5522847 2,17 L2,6 C2,5.44771525 2.44771525,5 3,5 Z M9.632,10.066 L11.032,10.066 L11.032,9.044 L7.035,9.044 L7.035,10.066 L8.435,10.066 L8.435,14 L9.632,14 L9.632,10.066 Z M14.935,14 L16.846,9.044 L15.523,9.044 L14.382,12.558 L14.354,12.558 L13.206,9.044 L11.862,9.044 L13.738,14 L14.935,14 Z" id="Combined-Shape" fill="#000000"></path>
+			<rect id="Rectangle" fill="#000000" opacity="0.3" x="3" y="19" width="18" height="1" rx="0.5"></rect>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Usb-storage 선언-->
+<th:block th:fragment="Usb-storage">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Usb-storage.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M11.5,17.4497475 L6.55025253,12.5 C6.15972824,12.1094757 6.15972824,11.4763107 6.55025253,11.0857864 L13.6213203,4.01471863 C14.4023689,3.23367004 15.6686989,3.23367004 16.4497475,4.01471863 L19.9852814,7.55025253 C20.76633,8.33130112 20.76633,9.59763107 19.9852814,10.3786797 L12.9142136,17.4497475 C12.5236893,17.8402718 11.8905243,17.8402718 11.5,17.4497475 Z" id="Rectangle-53" fill="#000000"></path>
+			<path d="M6.90380592,19.9246212 L4.0753788,17.0961941 C3.88011665,16.9009319 3.88011665,16.5843494 4.0753788,16.3890873 L6.55025253,13.9142136 L10.0857864,17.4497475 L7.6109127,19.9246212 C7.41565056,20.1198833 7.09906807,20.1198833 6.90380592,19.9246212 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--USB 선언-->
+<th:block th:fragment="USB">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/USB.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Rectangle-69" fill="#000000" x="4" y="9" width="16" height="9" rx="2"></rect>
+			<path d="M7,3 L17,3 L17,9 L7,9 L7,3 Z M9,5 L9,7 L11,7 L11,5 L9,5 Z M13,5 L13,7 L15,7 L15,5 L13,5 Z" id="Combined-Shape" fill="#000000" opacity="0.3"></path>
+			<path d="M10,18 L14,18 L14,20 C14,20.5522847 13.5522847,21 13,21 L11,21 C10.4477153,21 10,20.5522847 10,20 L10,18 Z" id="Rectangle-3" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Video-camera 선언-->
+<th:block th:fragment="Video-camera">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Video-camera.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<rect id="Combined-Shape" fill="#000000" x="2" y="6" width="13" height="12" rx="2"></rect>
+			<path d="M22,8.4142119 L22,15.5857848 C22,16.1380695 21.5522847,16.5857848 21,16.5857848 C20.7347833,16.5857848 20.4804293,16.4804278 20.2928929,16.2928912 L16.7071064,12.7071013 C16.3165823,12.3165768 16.3165826,11.6834118 16.7071071,11.2928877 L20.2928936,7.70710477 C20.683418,7.31658067 21.316583,7.31658098 21.7071071,7.70710546 C21.8946433,7.89464181 22,8.14899558 22,8.4142119 Z" id="Path-2" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Watch1 선언-->
+<th:block th:fragment="Watch1">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Watch1.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M9,8 C8.44771525,8 8,8.44771525 8,9 L8,15 C8,15.5522847 8.44771525,16 9,16 L15,16 C15.5522847,16 16,15.5522847 16,15 L16,9 C16,8.44771525 15.5522847,8 15,8 L9,8 Z M9,6 L15,6 C16.6568542,6 18,7.34314575 18,9 L18,15 C18,16.6568542 16.6568542,18 15,18 L9,18 C7.34314575,18 6,16.6568542 6,15 L6,9 C6,7.34314575 7.34314575,6 9,6 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+			<path d="M9,8 C8.44771525,8 8,8.44771525 8,9 L8,15 C8,15.5522847 8.44771525,16 9,16 L15,16 C15.5522847,16 16,15.5522847 16,15 L16,9 C16,8.44771525 15.5522847,8 15,8 L9,8 Z" id="Rectangle-36" fill="#000000" opacity="0.3"></path>
+			<path d="M9,18 L15,18 L15,20.5 C15,21.3284271 14.3284271,22 13.5,22 L10.5,22 C9.67157288,22 9,21.3284271 9,20.5 L9,18 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+			<path d="M10.5,2 L13.5,2 C14.3284271,2 15,2.67157288 15,3.5 L15,6 L9,6 L9,3.5 C9,2.67157288 9.67157288,2 10.5,2 Z" id="Rectangle-Copy" fill="#000000" opacity="0.3"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Watch2 선언-->
+<th:block th:fragment="Watch2">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Watch2.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M9,17 L15,17 L15,20.5 C15,21.3284271 14.3284271,22 13.5,22 L10.5,22 C9.67157288,22 9,21.3284271 9,20.5 L9,17 Z" id="Rectangle" fill="#000000" opacity="0.3"></path>
+			<path d="M12,17 C14.7614237,17 17,14.7614237 17,12 C17,9.23857625 14.7614237,7 12,7 C9.23857625,7 7,9.23857625 7,12 C7,14.7614237 9.23857625,17 12,17 Z" id="Path" fill="#000000" opacity="0.3"></path>
+			<path d="M10.5,2 L13.5,2 C14.3284271,2 15,2.67157288 15,3.5 L15,7 L9,7 L9,3.5 C9,2.67157288 9.67157288,2 10.5,2 Z" id="Rectangle-Copy" fill="#000000" opacity="0.3"></path>
+			<path d="M12,17 C14.7614237,17 17,14.7614237 17,12 C17,9.23857625 14.7614237,7 12,7 C9.23857625,7 7,9.23857625 7,12 C7,14.7614237 9.23857625,17 12,17 Z M12,19 C8.13400675,19 5,15.8659932 5,12 C5,8.13400675 8.13400675,5 12,5 C15.8659932,5 19,8.13400675 19,12 C19,15.8659932 15.8659932,19 12,19 Z" id="Oval" fill="#000000" fill-rule="nonzero"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+
+<!--Wi-fi 선언-->
+<th:block th:fragment="Wi-fi">
+	<!--begin::Svg Icon | path:/assets/media/svg/icons/devices/Wi-fi.svg-->
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+			<path d="M19.366142,13.9305937 L17.2619853,15.6656848 C15.9733542,14.1029531 14.0626842,13.1818182 11.9984835,13.1818182 C9.94104045,13.1818182 8.03600715,14.0968752 6.74725784,15.6508398 L4.64798148,13.9098472 C6.44949126,11.7375997 9.12064835,10.4545455 11.9984835,10.4545455 C14.8857906,10.4545455 17.5648042,11.7460992 19.366142,13.9305937 Z M23.5459782,10.4257575 L21.4473503,12.1675316 C19.1284914,9.37358605 15.6994058,7.72727273 11.9984835,7.72727273 C8.30267753,7.72727273 4.87785708,9.36900008 2.55893241,12.1563207 L0.462362714,10.4120696 C3.29407133,7.00838857 7.48378666,5 11.9984835,5 C16.519438,5 20.7143528,7.01399004 23.5459782,10.4257575 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+			<path d="M15.1189503,17.3544974 L13.0392442,19.1188213 L11.9619232,20 L10.9331836,19.1485815 L8.80489611,17.4431757 C9.57552634,16.4814558 10.741377,15.9090909 11.9984835,15.9090909 C13.215079,15.9090909 14.347452,16.4450896 15.1189503,17.3544974 Z" id="Oval-21" fill="#000000"></path>
+		</g>
+	</svg>
+	<!--end::Svg Icon-->
+</th:block>
+</html>

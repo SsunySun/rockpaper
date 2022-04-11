@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.rockplace.rshm.db.mapper.crm.CrmMapper">
+
+	<sql id="common_paging_header">
+		<if test="mapperParseVo != null and mapperParseVo.map != null and mapperParseVo.map.length != null and mapperParseVo.map.start != null">
+		SELECT R1.*
+		  FROM (
+		</if>
+	</sql>
+
+	<sql id="common_paging_footer">
+		<if test="mapperParseVo != null and mapperParseVo.map != null and mapperParseVo.map.length != null and mapperParseVo.map.start != null">
+		  ) R1
+		LIMIT #{mapperParseVo.map.length, jdbcType=INTEGER} OFFSET #{mapperParseVo.map.start, jdbcType=INTEGER}
+		</if>
+	</sql>
+
+	<select id="getOpportunitiesCount" resultType="long">
+		SELECT count(*) as cnt
+		  FROM rockplace.view_opportunities
+		 WHERE opp_code is not null
+	</select>
+
+	<select id="getOpportunitiesList" parameterType="java.util.Map" resultType="java.util.Map">
+		<include refid="common_paging_header" />
+		SELECT opp_code as id,
+		       opp_name as name,
+		       opp_sales,
+		       opp_account,
+		       opp_customer,
+		       opp_enduser_customer,
+		       opp_enduser_project,
+		       opp_enduser_charge,
+		       opp_enduser_phone,
+		       opp_enduser_email,
+		       opp_enduser_address,
+		       opp_service_start,
+		       opp_service_end
+		  FROM rockplace.view_opportunities
+		 WHERE opp_code is not null
+		<include refid="common_paging_footer" />
+	</select>
+
+	<select id="getOpportunityCountById" parameterType="java.lang.String" resultType="long">
+		SELECT count(*) as cnt
+		  FROM rockplace.view_opportunities
+		 WHERE opp_code = #{id}
+	</select>
+
+	<select id="getOpportunityById" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT opp_code as id,
+		       opp_name as name,
+		       opp_sales,
+		       opp_account,
+		       opp_customer,
+		       opp_enduser_customer,
+		       opp_enduser_project,
+		       opp_enduser_charge,
+		       opp_enduser_phone,
+		       opp_enduser_email,
+		       opp_enduser_address,
+		       opp_service_start,
+		       opp_service_end
+		  FROM rockplace.view_opportunities
+		 WHERE opp_code = #{id}
+	</select>
+
+	<select id="getProductsCount" resultType="long">
+		SELECT count(*) as cnt
+		  FROM rockplace.view_products
+		 WHERE opp_code is not null
+	</select>
+
+	<select id="getProductsList" parameterType="java.util.Map" resultType="java.util.Map">
+		<include refid="common_paging_header" />
+		SELECT product_id as id,
+		       opp_code as src_id,
+		       'CRM' as src_ent_id,
+		       'CRM' as ent_id,
+		       product_name as name,
+		       product_quantity,
+		       product_description,
+		       product_type,
+		       product_category
+		  FROM rockplace.view_products
+		 WHERE opp_code is not null
+		<include refid="common_paging_footer" />
+	</select>
+
+	<select id="getProductsCountById" parameterType="java.lang.String" resultType="long">
+		SELECT count(*) as cnt
+		  FROM rockplace.view_products
+		 WHERE opp_code = #{id}
+	</select>
+
+	<select id="getProductsListByid" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT product_id as id,
+		       opp_code as src_id,
+		       'CRM' as src_ent_id,
+		       'CRM' as ent_id,
+		       product_name as name,
+		       product_quantity,
+		       product_description,
+		       product_type,
+		       product_category
+		  FROM rockplace.view_products
+		 WHERE opp_code = #{id}
+	</select>
+</mapper>

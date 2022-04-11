@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--subHeaderFragment 선언-->
+<th:block th:fragment="subHeaderFragment(title)">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Details-->
+			<div class="d-flex align-items-center flex-wrap mr-2">
+				<!--begin::Title-->
+				<span class="title-icon">
+					<i class="flaticon2-delivery-package text-primary"></i>
+				</span>
+				<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5" th:text="${title}">TITLE</h5>
+				<!--end::Title-->
+			</div>
+			<!--end::Details-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+</th:block>
+</html>

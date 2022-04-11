@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/common}">
+
+<!-- 해당 page 고유 pre-css 추가 -->
+<th:block layout:fragment="pre-css"></th:block>
+
+<!-- 해당 page 고유 post-css 추가 -->
+<th:block layout:fragment="post-css"></th:block>
+
+<!-- Content -->
+<div class="d-flex flex-column flex-root" layout:fragment="content">
+	<!--begin::Page-->
+	<div class="d-flex flex-row flex-column-fluid page">
+		<!-- aside fragment 사용 -->
+		<th:block th:if="${isAside}">
+			<th:block th:replace="@{'fragments/common/aside'} :: asideFragment"></th:block>
+		</th:block>
+		<!--begin::Wrapper-->
+		<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+			<!--begin::Content-->
+			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+				<!-- subHeader fragment 사용 -->
+				<th:block th:replace="@{'fragments/common/subHeader'} :: subHeaderFragment(${title})"></th:block>
+				<!--begin::Entry-->
+				<div class="d-flex flex-column-fluid">
+					<!--begin::Container-->
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<!--begin::Card-->
+								<div class="card card-custom">
+									<div class="card-body">
+										<form class="form" id="searchForm" action="#">
+											<div class="row mb-6">
+												<div class="col-lg-4 mb-lg-0 mb-4">
+													<label for="tableId" class="col-form-label">Table</label>
+													<select id="tableId" name="tableId" class="form-control">
+														<option value="">Please select...</option>
+														<option th:each="table : ${tableList}" th:value="${table.id}" th:utext="|${table.name}(${table.id})|"></option>
+													</select>
+												</div>
+												<div class="col-lg-4 mb-lg-0 mb-4">
+													<label for="name" class="col-form-label">Name</label>
+													<input type="text" id="name" name="name" class="form-control" placeholder="Name" />
+												</div>
+												<div class="col-lg-4 mb-lg-0 mb-4">
+													<label for="product" class="col-form-label">System</label>
+													<select id="product" name="product" class="form-control">
+														<option value="">Please select...</option>
+														<option value="true">TRUE</option>
+														<option value="false" selected="selected">FALSE</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<div class="row mt-2 justify-content-end">
+											<!--begin::Button-->
+											<button class="btn btn-primary btn-primary-icon" id="search">
+												<span>
+													<i class="la la-search"></i>
+													<span>Search</span>
+												</span>
+											</button>
+											<!--end::Button-->
+										</div>
+									</div>
+									<div class="card-body" id="tableField">
+										<!--begin::Table-->
+										<div class="table-responsive">
+											<table class="table table-hover mb-6" id="table-field-table">
+												<thead>
+													<tr>
+														<th scope="col">
+															<label class="checkbox checkbox-outline form-control">
+																<input type="checkbox" checked="checked" />
+																<span></span>
+															</label>
+														</th>
+														<th>ID</th>
+														<th>Name</th>
+														<th>Label</th>
+														<th>Entity ID</th>
+														<th>Table ID</th>
+														<th>Field Type</th>
+														<th>Type</th>
+														<th>Reference Entity</th>
+														<th>Reference Code Type</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr id="form" class="active">
+														<!-- hidden variable -->
+														<input type="hidden" name="var/entId" value="TFD" />
+														<input type="hidden" name="isSystem" value="false" />
+														<td scope="row">
+															<label class="checkbox checkbox-outline form-control">
+																<input type="checkbox" checked="checked" />
+																<span></span>
+															</label>
+														</td>
+														<td>
+															<input type="text" name="id" class="form-control" placeholder="ID" disabled="disabled" />
+														</td>
+														<td>
+															<input type="text" name="name" class="form-control" placeholder="Name" oninput="toUpperCase(this);" onchange="changeNameAndTableId(this);" required="required" />
+														</td>
+														<td >
+															<input type="text" name="label" class="form-control" placeholder="Label" />
+														</td>
+														<td>
+															<select name="entId" class="form-control" disabled="disabled">
+																<option value="">Please select...</option>
+																<option th:each="entity : ${entityList}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|"></option>
+															</select>
+														</td>
+														<td>
+															<select name="tabId" class="form-control" onchange="changeNameAndTableId(this);">
+																<option value="" entid="">Please select...</option>
+																<option th:each="table : ${tableList}" th:value="${table.id}" th:entid="${table.entId}" th:utext="|${table.name}(${table.id})|"></option>
+															</select>
+														</td>
+														<td>
+															<select name="tfdId" class="form-control" onchange="changeFieldType(this);">
+																<option value="">Please select...</option>
+																<option th:each="fieldType : ${fieldTypeList}" th:value="${fieldType.id}" th:utext="|${fieldType.name}(${fieldType.id})|"></option>
+															</select>
+														</td>
+														<td>
+															<select name="type" class="form-control">
+																<option value="">Please select...</option>
+															</select>
+														</td>
+														<td>
+															<select name="refEntId" class="form-control" disabled="disabled">
+																<option value="null">Please select...</option>
+																<option th:each="entity : ${entityList}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|"></option>
+															</select>
+														</td>
+														<td >
+															<input type="text" name="refCtyId" class="form-control" oninput="toUpperCase(this);" placeholder="Code Type ID" disabled="disabled" />
+														</td>
+														<td>
+															<div class="btn-group mr-2" role="group" aria-label="action">
+																<button type="button" class="btn btn-outline-secondary btn-icon" name="create">
+																	<i class="la la-save"></i>
+																</button>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!--end::Table-->
+									</div>
+								</div>
+								<!--end::Card-->
+							</div>
+						</div>
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Entry-->
+			</div>
+			<!--end::Content-->
+			<!-- footer fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/footer'} :: footerFragment"></th:block>
+		</div>
+		<!--end::Wrapper-->
+	</div>
+	<!--end::Page-->
+</div>
+
+<!-- 해당 page 고유 pre-script 추가 -->
+<th:block layout:fragment="pre-script"></th:block>
+
+<!-- 해당 page 고유 post-script 추가 -->
+<th:block layout:fragment="post-script">
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+	
+			$('#search').on('click', function(event) {
+				getTableFieldByTableList();
+			});
+
+			$("#searchForm").on('submit', function(event) {
+
+				event.preventDefault();
+				getTableFieldByTableList();
+			});
+
+			checkHeaderCheckbox();
+			setButtonScript();
+		});
+
+		var validationField = function() {
+
+			let isValid = true;
+
+			const inputs = $("#form *").find('input[type=text]').not(':disabled');
+			inputs.each(function() {
+				
+				if($(this).val() == '') {
+
+					$(this).addClass('is-invalid');
+					isValid = false;
+				} else {
+					$(this).removeClass('is-invalid');
+				}
+			});
+
+			const selects = $("#form *").find('select').not(':disabled');
+			selects.each(function() {
+
+				if($(this).val() == '') {
+
+					$(this).addClass('is-invalid');
+					isValid = false;
+				} else {
+					$(this).removeClass('is-invalid');
+				}
+			});
+
+			return isValid;
+		}
+
+		var setButtonScript = function() {
+
+			$('button[name=create]').each(function() {
+
+				$(this).on('click', function(event) {
+
+					if(!validationField()) {
+						return;
+					};
+
+					var target = $("#form *");
+					var disabled = target.find(':disabled').prop("disabled", false);
+					var params = target.serializeArray();
+					disabled.prop("disabled", true);
+
+					$.ajax({
+						url: '/api/admin/tablefield/create',
+						method: "POST",
+						data: params
+					}).done(function (response, textStatus, xhr) {
+
+						// console.log("response", response);
+						// console.log("textStatus", textStatus);
+						// console.log("xhr", xhr);
+						if(response.status == 200) {
+							// getTableFieldByTableList();
+						} else {
+							alert('message : ' + response.message + '\n' + 'result : ' + response.result);
+						}
+					}).fail(function(response, textStatus, errorThrown){
+
+						console.log("response", response);
+						console.log("textStatus", textStatus);
+						console.log("errorThrown", errorThrown);
+						alert('response : ' + response + '\n' + 'textStatus : ' + textStatus + '\n' + 'errorThrown : ' + errorThrown);
+					});
+				});
+			});
+
+			$('button[name=update]').each(function(index) {
+
+				$(this).on('click', function(event) {
+
+					var target = $("#form_" + index + " *");
+					var disabled = target.find(':disabled').prop("disabled", false);
+					var params = target.serializeArray();
+					disabled.prop("disabled", true);
+
+					$.ajax({
+						url: '/api/admin/tablefield/update',
+						method: "POST",
+						data: params
+					}).done(function (response, textStatus, xhr) {
+
+						// console.log("response", response);
+						// console.log("textStatus", textStatus);
+						// console.log("xhr", xhr);
+						if(response.status == 200) {
+							getTableFieldByTableList();
+						} else {
+							alert(response.message);
+						}
+					}).fail(function(response, textStatus, errorThrown){
+
+						console.log("response", response);
+						console.log("textStatus", textStatus);
+						console.log("errorThrown", errorThrown);
+						alert('response : ' + response + '\n' + 'textStatus : ' + textStatus + '\n' + 'errorThrown : ' + errorThrown);
+					});
+				});
+			});
+
+			$('button[name=delete]').each(function(index) {
+
+				$(this).on('click', function(event) {
+
+					const parentElement = $(this).parent().parent().parent();
+
+					$.ajax({
+						url: '/api/admin/tablefield/delete',
+						method: "POST",
+						data: {
+							id: parentElement.find('input[name=id]').val()
+						}
+					}).done(function (response, textStatus, xhr) {
+
+						// console.log("response", response);
+						// console.log("textStatus", textStatus);
+						// console.log("xhr", xhr);
+						if(response.status == 200) {
+							// getTableFieldByTableList();
+						} else {
+							alert(response.message);
+						}
+					}).fail(function(response, textStatus, errorThrown){
+
+						console.log("response", response);
+						console.log("textStatus", textStatus);
+						console.log("errorThrown", errorThrown);
+						alert('response : ' + response + '\n' + 'textStatus : ' + textStatus + '\n' + 'errorThrown : ' + errorThrown);
+					});
+				});
+			});
+		}
+
+		var getTableFieldByTableList = function() {
+
+			$("#tableField").load( 
+				"/admin/tableFieldByTableList",
+				$('#searchForm').serializeArray(),
+				function(response, status, xhr) {
+
+			});
+		}
+
+		var changeFieldType = function(element) {
+
+			const parentElement = $(element).parent().parent();
+
+			$.ajax({
+				url: '/api/common/sqlList',
+				method: "POST",
+				data: {
+					sqlId: 'CODE_BY_PID',
+					pid: element.value
+				}
+			}).done(function (response, textStatus, xhr) {
+
+				var target = parentElement.find('select[name=type]');
+				target.empty();
+				target.append('<option value="">Please select...</option>');
+
+				$.each(response.result, function (index, data) {
+
+					// APPEND OR INSERT DATA TO SELECT ELEMENT.
+					target.append('<option value="' + data.id + '">' + data.name + '(' + data.id + ')' + '</option>');
+				});
+
+			}).fail(function(response, textStatus, errorThrown) {
+
+				console.log("response", response);
+				console.log("textStatus", textStatus);
+				console.log("errorThrown", errorThrown);
+				alert('response : ' + response + '\n' + 'textStatus : ' + textStatus + '\n' + 'errorThrown : ' + errorThrown);
+			}).always(function() {
+
+				var refEntIdTarget = parentElement.find('select[name=refEntId]');
+				if(element.value == 'FLT_TYPE_ENTITY') {
+					refEntIdTarget.prop("disabled", false);
+				} else {
+
+					refEntIdTarget.val('');
+					refEntIdTarget.prop("disabled", true);
+				}
+
+				var refCtyIdTarget = parentElement.find('input[name=refCtyId]');
+				if(element.value == 'FLT_TYPE_CODE') {
+					refCtyIdTarget.prop("readonly", false);
+				} else {
+
+					refCtyIdTarget.val('');
+					refCtyIdTarget.prop("readonly", true);
+				}
+			});
+		}
+
+		var changeNameAndTableId = function(element) {
+
+			const parentElement = $(element).parent().parent();
+
+			var name = parentElement.find('input[name=name]').val();
+			var tableId = parentElement.find('select[name=tabId]').val();
+
+			var tableEntId = parentElement.find('select[name=tabId]').find('option:selected').attr('entId');
+			var entId = parentElement.find('select[name=entId]').val(tableEntId);
+
+			var id = parentElement.find('input[name=id]');
+			if(name != '' && tableId != '') {
+				id.val(tableId + '/' + name);
+			} else {
+				id.val('');
+			}
+		}
+
+		var checkHeaderCheckbox = function() {
+
+			var table = $("#table-field-table");
+
+			// 테이블 헤더에 있는 checkbox 클릭시
+			$(":checkbox:first", table).on('click', function() {
+
+				// 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+				if($(this).is(":checked") ){
+					$(":checkbox", table).prop("checked", true);
+				} else {
+					$(":checkbox", table).prop("checked", false);
+				}
+
+				// 모든 체크박스에 change 이벤트 발생시키기
+				$(":checkbox", table).trigger("change");
+			});
+
+			// 헤더에 있는 체크박스외 다른 체크박스 클릭시
+			$(":checkbox:not(:first)", table).on('click', function() {
+
+				var allCnt = $(":checkbox:not(:first)", table).length;
+				var checkedCnt = $(":checkbox:not(:first)", table).filter(":checked").length;
+				
+				// 전체 체크박스 갯수와 현재 체크된 체크박스 갯수를 비교해서 헤더에 있는 체크박스 체크할지 말지 판단
+				if(allCnt == checkedCnt ){
+					$(":checkbox:first", table).prop("checked", true);
+				} else {
+					$(":checkbox:first", table).prop("checked", false);
+				}
+			}).on('change', function() {
+
+				if($(this).is(":checked") ){
+
+					// 체크박스의 부모 > 부모 니까 tr 이 되고 tr 에 selected 라는 class 를 추가한다.
+					$(this).parent().parent().parent().addClass("active");
+				} else{
+					$(this).parent().parent().parent().removeClass("active");
+				}
+			});
+		}
+	</script>
+</th:block>
+</html>

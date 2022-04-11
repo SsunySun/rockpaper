@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.rockplace.rshm.db.mapper.rshm.CommonMapper">
+
+	<select id="getObjectToMapBySQL" parameterType="java.lang.String" resultType="java.util.Map">
+		${query}
+	</select>
+
+	<select id="getObjectToStringBySQL" parameterType="java.lang.String" resultType="java.lang.String">
+		${query}
+	</select>
+
+	<select id="getListToMapBySQL" parameterType="java.lang.String" resultType="java.util.Map">
+		${query}
+	</select>
+
+	<select id="getListToStringBySQL" parameterType="java.lang.String" resultType="java.lang.String">
+		${query}
+	</select>
+
+	<sql id="common_filter">
+		<if test="mapperParseVo != null and mapperParseVo.filterList.size != 0">
+			${mapperParseVo.where}
+		</if>
+		<foreach collection="mapperParseVo.filterList" item="filter" open="" close="" separator=" AND">
+			${filter}
+		</foreach>
+	</sql>
+
+	<sql id="common_order">
+		<if test="mapperParseVo != null and mapperParseVo.orderBy != null">
+		ORDER BY ${mapperParseVo.orderBy}
+		</if>
+	</sql>
+
+	<select id="getSqlResultMap" parameterType="java.util.Map" resultType="java.util.Map">
+		${query}
+		<include refid="common_filter" />
+		<include refid="common_order" />
+	</select>
+
+	<select id="getSqlResultList" parameterType="java.util.Map" resultType="java.util.Map">
+		${query}
+		<include refid="common_filter" />
+		<include refid="common_order" />
+	</select>
+
+	<insert id="mergeTable" parameterType="java.util.Map">
+		INSERT INTO ${table}
+		(
+			create_date, create_emp_id,
+			<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+				${key}
+			</foreach>
+		)
+		VALUES
+		(
+			current_timestamp(), #{user.id},
+			<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+				#{value}
+			</foreach>
+		)
+		ON DUPLICATE KEY
+		UPDATE
+		 update_date = current_timestamp(), update_emp_id = #{user.id},
+		<foreach index="key" item="value" collection="map.entrySet()" separator=",">
+			${key} = #{value}
+		</foreach>
+	</insert>
+
+	<update id="updateTable" parameterType="java.util.Map">
+		UPDATE ${table}
+		 set 
+		<foreach index="key" item="value" collection="setMap.entrySet()" separator=",">
+			${key} = #{value}
+		</foreach>
+		where
+		<foreach index="key" item="value" collection="whereMap.entrySet()" open="" close="" separator=" AND">
+			${key} = #{value}
+		</foreach>
+	</update>
+</mapper>

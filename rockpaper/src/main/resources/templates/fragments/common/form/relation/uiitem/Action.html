@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Action Fragment 선언-->
+<th:block th:fragment="fragment" 
+	th:with="id=${index == 99 ? field.id + '_' + relationField.id + '_' + index + '_' + subIndex.index : field.id + '_' + relationField.id + '_' + index.index + '_' + subIndex.index},
+			uiidx=${index == 99 ? 99 : index.index}">
+
+	<th:block th:if="${relationField.hidden}">
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${relationField.hidden}">
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'vertical')}">
+			<th:block th:replace=":: verticalFragment"></th:block>
+		</th:block>
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'horizontal')}">
+			<th:block th:replace=":: horizontalFragment"></th:block>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Action vertical Fragment 선언-->
+<th:block th:fragment="verticalFragment">
+
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth}">
+		<!--/* 값이 없을 경우 */-->
+		<th:block th:if="${#maps.isEmpty(relationObject)}">
+			<div class="my-4">
+				<div class="col text-right">
+					<th:block th:each="button : ${relationField.buttons}">
+						<button th:if="${button.type == 'create'}" type="button" class="btn btn-primary" th:name="${field.id + 'create'}" name="create" th:value="${button.ctl_id}" value="" th:utext="${button.label}" th:label="${button.label}" th:index="${uiidx}" index="0">저장</button>
+					</th:block>
+				</div>
+			</div>
+		</th:block>
+
+		<!--/* 값이 있을 경우 */-->
+		<th:block th:unless="${#maps.isEmpty(relationObject)}">
+			<th:blcok th:if="${isEdit}">
+				<div class="my-4 row">
+					<div class="col text-left">
+						<th:block th:each="button : ${relationField.buttons}">
+							<button th:if="${button.type == 'delete'}" type="button" class="btn btn-danger" th:name="${field.id + 'delete'}" name="delete" th:value="${button.ctl_id}" value="" th:utext="${button.label}" th:label="${button.label}" th:index="${uiidx}" index="0">삭제</button>
+						</th:block>
+					</div>
+					<div class="col text-right">
+						<th:block th:each="button : ${relationField.buttons}">
+							<button th:if="${button.type == 'update'}" type="button" class="btn btn-primary" th:name="${field.id + 'update'}" name="update" th:value="${button.ctl_id}" value="" th:utext="${button.label}" th:label="${button.label}" th:index="${uiidx}" index="0">수정</button>
+						</th:block>
+					</div>
+				</div>
+			</th:blcok>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Action horizontal Fragment 선언-->
+<th:block th:fragment="horizontalFragment">
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth}">
+		<!--/* 값이 없을 경우 */-->
+		<th:block th:if="${#maps.isEmpty(relationObject)}">
+			<div th:style="|width: ${relationField.width};|" style="width: 100%;">
+				<th:block th:each="button : ${relationField.buttons}">
+					<button th:if="${button.type == 'create'}" type="button" class="btn btn-icon btn-primary" th:name="${field.id + 'create'}" name="create" th:value="${button.ctl_id}" value="" th:label="${button.label}" th:index="${uiidx}" index="0">
+						<i class="la la-save"></i>
+					</button>
+				</th:block>
+			</div>
+		</th:block>
+
+		<!--/* 값이 있을 경우 */-->
+		<th:block th:unless="${#maps.isEmpty(relationObject)}">
+			<th:blcok th:if="${isEdit}">
+				<div th:style="|width: ${relationField.width};|" style="width: 100%;">
+					<th:block th:each="button : ${relationField.buttons}">
+						<button th:if="${button.type == 'update'}" type="button" class="btn btn-icon btn-primary" th:name="${field.id + 'update'}" name="update" th:value="${button.ctl_id}" value="" th:label="${button.label}" th:index="${uiidx}" index="0">
+							<i class="la la-save"></i>
+						</button>
+						<button th:if="${button.type == 'delete'}" type="button" class="btn btn-icon btn-danger" th:name="${field.id + 'delete'}" name="delete" th:value="${button.ctl_id}" value="" th:label="${button.label}" th:index="${uiidx}" index="0">
+							<i class="la la-trash"></i>
+						</button>
+					</th:block>
+				</div>
+			</th:blcok>
+		</th:block>
+	</th:block>
+</th:block>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Entity.Select Fragment 선언-->
+<th:block th:fragment="fragment">
+	<div th:class="|col-lg-${sub_filter.width} mb-lg-0 mb-6|" class="col-lg-3 mb-lg-0 mb-6">
+		<label th:text="${sub_filter.label}" th:for="${sub_filter.id}">Label</label>
+		<select class="form-control datatable-input" th:id="${sub_filter.id}" id="id" th:data-col-index="${sub_filter.index}" data-col-index="0">
+			<option value="" th:utext="|== ${sub_filter.label} ==|">Please select...</option>
+			<option th:each="entity : ${refListMap.get(sub_filter.id)}" th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" th:selected="${#strings.equals(sub_filter.def_val, entity.id)}"></option>
+		</select>
+	</div>
+</th:block>
+</html>

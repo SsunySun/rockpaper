@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--asideFragment 선언-->
+<th:block th:fragment="asideFragment">
+	<!--begin::Aside-->
+	<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+		<!--begin::Brand-->
+		<div class="brand flex-column-auto" id="kt_brand">
+			<!--begin::Logo-->
+			<a th:href="@{/}" href="/" class="brand-logo">
+				<img alt="Logo" th:src="@{/assets/media/logos/logo.png}" src="/assets/media/logos/logo.png" class="h-30px" />
+			</a>
+			<!--end::Logo-->
+			<!--begin::Toggle-->
+			<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+				<!-- text Icon fragment 사용 -->
+				<th:block th:replace="@{'fragments/svg/icon'} :: textIcon('Toggle-Right', 'svg-icon-xl')"></th:block>
+			</button>
+			<!--end::Toolbar-->
+		</div>
+		<!--end::Brand-->
+		<!--begin::User-->
+		<div class="user ml-4 mt-4 d-flex" id="kt_user">
+			<div class="btn btn-icon h-40px w-40px p-0" id="kt_quick_user_toggle">
+				<img th:src="@{/assets/media/users/blank.png}" src="/assets/media/users/blank.png" class="h-40px align-self-end" alt="" />
+			</div>
+			<div class="user-info ml-4">
+				<div class="user-name font-weight-bold font-size-h5 text-light" th:if="${session.user != null}" th:text="${session.user.name}">Name</div>
+				<div class="user-dept font-size-h7 text-light" th:text="|(${session.user.deptName})|">(Dept)</div>
+			</div>
+		</div>
+		<!--end::User-->
+		<!--begin::Aside Menu-->
+		<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+			<!--begin::Menu Container-->
+			<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
+				<!--begin::Menu Nav-->
+				<ul class="menu-nav">
+					<th:block th:each="menuEntity : ${menuList}">
+						<th:block th:if="${menuEntity.pidMenuEntityList.size == 0}">
+							<li th:classappend="${menuEntity.id == #httpServletRequest.getParameter('menuId')} ? 'menu-item-active'" class="menu-item" aria-haspopup="true">
+								<a th:target="${menuEntity.isNew ? '_blank' : '_self'}" target="_self" th:href="@{${menuEntity.url}}" href="#" th:menuId=${menuEntity.id} menuId="" class="menu-link">
+									<!-- Menu Icon fragment 사용 -->
+									<th:block th:replace="@{'fragments/svg/icon'} :: menuIcon(${menuEntity.menuIcon}, null)"></th:block>
+									<span class="menu-text" th:text="${menuEntity.label}">Label</span>
+								</a>
+							</li>
+						</th:block>
+						<th:block th:unless="${menuEntity.pidMenuEntityList.size == 0}">
+							<li class="menu-section">
+								<h4 class="menu-text" th:text="${menuEntity.label}">Label</h4>
+								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+							</li>
+						</th:block>
+						<th:block th:each="subMenuEntity : ${menuEntity.pidMenuEntityList}">
+
+							<!-- Sub 메뉴가 없을 경우 -->
+							<th:block th:if="${subMenuEntity.pidMenuEntityList.size} == 0">
+								<li th:classappend="${subMenuEntity.id == #httpServletRequest.getParameter('menuId')} ? 'menu-item-active'" class="menu-item" aria-haspopup="true">
+									<a th:target="${subMenuEntity.isNew ? '_blank' : '_self'}" target="_self" th:href="@{${subMenuEntity.url}}" href="#" th:menuId=${subMenuEntity.id} menuId="" class="menu-link">
+										<!-- Menu Icon fragment 사용 -->
+										<th:block th:replace="@{'fragments/svg/icon'} :: menuIcon(${subMenuEntity.menuIcon}, null)"></th:block>
+										<span class="menu-text" th:text="${subMenuEntity.label}">Sub Label</span>
+									</a>
+								</li>
+							</th:block>
+
+							<!-- Sub 메뉴가 있을 경우 -->
+							<th:block th:unless="${subMenuEntity.pidMenuEntityList.size} == 0">
+								<li th:classappend="${subMenuEntity.id == #httpServletRequest.getParameter('menuId')} ? 'menu-item-open menu-item-here'" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a th:href="@{#}" href="javascript:;" class="menu-link menu-toggle">
+										<!-- Menu Icon fragment 사용 -->
+										<th:block th:replace="@{'fragments/svg/icon'} :: menuIcon(${subMenuEntity.menuIcon}, null)"></th:block>
+										<span class="menu-text" th:text="${subMenuEntity.label}">Sub Label</span>
+										<i class="menu-arrow"></i>
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item menu-item-parent" aria-haspopup="true">
+												<span class="menu-link">
+													<span class="menu-text" th:text="${subMenuEntity.label}">Sub Label</span>
+												</span>
+											</li>
+
+											<th:block th:each="lastSubMenuEntity : ${subMenuEntity.pidMenuEntityList}">
+												<li th:classappend="${lastSubMenuEntity.id == #httpServletRequest.getParameter('menuId')} ? menu-item-active" class="menu-item" aria-haspopup="true">
+													<a th:target="${lastSubMenuEntity.isNew ? '_blank' : '_self'}" target="_self" th:href="@{${lastSubMenuEntity.url}}" href="#" th:menuId=${lastSubMenuEntity.id} menuId="" class="menu-link">
+														<i class="menu-bullet menu-bullet-dot">
+															<span></span>
+														</i>
+														<span class="menu-text" th:text="${lastSubMenuEntity.label}">Last Label</span>
+													</a>
+												</li>
+											</th:block>
+										</ul>
+									</div>
+								</li>
+							</th:block>
+						</th:block>
+					</th:block>
+				</ul>
+				<!--end::Menu Nav-->
+			</div>
+			<!--end::Menu Container-->
+		</div>
+		<!--end::Aside Menu-->
+	</div>
+	<!--end::Aside-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:src="@{/assets/js/common/jquery.url.js}" src="/assets/js/common/jquery.url.js"></script>
+	<!--end::Page Scripts-->
+
+	<script th:inline="javascript">
+
+		jQuery(document).ready(function() {
+
+			$('a[class=menu-link]').each(function(index) {
+
+				$(this).on('click', function(event) {
+
+					event.preventDefault();
+
+					var href = $(this).attr('href');
+					var menuId = $(this).attr('menuId');
+
+					// setting url info
+					$.url.setUrl(href);
+					$.url.param().menuId = menuId;
+
+					var param = '';
+					$.each($.url.param(), function(key, value) {
+						param += key + '=' + encodeURIComponent(value) + '&';
+					});
+
+					var url = $.url.attr('path') + '?' + param;
+					var target = $(this).prop('target');
+					// # open in new window if "_blank" used
+					if(target == '_blank') { 
+						window.open(url, target);
+					} else {
+						window.location = url;
+					}
+				});
+			});
+		});
+	</script>
+</th:block>
+</html>

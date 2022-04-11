@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/common}"> -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/common}">
+
+<!-- 해당 page 고유 pre-css 추가 -->
+<th:block layout:fragment="pre-css"></th:block>
+
+<!-- 해당 page 고유 post-css 추가 -->
+<th:block layout:fragment="post-css"></th:block>
+
+<!-- Content -->
+<div class="d-flex flex-column flex-root" layout:fragment="content">
+	<!--begin::Page-->
+	<div class="d-flex flex-row flex-column-fluid page">
+		<!-- aside fragment 사용 -->
+		<th:block th:if="${isAside}">
+			<th:block th:replace="@{'fragments/common/aside'} :: asideFragment"></th:block>
+		</th:block>
+		<!--begin::Wrapper-->
+		<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+			<!--begin::Content-->
+			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+				<!--begin::Entry-->
+				<div class="d-flex flex-column-fluid">
+					<!--begin::Container-->
+					<div class="container">
+						<div class="card card-custom">
+							<div class="card-header">
+								<div class="card-title">
+									<h3 class="card-label">나의 할일</h3>
+								</div>
+								<div class="card-toolbar">
+									<a href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#ticketModal" data-remote="/common/modal/form?formId=FRM_WOR_I_001" data-name="내부업무 등록">
+										<!-- Design Icon fragment 사용 -->
+										<th:block th:replace="@{'fragments/svg/icon'} :: navigationIcon('Plus', 'svg-icon-md')"></th:block>
+										<th:block>내부업무 등록</th:block>
+									</a>
+								</div>
+							</div>
+							<div class="card-body">
+								<div id="kt_calendar"></div>
+							</div>
+						</div>
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Entry-->
+			</div>
+			<!--end::Content-->
+			<!-- Modal fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('ticketModal', 'ticketModalLabel')"></th:block>
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('calendarTicketModal', 'calendarTicketModalLabel')"></th:block>
+			<!-- footer fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/footer'} :: footerFragment"></th:block>
+		</div>
+		<!--end::Wrapper-->
+	</div>
+	<!--end::Page-->
+</div>
+
+<!-- 해당 page 고유 pre-script 추가 -->
+<th:block layout:fragment="pre-script"></th:block>
+
+<!-- 해당 page 고유 post-script 추가 -->
+<th:block layout:fragment="post-script">
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:src="@{/assets/js/common/dashboard.js}" src="/assets/js/common/dashboard.js"></script>
+	<!--end::Page Scripts-->
+</th:block>
+</html>

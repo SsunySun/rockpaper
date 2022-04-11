@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.rockplace.rshm.db.mapper.insa.InsaMapper">
+
+	<select id="getOrganizationList" resultType="java.util.Map">
+		SELECT COMPANY_CODE,
+		       COMPANY_NAME,
+		       UPDATED_DATE
+		  FROM SUN_SIGN.V_COMPANY_RP
+	</select>
+
+	<select id="getDepartmentList" resultType="java.util.Map">
+		SELECT COMPANY_CODE, 
+		       DEPT_CODE, 
+		       DEPT_NAME, 
+		       PARENT_DEPT_CODE, 
+		       UPDATED_DATE
+		  FROM SUN_SIGN.V_DEPT_RP
+	</select>
+
+	<select id="getEmployeeList" resultType="java.util.Map">
+		SELECT COMPANY_CODE,
+		       DEPT_CODE,
+		       NM_KOR,
+		       EMAIL,
+		       EMP_NO,
+		       POSITION_CODE,
+		       DUTY_CODE,
+		       JOB_TEL_NO,
+		       MOBILE_TEL_NO,
+		       UPDATED_DATE
+		  FROM SUN_SIGN.V_EMP_RP
+	</select>
+
+	<select id="getCodeList" resultType="java.util.Map">
+		SELECT COMPANY_CODE,
+		       CODE_DIV,
+		       CODE,
+		       LANGUAGE,
+		       CODE_NAME,
+		       UPDATED_DATE
+		  FROM SUN_SIGN.V_CODE_RP
+	</select>
+
+	<select id="getDepartmentLeaderInfoList" resultType="java.util.Map">
+		SELECT EMAIL,
+		       COMPANY, 
+		       DEPT_CODE, 
+		       ADD_YN, 
+		       HEAD_YN
+		  FROM SUN_SIGN.V_DEPT_EMP_REL_RP
+	</select>
+
+	<select id="getVacationCodeList" resultType="java.util.Map">
+		SELECT VacationCode as CODE,
+		       VacationName as CODE_NAME
+		  FROM SUN_SIGN.V_VACATION_CODE_RP
+	</select>
+
+	<select id="getVacationList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT Email as EMAIL,
+		       VacationDay as DAY,
+		       VacationCode as VACATION_CD,
+		       StatusCode as STATUS,
+		       createdDate as CREATE_DATE,
+		       updatedDate as UPDATE_DATE 
+		  FROM SUN_SIGN.V_VACATION_REQ_RP
+		 WHERE StatusCode = '최종승인'
+		   and VacationCode in ('VD001', 'VD002', 'VD003', 'VD006', 'VD007', 'VD008', 'VD009', 'VD010', 'VD011')
+		   and date(createdDate) between #{start} and #{end}
+	</select>
+</mapper>

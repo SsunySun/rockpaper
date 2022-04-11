@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/error}">
+
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root" layout:fragment="content">
+	<!--begin::Error-->
+	<div class="d-flex flex-column-fluid align-items-first justify-content-center">
+		<div class="d-flex flex-column align-items-center px-10 pt-10 pt-lg-30">
+			<!--begin::Content-->
+			<!-- <h1 class="font-weight-boldest text-white mb-5" style="font-size: 8rem" th:text="${code}">Code</h1> -->
+			<p class="display-3 text-center text-white font-weight-normal py-3" th:text="${msg}">Message</p>
+			<a href="/logout" class="btn btn-pill btn-transparent-white font-weight-bolder py-4 px-8">
+				<!-- navigation icon fragment 사용 -->
+				<th:block th:replace="@{'fragments/svg/icon'} :: navigationIcon('Sign-out', 'svg-icon-md mr-3')"></th:block>
+				Logout
+			</a>
+			<!--end::Content-->
+		</div>
+	</div>
+	<!--end::Error-->
+</div>
+<!--end::Main-->
+</html>

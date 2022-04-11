@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Code.Select Fragment 선언-->
+<th:block th:fragment="fragment" 
+	th:with="id=${index == 99 ? field.id + '_' + relationField.id + '_' + index + '_' + subIndex.index : field.id + '_' + relationField.id + '_' + index.index + '_' + subIndex.index}">
+
+	<th:block th:if="${relationField.hidden}">
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${relationField.hidden}">
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'vertical')}">
+			<th:block th:replace=":: verticalFragment"></th:block>
+		</th:block>
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'horizontal')}">
+			<th:block th:replace=":: horizontalFragment"></th:block>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Code.Select vertical Fragment 선언-->
+<th:block th:fragment="verticalFragment">
+	<div class="row">
+		<div class="col-12">
+			<label th:classappend="${auth && !relationField.readonly && relationField.require && isEdit} ? 'text-primary'" class="col-form-label" th:for="${relationField.id}" for="id" th:utext="${relationField.require} ? ${'* ' + relationField.label} : ${relationField.label}">Label</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<!--/* 권한이 있을 경우 */-->
+			<th:block th:if="${auth && isEdit}">
+				<select th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" th:disabled="${relationField.readonly}">
+					<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+					<option th:each="code : ${relationRefListMap.get(relationField.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), code.id)}"></option>
+				</select>
+			</th:block>
+
+			<!--/* 권한이 없을 경우 */-->
+			<th:block th:unless="${auth && isEdit}">
+				<select class="form-control" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" disabled="disabled">
+					<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+					<option th:each="code : ${relationRefListMap.get(relationField.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), code.id)}"></option>
+				</select>
+			</th:block>
+		</div>
+	</div>
+
+</th:block>
+
+<!--Code.Select horizontal Fragment 선언-->
+<th:block th:fragment="horizontalFragment">
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth && isEdit}">
+		<select th:classappend="${relationField.require} ? 'require'" class="form-control" th:style="|width: ${relationField.width};|" style="width: 100%;" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" th:disabled="${relationField.readonly}">
+			<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+			<option th:each="code : ${relationRefListMap.get(relationField.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), code.id)}"></option>
+		</select>
+	</th:block>
+
+	<!--/* 권한이 없을 경우 */-->
+	<th:block th:unless="${auth && isEdit}">
+		<select class="form-control" th:style="|width: ${relationField.width};|" style="width: 100%;" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" disabled="disabled">
+			<option value="" th:utext="|== ${relationField.placeholder} ==|">Please select...</option>
+			<option th:each="code : ${relationRefListMap.get(relationField.id)}" th:value="${code.id}" th:utext="|${code.name}(${code.id})|" th:selected="${#strings.equals(#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val), code.id)}"></option>
+		</select>
+	</th:block>
+</th:block>
+</html>

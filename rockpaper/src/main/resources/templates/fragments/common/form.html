@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--formFragment 선언-->
+<th:block th:fragment="formFragment(form_id, form_action, isModal)">
+	<!--begin::Container-->
+	<div class="container">
+		<!--begin::Card-->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-custom">
+					<div class="card-header" th:unless="${isModal}">
+						<h3 class="card-title" th:text="${formEntity.name}">Title</h3>
+					</div>
+					<div class="card-body">
+						<!--begin::Form-->
+						<form class="form" th:id="${form_id}" id="ticket_form" th:action="${form_action}" action="#">
+							<!-- hidden variable -->
+							<input type="hidden" name="key" id="key" th:value="${key}" />
+							<input type="hidden" name="entId" id="entId" th:value="${formEntity.entId}" />
+							<th:block th:unless="${formEntity.tasId == null}">
+								<input type="hidden" name="ctlId" id="ctlId" value="" />
+							</th:block>
+
+							<!--begin::Accordion(Timeline)-->
+							<th:block th:if="${configMap.external.timeline && workflowFlowList != null && workflowFlowList.size > 0}">
+								<div class="accordion accordion-solid accordion-toggle-plus" id="timeline">
+									<div class="card">
+										<div class="card-header">
+											<div class="card-title collapsed" data-toggle="collapse" data-target="#timeline_Collapse_1">
+											<i class="flaticon2-chart"></i>업무흐름도</div>
+										</div>
+										<div id="timeline_Collapse_1" class="collapse" data-parent="#timeline">
+											<div class="card-body">
+												<!--begin::Timeline-->
+												<div class="timeline timeline-5">
+													<div class="timeline-items">
+
+														<th:block th:each="workflowFlow : ${workflowFlowList}">
+															<!--begin::Item-->
+															<div class="timeline-item">
+																<!-- 임시저장(TAS_TYPE_REG) / 등록(TAS_TYPE_DRAFT) -->
+																<th:block th:if="${workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_REG' || 
+																	workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_DRAFT'}">
+
+																	<!--begin::Icon-->
+																	<div class="timeline-media bg-light-warning">
+																		<!-- general Icon fragment 사용 -->
+																		<th:block th:replace="@{'fragments/svg/icon'} :: generalIcon('Attachment2', 'svg-icon-warning svg-icon-md')"></th:block>
+																	</div>
+																	<!--end::Icon-->
+																	<!--begin::Info-->
+																	<div class="timeline-desc timeline-desc-light-warning">
+																		<span class="font-weight-bolder text-primary" th:text="${#temporals.format(workflowFlow.createDate, 'yyyy-MM-dd HH:mm')}">yyyy-MM-dd HH:mm</span>
+																		<!-- <p class="font-weight-normal text-dark-50 pb-2" th:text="|'${#strings.isEmpty(workflowFlow.tasId) ? '' : workflowFlow.taskEntity.name}' 에서 '${workflowFlow.nextTaskEntity.name}'으로 진행되었습니다.|">Content</p> -->
+																		<p class="font-weight-normal text-dark-50 pb-2" th:text="|${#strings.isEmpty(workflowFlow.tasId) ? '단계: ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name: '단계: ' + workflowFlow.taskEntity.name + ' -> ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name}|">Content</p>
+																	</div>
+																	<!--end::Info-->
+																</th:block>
+
+																<!-- 접수(TAS_TYPE_ACP) / 처리(TAS_TYPE_PROC) -->
+																<th:block th:if="${workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_ACP' || 
+																	workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_PROC'}">
+
+																	<!--begin::Icon-->
+																	<div class="timeline-media bg-light-primary">
+																		<!-- communication Icon fragment 사용 -->
+																		<th:block th:replace="@{'fragments/svg/icon'} :: communicationIcon('Group-chat', 'svg-icon-primary svg-icon-md')"></th:block>
+																	</div>
+																	<!--end::Icon-->
+																	<!--begin::Info-->
+																	<div class="timeline-desc timeline-desc-light-primary">
+																		<span class="font-weight-bolder text-primary" th:text="${#temporals.format(workflowFlow.createDate, 'yyyy-MM-dd HH:mm')}">yyyy-MM-dd HH:mm</span>
+																		<p class="font-weight-normal text-dark-50 pb-2" th:text="|${#strings.isEmpty(workflowFlow.tasId) ? '단계: ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name : '단계: ' + workflowFlow.taskEntity.name + ' -> ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name}|">Content</p>
+																	</div>
+																	<!--end::Info-->
+																</th:block>
+
+																<!-- 완료(TAS_TYPE_COMP) -->
+																<th:block th:if="${workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_COMP'}">
+
+																	<!--begin::Icon-->
+																	<div class="timeline-media bg-light-success">
+																		<!-- home Icon fragment 사용 -->
+																		<th:block th:replace="@{'fragments/svg/icon'} :: homeIcon('Library', 'svg-icon-success svg-icon-md')"></th:block>
+																	</div>
+																	<!--end::Icon-->
+																	<!--begin::Info -->
+																	<div class="timeline-desc timeline-desc-light-success">
+																		<span class="font-weight-bolder text-primary" th:text="${#temporals.format(workflowFlow.createDate, 'yyyy-MM-dd HH:mm')}">yyyy-MM-dd HH:mm</span>
+																		<p class="font-weight-normal text-dark-50 pb-2" th:text="|${#strings.isEmpty(workflowFlow.tasId) ? '단계: ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name : '단계: ' + workflowFlow.taskEntity.name + ' -> ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name}|">Content</p>
+																	</div>
+																	<!--end::Info-->
+																</th:block>
+
+																<!-- 취소 -->
+																<th:block th:if="${workflowFlow.nextTaskEntity.typeCodeEntity.id == 'TAS_TYPE_CANCEL'}">
+
+																	<!--begin::Icon-->
+																	<div class="timeline-media bg-light-danger">
+																		<!-- communication Icon fragment 사용 -->
+																		<th:block th:replace="@{'fragments/svg/icon'} :: communicationIcon('Add-user', 'svg-icon-danger svg-icon-md')"></th:block>
+																	</div>
+																	<!--end::Icon-->
+																	<!--begin::Info-->
+																	<div class="timeline-desc timeline-desc-light-danger">
+																		<span class="font-weight-bolder text-primary" th:text="${#temporals.format(workflowFlow.createDate, 'yyyy-MM-dd HH:mm')}">yyyy-MM-dd HH:mm</span>
+																		<p class="font-weight-normal text-dark-50 pb-2" th:text="|${#strings.isEmpty(workflowFlow.tasId) ? '단계: ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name : '단계: ' + workflowFlow.taskEntity.name + ' -> ' + workflowFlow.nextTaskEntity.name + '/ 등록자: ' + workflowFlow.employeeEntity.name}|">Content</p>
+																	</div>
+																	<!--end::Info-->
+																</th:block>
+															</div>
+															<!--end::Item-->
+														</th:block>
+													</div>
+												</div>
+												<!--end::Timeline-->
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="my-4"></div>
+							</th:block>
+							<!--end::Accordion(Timeline)-->
+
+							<!--begin::Accordion(Group)-->
+							<th:block th:each="groups : ${configMap.groups}">
+								<div class="accordion accordion-solid accordion-toggle-plus" th:id="${groups.id}" id="groupId">
+									<div class="card">
+										<div class="card-header">
+											<div th:classappend="${!groups.expand} ? 'collapsed'" class="card-title" data-toggle="collapse" th:data-target="|#${groups.id}_Collapse|" data-target="#groupId_Collapse">
+												<i class="flaticon-pie-chart-1"></i>
+												<span th:text=${groups.title}>Group title</span>
+											</div>
+										</div>
+										<div th:id="|${groups.id}_Collapse|" id="groupId_Collapse" th:classappend="${groups.expand} ? 'show'" class="collapse" th:data-parent="|#${groups.id}|" data-parent="#groupId">
+											<div class="card-body">
+												<div class="form-group row">
+													<th:block th:each="field : ${configMap.fields}">
+														<div th:if="${groups.id == field.group}" th:class="|col-lg-${field.cols}|" class="col-lg-6">
+															<th:block th:replace="@{'fragments/common/form/uiitem/' + __${field.uiitem}__} :: fragment"></th:block>
+														</div>
+													</th:block>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="my-4"></div>
+							</th:block>
+							<!--end::Accordion(Group)-->
+
+							<!--begin::Action Button-->
+							<div class="card-footer">
+								<div class="row">
+									<div class="col text-left">
+										<th:block th:if="${auth}">
+											<th:block th:unless="${formEntity.tasId == null}">
+												<th:block th:each="control : ${formEntity.taskEntity.controlEntityList}">
+													<th:block th:if="${control.used && control.typeCd == 'CTL_TYPE_DANGER'}">
+														<button type="button" btn-type="control" th:id="${control.id}" th:classappend="${control.typeCodeEntity.val}" class="btn mr-2" th:text="${control.name}" th:label="${control.name}" th:onclick="setControl([[${form_id}]], [[${control.id}]])" onclick="setControl('ticket_form', 'controlId');">Name</button>
+													</th:block>
+												</th:block>
+											</th:block>
+											<th:block th:each="button : ${configMap.buttons}">
+												<th:block th:if="${button.used}">
+													<!-- 삭제 -->
+													<th:block th:if="${#strings.equals(button.type, 'delete') && !#maps.isEmpty(object)}">
+														<button id="deleteBtn" type="button" th:classappend="${button.class}" class="btn mr-2" th:text="${button.label}" th:label="${button.label}" th:entId="${formEntity.entId}" th:value="${object.id}" th:remote="${button.action}">Label</button>
+													</th:block>
+												</th:block>
+											</th:block>
+										</th:block>
+									</div>
+									<div class="col text-right">
+										<th:block th:if="${auth}">
+											<th:block th:unless="${formEntity.tasId == null}">
+												<th:block th:each="control : ${formEntity.taskEntity.controlEntityList}">
+													<th:block th:if="${control.used && control.typeCd != 'CTL_TYPE_DANGER'}">
+														<button th:type="${control.typeCd == 'CTL_TYPE_PRIMARY' ? 'submit' : 'button'}" type="submit" btn-type="control" th:id="${control.id}" th:classappend="${control.typeCodeEntity.val}" class="btn mr-2" th:text="${control.name}" th:label="${control.name}" th:onclick="setControl([[${form_id}]], [[${control.id}]])" onclick="setControl('ticket_form', 'controlId');">Name</button>
+													</th:block>
+												</th:block>
+											</th:block>
+											<th:block th:each="button : ${configMap.buttons}">
+												<th:block th:if="${button.used}">
+													<!-- 닫기(크롬에서 웹 취약성으로 처리 안됨) -->
+													<!-- <th:block th:if="${#strings.equals(button.type, 'close')}">
+														<button id="closeBtn" type="button" th:classappend="${button.class}" class="btn mr-2" th:text="${button.label}">Label</button>
+													</th:block> -->
+	
+													<!-- 복제 -->
+													<!-- <th:block th:if="${#strings.equals(button.type, 'clone')}">
+														<button id="cloneBtn" type="button" th:classappend="${button.class}" class="btn mr-2" th:text="${button.label}">Label</button>
+													</th:block> -->
+													<!-- 저장 -->
+													<th:block th:if="${#strings.equals(button.type, 'submit')}">
+														<button type="submit" th:classappend="${button.class}" class="btn mr-2" th:text="${button.label}" th:label="${button.label}">Label</button>
+													</th:block>
+												</th:block>
+											</th:block>
+										</th:block>
+									</div>
+								</div>
+							</div>
+							<!--end::Action Button-->
+						</form>
+						<!--end::Form-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end::Card-->
+	</div>
+	<!--end::Container-->
+
+	<!--begin::Page Scripts(used by this page)-->
+	<script th:src="@{/assets/js/common/valid-form.js}" src="/assets/js/common/valid-form.js"></script>
+	<!--end::Page Scripts-->
+
+	<script th:inline="javascript">
+
+		// 필수값 체크 로직
+		var fields = new Object();
+
+		/*<![CDATA[*/
+		var requireFields = /*[[${configMap.fields}]]*/ '';
+		/*]]>*/
+
+		// Form Script
+		/*<![CDATA[*/
+			/*[(${script})]*/
+		/*]]>*/
+
+		requireFields.forEach(field => {
+			if(!field.readonly && field.require) {
+
+				if(field.uiitem.startsWith('String') || field.uiitem.startsWith('Number')) {
+					fields[field.id] = getFieldsType(field.label, 'text', '');
+				} else if(field.uiitem.startsWith('Number')) {
+
+					if(field.uiitem.startsWith('Number.Point')) {
+						fields[field.id] = getFieldsType(field.label, 'text', '');
+					} else {
+						fields[field.id] = getFieldsType(field.label, 'number', '');
+					}
+				} else {
+					fields[field.id] = getFieldsType(field.label, 'text', '');
+				}
+			}
+		});
+
+		jQuery(document).ready(function() {
+			_Form.init(/*[[${form_id}]]*/ 'ticket_form', fields);
+		});
+
+		setControl = function(formId, controlId) {
+			$('#' + formId + ' input[name=ctlId]').attr('value', controlId);
+		}
+	</script>
+</th:block>
+</html>

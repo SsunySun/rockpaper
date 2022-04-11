@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Date.DT Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<th:block th:if="${field.readonly}">
+						<div class="input-group" th:id="${field.id + 'datetimepicker'}" id='datetimepicker'>
+							<input type="text" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" readonly="readonly" th:placeholder="${field.placeholder}" placeholder="Select date"
+								th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+							</div>
+						</div>
+					</th:block>
+
+					<th:block th:unless="${field.readonly}">
+						<div class="input-group" th:id="${field.id + 'datetimepicker'}" id='datetimepicker' data-target-input="nearest" th:data-target="${'#' + field.id + 'datetimepicker'}" data-target="#datetimepicker" data-toggle="datetimepicker">
+							<input type="text" class="form-control datetimepicker-input" th:name="${field.id}" name="name" th:id="${field.id}" id="id" readonly="readonly" th:data-target="${'#' + field.id + 'datetimepicker'}" data-target="#datetimepicker" th:placeholder="${field.placeholder}" placeholder="Select date"
+								th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+							</div>
+						</div>
+						<script th:inline="javascript">
+							$("#[(${field.id})]datetimepicker").datetimepicker({
+								autoclose: true,
+								locale: 'ko',
+								format: 'yyyy-MM-DD',
+								dayViewHeaderFormat: 'YYYY MMMM',
+								minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+								maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+								sideBySide: true,
+								stepping: 30,
+								useCurrent: false
+							});
+						</script>
+					</th:block>
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<div class="input-group">
+						<input type="text" class="form-control" readonly="readonly" th:placeholder="${field.placeholder}" placeholder="Select date" 
+							th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

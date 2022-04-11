@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Date.Range.DTTM Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<!--/* UIItem Field */-->
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)}" />
+
+		<!--/* Config Field */-->
+		<input type="hidden" class="form-control" th:name="${field.config.target_id}" name="name" th:id="${field.config.target_id}" id="id"
+			th:value="${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<div class='input-group' th:id="${field.id + 'daterangepicker'}" id='daterangepicker'>
+						<input type='text' class="form-control" th:placeholder="${field.placeholder}" placeholder="Select date & time range" readonly="readonly" 
+							th:value="|${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)} ~ ${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)}|" />
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+
+					<!--/* UIItem Field */-->
+					<input type="hidden" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id"
+						th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)}" />
+
+					<!--/* Config Field */-->
+					<input type="hidden" class="form-control" th:name="${field.config.target_id}" name="name" th:id="${field.config.target_id}" id="id"
+						th:value="${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)}" />
+
+					<th:block th:unless="${field.readonly}">
+						<script th:inline="javascript">
+
+							var /*[(${field.id + 'startDate'})]*/startDate
+								= "[(${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)})]";
+							if(!/*[(${field.id + 'startDate'})]*/startDate) {
+
+								/*[(${field.id + 'startDate'})]*/startDate
+									= moment(moment().add(0, 'days').format("YYYY-MM-DD" + " 09:00")).format("YYYY-MM-DD HH:mm");
+							}
+
+							var /*[(${field.id + 'endDate'})]*/endDate
+								= "[(${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)})]";
+							if(!/*[(${field.id + 'endDate'})]*/endDate) {
+
+								/*[(${field.id + 'endDate'})]*/endDate
+									= moment(moment().add(0, 'days').format("YYYY-MM-DD" + " 09:00")).format("YYYY-MM-DD HH:mm");
+							}
+							
+							$("#[(${field.id})]daterangepicker").daterangepicker({
+								buttonClasses: 'btn',
+								applyClass: 'btn-primary',
+								cancelClass: 'btn-secondary',
+
+								timePicker: true,
+								timePickerIncrement: /*[[${field.config.time_interval}]]*/ 1,
+								timePicker24Hour: true,
+
+								startDate: /*[(${field.id + 'startDate'})]*/startDate,
+								endDate: /*[(${field.id + 'endDate'})]*/endDate,
+								minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+								// maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+								parentEl: "#[(${form_id})]",
+
+								locale: {
+									format: "YYYY-MM-DD HH:mm",
+									titleFormat: "YYYY년 mm월",
+									separator: " ~ ",
+									applyLabel: "선택",
+									cancelLabel: "취소",
+									fromLabel: "종료일시",
+									toLabel: "시작일시",
+									customRangeLabel: "기간",
+									weekLabel: "주",
+									daysOfWeek: [ "일", "월", "화", "수", "목", "금", "토" ],
+									monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ]
+								},
+							}, function(start, end, label) {
+
+								$('#[(${field.id})]daterangepicker .form-control').val(start.format('YYYY-MM-DD HH:mm') + ' ~ ' + end.format('YYYY-MM-DD HH:mm'));
+								$('#[(${field.id})]').val(start.format('YYYY-MM-DD HH:mm'));
+								$('#[(${field.config.target_id})]').val(end.format('YYYY-MM-DD HH:mm'));
+							});
+						</script>
+					</th:block>	
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<div class='input-group'>
+						<input type='text' class="form-control" th:placeholder="${field.placeholder}" placeholder="Select date & time range" readonly="readonly" 
+							th:value="|${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)} ~ ${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)}|" />
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+
+					<!--/* UIItem Field */-->
+					<input type="hidden" class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id"
+						th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? #dates.format(object.get(field.id), 'yyyy-MM-dd HH:mm') : field.def_val)}" />
+
+					<!--/* Config Field */-->
+					<input type="hidden" class="form-control" th:name="${field.config.target_id}" name="name" th:id="${field.config.target_id}" id="id"
+						th:value="${#maps.isEmpty(object) ? field.config.target_def_val : (#maps.containsKey(object, field.config.target_id) ? #dates.format(object.get(field.config.target_id), 'yyyy-MM-dd HH:mm') : field.config.target_def_val)}" />
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

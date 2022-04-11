@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Entity.SearchSelectCRM Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="name"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+					<div class="align-items-center flex-wrap">
+						<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+					</div>
+					<div th:classappend="${!(!#maps.isEmpty(object) && #maps.containsKey(object, field.id))} ? 'd-none'" 
+						class="align-items-center flex-wrap" th:id="${field.id + '-btn'}" id="id">
+						<span>
+							<a class="btn btn-sm btn-light-primary justify-content-end">
+								<i class="flaticon-eye"></i> 열람
+							</a>
+						</span>
+						<script th:inline="javascript">
+							$('div[id=[(${field.id})]-btn]').on('click', function() {
+								openWindowByFormAndKey('FRM_CRM001', $('#[(${field.id})]').val());
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<select class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="name" th:disabled="${field.readonly}" th:onchange="[(${field.id + 'checkHideButton'})](this, '[(${field.id + '-btn'})]')" onchange="checkHideButton(this, 'btn-id')">
+						<option th:each="entity: ${refListMap.get(field.id)}" th:if="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), entity.id)}" 
+							th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" 
+							th:selected="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), entity.id)}"></option>
+					</select>
+					<th:block th:unless="${field.readonly}">
+						<script th:inline="javascript">
+							$("#[(${field.id})]").select2({
+								placeholder: "[(${field.placeholder})]",
+								allowClear: true,
+								minimumInputLength: 2,
+								language: {
+									inputTooShort: function(args) {
+										var remainingChars = args.minimum - args.input.length;
+										var message = remainingChars + '자 이상 입력하세요';
+										return message;
+									},
+									noResults: function () {
+										return '결과값이 없습니다.';
+									},
+									searching: function () {
+										return '조회 중…';
+									}
+								},
+								ajax: {
+									url: '/api/common/sqlList',
+									method: 'POST',
+									delay: 500,
+									data: function(params) {
+
+										var query = new Object();
+										var config = /*[[${field.config}]]*/ '[]';
+										if(Array.isArray(config)) {
+											config.forEach(field => {
+												query[field.id] = field.value;
+											});
+										}
+										query['search'] = params.term;
+										return query;
+									},
+									processResults: function (data) {
+										return { results: data };
+									},
+								}
+							});
+
+							var /*[(${field.id + 'checkHideButton'})]*/checkHideButton 
+									= function(element, id) {
+
+								if(element.value == '') {
+									$("#" + id).addClass('d-none');
+								} else {
+									$("#" + id).removeClass('d-none');
+								}
+							}
+						</script>
+					</th:block>
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<select class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="name" disabled="disabled">
+						<option th:each="entity: ${refListMap.get(field.id)}" th:if="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), entity.id)}" 
+							th:value="${entity.id}" th:utext="|${entity.name}(${entity.id})|" 
+							th:selected="${#strings.equals(#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val), entity.id)}"></option>
+					</select>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

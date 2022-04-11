@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- SVG ICON -->
+<!--Menu ICON 선언-->
+<th:block th:fragment="menuIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon menu-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/menu'} :: ${#strings.toUpperCase(fragment)}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--ICON(Deprecated) 선언-->
+<th:block th:fragment="icon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/svg'} :: ${#strings.toUpperCase(fragment)}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--clothes ICON 선언-->
+<th:block th:fragment="clothesIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/clothes/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--code ICON 선언-->
+<th:block th:fragment="codeIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/code/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--communication ICON 선언-->
+<th:block th:fragment="communicationIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/communication/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--cooking ICON 선언-->
+<th:block th:fragment="cookingIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/cooking/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--design ICON 선언-->
+<th:block th:fragment="designIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/design/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--devices ICON 선언-->
+<th:block th:fragment="devicesIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/devices/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--electric ICON 선언-->
+<th:block th:fragment="electricIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/electric/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--files ICON 선언-->
+<th:block th:fragment="filesIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/files/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--food ICON 선언-->
+<th:block th:fragment="foodIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/food/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--general ICON 선언-->
+<th:block th:fragment="generalIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/general/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--home ICON 선언-->
+<th:block th:fragment="homeIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/home/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--layout ICON 선언-->
+<th:block th:fragment="layoutIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/layout/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--map ICON 선언-->
+<th:block th:fragment="mapIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/map/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--media ICON 선언-->
+<th:block th:fragment="mediaIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/media/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--navigation ICON 선언-->
+<th:block th:fragment="navigationIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/navigation/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--shopping ICON 선언-->
+<th:block th:fragment="shoppingIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/shopping/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--text ICON 선언-->
+<th:block th:fragment="textIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/text/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--tools ICON 선언-->
+<th:block th:fragment="toolsIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/tools/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+
+<!--weather ICON 선언-->
+<th:block th:fragment="weatherIcon(fragment, class)">
+	<span th:classappend="${!#strings.isEmpty(class)} ? ${class}" class="svg-icon">
+		<th:block th:if="${fragment != null}">
+			<th:block th:replace="@{'fragments/svg/weather/svg'} :: ${fragment}"></th:block>
+		</th:block>
+	</span>
+</th:block>
+</html>

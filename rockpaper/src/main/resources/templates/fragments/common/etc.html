@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- ETC Content -->
+<!--scrolltopFragment 선언-->
+<th:block th:fragment="scrolltopFragment">
+	<!--begin::Scrolltop-->
+	<div id="kt_scrolltop" class="scrolltop">
+		<!-- Navigation Icon fragment 사용 -->
+		<th:block th:replace="@{'fragments/svg/icon'} :: navigationIcon('Up-2', null)"></th:block>
+	</div>
+	<!--end::Scrolltop-->
+</th:block>
+</html>

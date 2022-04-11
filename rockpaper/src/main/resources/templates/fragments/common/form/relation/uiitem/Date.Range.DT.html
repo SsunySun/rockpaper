@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Date.Range.DT Fragment 선언-->
+<th:block th:fragment="fragment"
+	th:with="id=${index == 99 ? field.id + '_' + relationField.id + '_' + index + '_' + subIndex.index : field.id + '_' + relationField.id + '_' + index.index + '_' + subIndex.index}">
+
+	<th:block th:if="${relationField.hidden}">
+
+		<!--/* UIItem Field */-->
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+
+		<!--/* Config Field */-->
+		<input type="hidden" class="form-control" th:name="${relationField.config.target_id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${relationField.hidden}">
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'vertical')}">
+			<th:block th:replace=":: verticalFragment"></th:block>
+		</th:block>
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'horizontal')}">
+			<th:block th:replace=":: horizontalFragment"></th:block>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Date.Range.DT vertical Fragment 선언-->
+<th:block th:fragment="verticalFragment">
+	<div class="row">
+		<div class="col-12">
+			<label th:classappend="${auth && !relationField.readonly && relationField.require && isEdit} ? 'text-primary'" class="col-form-label" th:for="${relationField.id}" for="id" th:utext="${relationField.require} ? ${'* ' + relationField.label} : ${relationField.label}">Label</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<!--/* 권한이 있을 경우 */-->
+			<th:block th:if="${auth && isEdit}">
+				<div class='input-group' th:id="${id + 'daterangepicker'}" id='daterangepicker'>
+					<input type='text' th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" placeholder="Select date range" readonly="readonly" 
+						th:value="|${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)} ~ ${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}|"; />
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+					</div>
+				</div>
+
+				<!--/* UIItem Field */-->
+				<input type="hidden" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:id="${id + 'uiitem'}" id="id" th:placeholder="${relationField.placeholder}" placeholder="Select date range"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+
+				<!--/* Config Field */-->
+				<input type="hidden" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.config.target_id}" name="name" th:id="${id + 'config'}" id="id" th:placeholder="${relationField.placeholder}" placeholder="Select date range"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}" />
+
+				<th:block th:unless="${relationField.readonly}">
+					<script th:inline="javascript">
+						var /*[(${id + 'startDate'})]*/startDate
+							= "[(${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)})]";
+						if(!/*[(${id + 'startDate'})]*/startDate) {
+
+							/*[(${id + 'startDate'})]*/startDate
+								= moment().startOf('day');
+						}
+
+						var /*[(${id + 'endDate'})]*/endDate
+							= "[(${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)})]";
+						if(!/*[(${id + 'endDate'})]*/endDate) {
+
+							/*[(${id + 'endDate'})]*/endDate
+								= moment().endOf('day');
+						}
+
+						$("#[(${id})]daterangepicker").daterangepicker({
+							buttonClasses: 'btn',
+							applyClass: 'btn-primary',
+							cancelClass: 'btn-secondary',
+
+							timePicker: false,
+							timePickerIncrement: 30,
+							timePicker24Hour: true,
+
+							startDate: /*[(${id + 'startDate'})]*/startDate,
+							endDate: /*[(${id + 'endDate'})]*/endDate,
+							minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+							maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+							parentEl: "#[(${form_id})]",
+
+							locale: {
+								format: "YYYY-MM-DD",
+								titleFormat: "YYYY년 mm월",
+								separator: " ~ ",
+								applyLabel: "선택",
+								cancelLabel: "취소",
+								fromLabel: "종료일시",
+								toLabel: "시작일시",
+								customRangeLabel: "기간",
+								weekLabel: "주",
+								daysOfWeek: [ "일", "월", "화", "수", "목", "금", "토" ],
+								monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ]
+							},
+						}, function(start, end, label) {
+
+							$('#[(${id})]daterangepicker .form-control').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+							$('#[(${id + "uiitem"})]').val(start.format('YYYY-MM-DD'));
+							$('#[(${id + "config"})]').val(end.format('YYYY-MM-DD'));
+						});
+					</script>
+				</th:block>
+			</th:block>
+
+			<!--/* 권한이 없을 경우 */-->
+			<th:block th:unless="${auth && isEdit}">
+				<div class='input-group'>
+					<input type='text' class="form-control" th:placeholder="${relationField.placeholder}" placeholder="Select date range" readonly="readonly" 
+						th:value="|${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)} ~ ${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}|"; />
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+					</div>
+				</div>
+
+				<!--/* UIItem Field */-->
+				<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+
+				<!--/* Config Field */-->
+				<input type="hidden" class="form-control" th:name="${relationField.config.target_id}" name="name"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}" />
+			</th:block>
+		</div>
+	</div>
+</th:block>
+
+<!--Date.Range.DT horizontal Fragment 선언-->
+<th:block th:fragment="horizontalFragment">
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth && isEdit}">
+		<div class='input-group' th:id="${id + 'daterangepicker'}" id='daterangepicker' th:style="|width: ${relationField.width};|" style="width: 100%;">
+			<input type='text' th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:placeholder="${relationField.placeholder}" placeholder="Select date range" readonly="readonly" 
+				th:value="|${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)} ~ ${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}|"; />
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+			</div>
+		</div>
+
+		<!--/* UIItem Field */-->
+		<input type="hidden" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:id="${id + 'uiitem'}" id="id" th:placeholder="${relationField.placeholder}" placeholder="Select date range"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+
+		<!--/* Config Field */-->
+		<input type="hidden" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.config.target_id}" name="name" th:id="${id + 'config'}" id="id" th:placeholder="${relationField.placeholder}" placeholder="Select date range"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}" />
+
+		<th:block th:unless="${relationField.readonly}">
+			
+			<script th:inline="javascript">
+	
+				var /*[(${id + 'startDate'})]*/startDate
+					= "[(${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)})]";
+				if(!/*[(${id + 'startDate'})]*/startDate) {
+					/*[(${id + 'startDate'})]*/startDate
+						= moment().startOf('day');
+				}
+
+				var /*[(${id + 'endDate'})]*/endDate
+					= "[(${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)})]";
+				if(!/*[(${id + 'endDate'})]*/endDate) {
+					/*[(${id + 'endDate'})]*/endDate
+						= moment().endOf('day');
+				}
+				
+				$("#[(${id})]daterangepicker").daterangepicker({
+					buttonClasses: 'btn',
+					applyClass: 'btn-primary',
+					cancelClass: 'btn-secondary',
+
+					timePicker: false,
+					timePickerIncrement: 30,
+					timePicker24Hour: true,
+
+					startDate: /*[(${id + 'startDate'})]*/startDate,
+					endDate: /*[(${id + 'endDate'})]*/endDate,
+					// minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+					// maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+					parentEl: "#[(${form_id})]",
+
+					locale: {
+						format: "YYYY-MM-DD",
+						titleFormat: "YYYY년 mm월",
+						separator: " ~ ",
+						applyLabel: "선택",
+						cancelLabel: "취소",
+						fromLabel: "종료일시",
+						toLabel: "시작일시",
+						customRangeLabel: "기간",
+						weekLabel: "주",
+						daysOfWeek: [ "일", "월", "화", "수", "목", "금", "토" ],
+						monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ]
+					},
+				}, function(start, end, label) {
+
+					$('#[(${id})]daterangepicker .form-control').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+					$('#[(${id + "uiitem"})]').val(start.format('YYYY-MM-DD'));
+					$('#[(${id + "config"})]').val(end.format('YYYY-MM-DD'));
+				});
+			</script>
+		</th:block>
+	</th:block>
+
+	<!--/* 권한이 없을 경우 */-->
+	<th:block th:unless="${auth && isEdit}">
+		<div class='input-group'>
+			<input type='text' class="form-control" th:placeholder="${relationField.placeholder}" placeholder="Select date range" readonly="readonly" 
+				th:value="|${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)} ~ ${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}|"; />
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+			</div>
+		</div>
+
+		<!--/* UIItem Field */-->
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+
+		<!--/* Config Field */-->
+		<input type="hidden" class="form-control" th:name="${relationField.config.target_id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.config.target_def_val : (#maps.containsKey(relationObject, relationField.config.target_id) ? relationObject.get(relationField.config.target_id) : relationField.config.target_def_val)}" />
+	</th:block>
+</th:block>
+</html>

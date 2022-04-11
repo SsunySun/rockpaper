@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--cssFragment 선언-->
+<th:block th:fragment="cssFragment">
+
+	<!-- Content Page의 CSS fragment 삽입 -->
+	<th:block layout:fragment="pre-css"></th:block>
+
+	<!--begin::Global Theme Styles(used by all pages)-->
+	<link th:href="@{/assets/plugins/global/plugins.bundle.css}" href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/plugins/custom/prismjs/prismjs.bundle.css}" href="/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/css/style.bundle.css}" href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/css/style.css}" href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+	<!--end::Global Theme Styles-->
+
+	<!--begin::Layout Themes(used by all pages)-->
+	<link th:href="@{/assets/css/themes/layout/header/base/light.css}" href="/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/css/themes/layout/header/menu/light.css}" href="/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/css/themes/layout/brand/dark.css}" href="/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/css/themes/layout/aside/dark.css}" href="/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+	<!--end::Layout Themes-->
+
+	<!--begin::Page Vendors Styles(used by this page)-->
+	<link th:href="@{/assets/plugins/custom/jsoneditor/jsoneditor.min.css}" href="/assets/plugins/custom/jsoneditor/jsoneditor.min.css" rel="stylesheet" type="text/css">
+	<!--end::Page Vendors Styles-->
+
+	<!--begin::Page Vendors Styles(used by this page)-->
+	<link th:href="@{/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css}" href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css">
+	<!--end::Page Vendors Styles-->
+
+	<!-- Content Page의 CSS fragment 삽입 -->
+	<th:block layout:fragment="post-css"></th:block>
+
+	<link rel="shortcut icon" th:href="@{/assets/media/logos/favicon.ico}" href="/assets/media/logos/favicon.ico" />
+</th:block>
+</html>

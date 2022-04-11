@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--cardHeaderFragment 선언-->
+<th:block th:fragment="cardHeaderFragment">
+	<!--begin::Cardheader-->
+	<div class="card-header">
+		<div class="card-title">
+			<span class="card-icon">
+				<i class="flaticon2-delivery-package text-primary"></i>
+			</span>
+			<h3 class="card-label" th:text="${object.name}">TITLE</h3>
+		</div>
+		<div class="card-toolbar">
+			<th:block th:if="${config.action.export_btn.use}">
+				<!--begin::Dropdown-->
+				<div class="dropdown dropdown-inline mr-2">
+					<button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<!-- Design Icon fragment 사용 -->
+						<th:block th:replace="@{'fragments/svg/icon'} :: devicesIcon('Printer', 'svg-icon-md')"></th:block>
+						<th:block th:text="${config.action.export_btn.title}">Export</th:block>
+					</button>
+					<!--begin::Dropdown Menu-->
+					<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+						<!--begin::Navigation-->
+						<ul class="navi flex-column navi-hover py-2">
+							<li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
+							<th:block th:if="${config.action.export_btn.print}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_print">
+										<span class="navi-icon">
+											<i class="la la-print"></i>
+										</span>
+										<span class="navi-text">Print</span>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:if="${config.action.export_btn.copy}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_copy">
+										<span class="navi-icon">
+											<i class="la la-copy"></i>
+										</span>
+										<span class="navi-text">Copy</span>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:if="${config.action.export_btn.excel}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_excel">
+										<span class="navi-icon">
+											<i class="la la-file-excel-o"></i>
+										</span>
+										<span class="navi-text">Excel</span>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:if="${config.action.export_btn.csv}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_csv">
+										<span class="navi-icon">
+											<i class="la la-file-text-o"></i>
+										</span>
+										<span class="navi-text">CSV</span>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:if="${config.action.export_btn.pdf}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_pdf">
+										<span class="navi-icon">
+											<i class="la la-file-pdf-o"></i>
+										</span>
+										<span class="navi-text">PDF</span>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:if="${config.action.export_btn.excel_all}">
+								<li class="navi-item">
+									<a href="#" class="navi-link" id="export_excel_all">
+										<span class="navi-icon">
+											<i class="la la-file-excel-o"></i>
+										</span>
+										<span class="navi-text">Excel</span>
+									</a>
+								</li>
+							</th:block>
+						</ul>
+						<!--end::Navigation-->
+					</div>
+					<!--end::Dropdown Menu-->
+				</div>
+				<!--end::Dropdown-->
+			</th:block>
+
+			<th:block th:if="${config.action.create_btn.use}">
+				<!--begin::Button-->
+				<a href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#ticketModal" th:data-remote="${config.action.create_btn.url}" data-remote="#" th:data-name="${config.action.create_btn.modal_title}" data-name="Name">
+					<!-- Design Icon fragment 사용 -->
+					<th:block th:replace="@{'fragments/svg/icon'} :: navigationIcon('Plus', 'svg-icon-md')"></th:block>
+					<th:block th:text="${config.action.create_btn.title}">New Record</th:block>
+				</a>
+				<!--end::Button-->
+			</th:block>
+
+			<!-- Modal fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('ticketModal', 'ticketModalLabel')"></th:block>
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('calendarTicketModal', 'calendarTicketModalLabel')"></th:block>
+		</div>
+	</div>
+	<!--end::Cardheader-->
+</th:block>
+
+<!--calendarCardHeaderFragment 선언-->
+<th:block th:fragment="calendarCardHeaderFragment">
+	<!--begin::Cardheader-->
+	<div class="card-header">
+		<div class="card-title">
+			<span class="card-icon">
+				<i class="flaticon2-delivery-package text-primary"></i>
+			</span>
+			<h3 class="card-label" th:text="${object.name}">TITLE</h3>
+		</div>
+		<div class="card-toolbar">
+			<!-- Modal fragment 사용 -->
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('ticketModal', 'ticketModalLabel')"></th:block>
+			<th:block th:replace="@{'fragments/common/modal'} :: modalFragment('calendarTicketModal', 'calendarTicketModalLabel')"></th:block>
+		</div>
+	</div>
+	<!--end::Cardheader-->
+</th:block>
+</html>

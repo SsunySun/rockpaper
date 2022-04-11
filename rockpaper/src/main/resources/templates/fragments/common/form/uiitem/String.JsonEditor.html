@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--String.JsonEditor Fragment 선언-->
+<th:block th:fragment="fragment">
+	<th:block th:if="${field.hidden}">
+		<input type="hidden" class="form-control" th:name="${field.id}" name="id"
+			th:value="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${field.hidden}">
+		<div class="row">
+			<div class="col-12">
+				<label th:classappend="${auth && !field.readonly && field.require} ? 'text-primary'" class="col-form-label" th:for="${field.id}" for="id" th:utext="${field.require} ? ${'* ' + field.label} : ${field.label}">Label</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!--/* 권한이 있을 경우 */-->
+				<th:block th:if="${auth}">
+					<textarea class="form-control" style="display: none;" th:name="${field.id}" name="name" th:id="${field.id}" id="id" th:rows="${field.rows}" rows="5" 
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+					<div th:id="${field.id + '-editor'}" id="json-editor"></div>
+					<script th:inline="javascript">
+						// create the editor
+						new JSONEditor(document.getElementById('[(${field.id})]-editor'), 
+							{
+								mode: 'tree',
+								modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
+								onError: function (err) {
+									// console.error(err);
+									alert(err.toString());
+								},
+								onChange: function () {
+									// console.log('onChange');
+									editor.refresh()
+								},
+								onChangeJSON: function (json) {
+									// console.log('onChangeJSON', json);
+									editor.update(json)
+								},
+								onChangeText: function (text) {
+									// console.log('onChangeText', text);
+									$('#[(${field.id})]').text(text);
+								},
+								onFocus: function(event) {
+									// console.log('Focus : ', event);
+								},
+								onBlur: function(event) {
+									// console.log('Blur : ', event);
+								},
+								indentation: 4,
+								// escapeUnicode: true,
+								limitDragging: true
+							},
+							JSON.parse(/*[[${#maps.isEmpty(object) ? '{}' : (#maps.containsKey(object, field.id) ? object.get(field.id) : '{' + field.def_val + '}')}]]*/));
+					</script>
+				</th:block>
+
+				<!--/* 권한이 없을 경우 */-->
+				<th:block th:unless="${auth}">
+					<textarea class="form-control" th:name="${field.id}" name="name" th:id="${field.id}" id="id" th:rows="${field.rows}" rows="3" disabled="disabled" th:placeholder="${field.placeholder}" placeholder="값을 입력하세요"
+						th:utext="${#maps.isEmpty(object) ? field.def_val : (#maps.containsKey(object, field.id) ? object.get(field.id) : field.def_val)}"></textarea>
+				</th:block>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

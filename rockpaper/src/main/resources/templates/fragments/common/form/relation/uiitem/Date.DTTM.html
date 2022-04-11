@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Date.DTTM Fragment 선언-->
+<th:block th:fragment="fragment" 
+	th:with="id=${index == 99 ? field.id + '_' + relationField.id + '_' + index + '_' + subIndex.index : field.id + '_' + relationField.id + '_' + index.index + '_' + subIndex.index}">
+
+	<th:block th:if="${relationField.hidden}">
+		<input type="hidden" class="form-control" th:name="${relationField.id}" name="name"
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? relationObject.get(relationField.id) : relationField.def_val)}" />
+	</th:block>
+
+	<th:block th:unless="${relationField.hidden}">
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'vertical')}">
+			<th:block th:replace=":: verticalFragment"></th:block>
+		</th:block>
+		<th:block th:if="${#strings.equals(relationConfigMap.get(field.id).get('mode'), 'horizontal')}">
+			<th:block th:replace=":: horizontalFragment"></th:block>
+		</th:block>
+	</th:block>
+</th:block>
+
+<!--Date.DTTM vertical Fragment 선언-->
+<th:block th:fragment="verticalFragment">
+	<div class="row">
+		<div class="col-12">
+			<label th:classappend="${auth && !relationField.readonly && relationField.require && isEdit} ? 'text-primary'" class="col-form-label" th:for="${relationField.id}" for="id" th:utext="${relationField.require} ? ${'* ' + relationField.label} : ${relationField.label}">Label</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<!--/* 권한이 있을 경우 */-->
+			<th:block th:if="${auth && isEdit}">
+				<th:block th:if="${relationField.readonly}">
+					<div class="input-group" th:id="${id + 'datetimepicker'}" id='datetimepicker'>
+						<input type="text" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:id="${id}" id="id" readonly="readonly" th:placeholder="${relationField.placeholder}" placeholder="Select date & time"
+							th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+				</th:block>
+
+				<th:block th:unless="${relationField.readonly}">
+					<div class="input-group" th:id="${id + 'datetimepicker'}" id='datetimepicker' data-target-input="nearest" th:data-target="${'#' + id + 'datetimepicker'}" data-target="#datetimepicker" data-toggle="datetimepicker">
+						<input type="text" th:classappend="${relationField.require} ? 'require'" class="form-control datetimepicker-input" th:name="${relationField.id}" name="name" th:id="${id}" id="id" readonly="readonly" th:data-target="${'#' + id + 'datetimepicker'}" data-target="#datetimepicker" th:placeholder="${relationField.placeholder}" placeholder="Select date & time"
+							th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+						</div>
+					</div>
+					<script th:inline="javascript">
+						$("#[(${id})]datetimepicker").datetimepicker({
+							autoclose: true,
+							locale: 'ko',
+							format: 'yyyy-MM-DD HH:mm',
+							dayViewHeaderFormat: 'YYYY MMMM',
+							minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+							maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+							sideBySide: true,
+							stepping: 30,
+							useCurrent: false
+						});
+					</script>
+				</th:block>
+			</th:block>
+
+			<!--/* 권한이 없을 경우 */-->
+			<th:block th:unless="${auth && isEdit}">
+				<div class="input-group">
+					<input type="text" class="form-control" readonly="readonly" th:placeholder="${relationField.placeholder}" placeholder="Select date" 
+					th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+					<div class="input-group-append">
+						<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+					</div>
+				</div>
+			</th:block>
+		</div>
+	</div>
+</th:block>
+
+<!--Date.DTTM horizontal Fragment 선언-->
+<th:block th:fragment="horizontalFragment">
+	<!--/* 권한이 있을 경우 */-->
+	<th:block th:if="${auth && isEdit}">
+		<th:block th:if="${relationField.readonly}">
+			<div class="input-group" th:id="${id + 'datetimepicker'}" id='datetimepicker' th:style="|width: ${relationField.width};|" style="width: 100%;">
+				<input type="text" th:classappend="${relationField.require} ? 'require'" class="form-control" th:name="${relationField.id}" name="name" th:id="${id}" id="id" readonly="readonly" th:placeholder="${relationField.placeholder}" placeholder="Select date & time"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+				<div class="input-group-append">
+					<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+				</div>
+			</div>
+		</th:block>
+
+		<th:block th:unless="${relationField.readonly}">
+			<div class="input-group" th:id="${id + 'datetimepicker'}" id='datetimepicker' th:style="|width: ${relationField.width};|" style="width: 100%;" data-target-input="nearest" th:data-target="${'#' + id + 'datetimepicker'}" data-target="#datetimepicker" data-toggle="datetimepicker">
+				<input type="text" th:classappend="${relationField.require} ? 'require'" class="form-control datetimepicker-input" th:name="${relationField.id}" name="name" th:id="${id}" id="id" readonly="readonly" th:data-target="${'#' + id + 'datetimepicker'}" data-target="#datetimepicker" th:placeholder="${relationField.placeholder}" placeholder="Select date & time"
+					th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+				<div class="input-group-append">
+					<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+				</div>
+			</div>
+			<script th:inline="javascript">
+				$("#[(${id})]datetimepicker").datetimepicker({
+					autoclose: true,
+					locale: 'ko',
+					format: 'yyyy-MM-DD HH:mm',
+					dayViewHeaderFormat: 'YYYY MMMM',
+					minDate: moment().add(-1, 'month').format("YYYY-MM-DD"),
+					maxDate: moment().add(1, 'month').format("YYYY-MM-DD"),
+					sideBySide: true,
+					stepping: 30,
+					useCurrent: false,
+					widgetParent: '#[(${field.id})]'
+				});
+			</script>
+		</th:block>
+	</th:block>
+
+	<!--/* 권한이 없을 경우 */-->
+	<th:block th:unless="${auth && isEdit}">
+		<div class="input-group" th:style="|width: ${relationField.width};|" style="width: 100%;">
+			<input type="text" class="form-control" readonly="readonly" th:placeholder="${relationField.placeholder}" placeholder="Select date" 
+			th:value="${#maps.isEmpty(relationObject) ? relationField.def_val : (#maps.containsKey(relationObject, relationField.id) ? #dates.format(relationObject.get(relationField.id), 'yyyy-MM-dd HH:mm') : relationField.def_val)}" />
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>

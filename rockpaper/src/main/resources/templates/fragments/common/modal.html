@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--modalFragment 선언-->
+<th:block th:fragment="modalFragment(id, label)">
+	<!--begin::Modal-->
+	<div class="modal fade" th:id="${id}" id="modal" tabindex="-1" role="dialog" th:aria-labelledby="${label}" aria-labelledby="modalLabel" aria-hidden="true" data-keyboard="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="d-flex ellipsis-txt">
+						<span class="title-icon">
+							<i class="flaticon2-delivery-package text-primary"></i>
+						</span>
+						<span class="modal-title ellipsis-txt" th:id="${label}" id="modalLabel">Modal Title</span>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+	<!--end::Modal-->
+</th:block>
+</html>

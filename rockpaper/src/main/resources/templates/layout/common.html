@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<!--begin::Head-->
+	<head>
+		<meta charset="utf-8" />
+		<title>rockPLACE Paper</title>
+		<meta name="description" content="Updates and statistics" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+		<!-- csrf 테그 확인 필요 -->
+		<!-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/> -->
+
+		<!--begin::Fonts-->
+		<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700}" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+
+		<!-- css fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/css'} :: cssFragment"></th:block>
+
+		<!-- script fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/script'} :: scriptFragment"></th:block>
+	</head>
+	<!--end::Head-->
+	<th:block th:if="${isAside}">
+		<!-- body fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/body'} :: bodyFragment"></th:block>
+	</th:block>
+	<th:block th:unless="${isAside}">
+		<!-- no aside body fragment 사용 -->
+		<th:block th:replace="@{'fragments/common/body'} :: bodyNoAsideFragment"></th:block>
+	</th:block>
+</html>

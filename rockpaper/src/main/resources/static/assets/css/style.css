@@ -1,0 +1,62 @@
+.timeline.timeline-5 {
+    overflow: auto;
+    max-height: 150px;
+}
+
+.ellipsis-txt {
+    /* width: 70px; */
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+}
+
+.aside-minimize:not(.aside-minimize-hover) .user .user-info {
+    display: none;
+}
+
+.title-icon {
+    margin-right: 0.75rem;
+    line-height: 0;
+}
+
+.height-30 {
+    height: calc(30vh);
+    overflow: auto;
+}
+
+.height-50 {
+    height: calc(50vh);
+    overflow: auto;
+}
+
+.height-70 {
+    height: calc(70vh);
+    overflow: auto;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.hide {
+    display: none;
+}
+
+.summernote-div {
+    overflow: auto;
+    border: 1px solid #E4E6EF;
+    padding: 10px;
+}
+
+.datatable td {
+    overflow: hidden; /* this is what fixes the expansion */
+    text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
+    white-space: nowrap;
+ }

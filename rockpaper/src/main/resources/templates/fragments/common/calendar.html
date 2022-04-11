@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--calendarFragment 선언-->
+<th:block th:fragment="calendarFragment">
+	<!--begin::Card-->
+	<div class="card card-custom card-stretch" id="calendar-fragment">
+		<div class="card-header">
+			<div class="card-title">
+				<h3 class="card-label">엔지니어</h3>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="fc-unthemed">
+				<th:block th:each="employee : ${employeeList}">
+					<div th:classappend="${employee.class}" class="engineer text-center btn btn-block text-left font-weight-bold mb-5" th:utext="${employee.name}">엔지니어 #1</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+	<!--end::Card-->
+</th:block>
+</html>

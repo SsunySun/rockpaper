@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.rockplace.rshm.db.mapper.rshm.TableSchemaMapper">
+
+	<update id="createSystemTable" parameterType="java.util.Map">
+		CREATE TABLE IF NOT EXISTS ${schema}.${tableName} (
+			id VARCHAR(255) NOT NULL,
+			name VARCHAR(255) NOT NULL,
+			label VARCHAR(255),
+			descr LONGTEXT,
+			create_date DATETIME NOT NULL,
+			create_emp_id VARCHAR(255) NOT NULL,
+			update_date DATETIME,
+			update_emp_id VARCHAR(255),
+			used BIT NOT NULL,
+			order_by INTEGER NOT NULL,
+			PRIMARY KEY (id)
+		) engine=InnoDB;
+	</update>
+
+	<insert id="initSystemTableField" parameterType="java.util.Map">
+		INSERT INTO ${schema}.TAB_TABLE_FIELD
+		(ID, NAME, LABEL, DESCR, CREATE_DATE, CREATE_EMP_ID, UPDATE_DATE, UPDATE_EMP_ID, USED, ORDER_BY, 
+		 ENT_ID, TAB_ID, TFD_ID, TYPE, REF_ENT_ID, REF_CTY_ID, SYSTEM)
+		VALUES
+		('${tableName}/ID', 'ID', 'ID', 'ID', current_timestamp(), #{userId}, null, null, true, 1, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* ID */
+		('${tableName}/NAME', 'NAME', '이름', '이름', current_timestamp(), #{userId}, null, null, true, 2, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 이름 */
+		('${tableName}/LABEL', 'LABEL', '라벨', '라벨', current_timestamp(), #{userId}, null, null, true, 3, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 라벨 */
+		('${tableName}/DESCR', 'DESCR', '설명', '설명', current_timestamp(), #{userId}, null, null, true, 4, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXTAREA', null, null, true),	/* 설명 */
+		('${tableName}/USED', 'USED', '사용 여부', '사용 여부', current_timestamp(), #{userId}, null, null, true, 5, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_BOOLEAN', 'FLT_TYPE_BOOLEAN_RADIO', null, null, true),	/* 사용 여부 */
+		('${tableName}/ORDER_BY', 'ORDER_BY', '순서', '순서', current_timestamp(), #{userId}, null, null, true, 6, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_NUMBER', 'FLT_TYPE_NUMBER_DEF', null, null, true),	/* 순서 */
+		('${tableName}/CREATE_DATE', 'CREATE_DATE', '등록시간', '등록시간', current_timestamp(), #{userId}, null, null, true, 7, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 등록시간 */
+		('${tableName}/CREATE_EMP_ID', 'CREATE_EMP_ID', '등록자', '등록자', current_timestamp(), #{userId}, null, null, true, 8, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 등록자 */
+		('${tableName}/UPDATE_DATE', 'UPDATE_DATE', '수정시간', '수정시간', current_timestamp(), #{userId}, null, null, true, 9, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 수정시간 */
+		('${tableName}/UPDATE_EMP_ID', 'UPDATE_EMP_ID', '수정자', '수정자', current_timestamp(), #{userId}, null, null, true, 10, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true);	/* 수정자 */
+	</insert>
+
+	<update id="createWorkflowTable" parameterType="java.util.Map">
+		CREATE TABLE IF NOT EXISTS ${schema}.${tableName} (
+			id VARCHAR(255) NOT NULL,
+			name VARCHAR(255) NOT NULL,
+			label VARCHAR(255),
+			descr LONGTEXT,
+			create_date DATETIME NOT NULL,
+			create_emp_id VARCHAR(255) NOT NULL,
+			update_date DATETIME,
+			update_emp_id VARCHAR(255),
+			used BIT NOT NULL,
+			order_by INTEGER NOT NULL,
+
+			ent_id VARCHAR(255) NOT NULL, 	-- 엔티티 ID
+			tas_id VARCHAR(255),			-- 단계
+			req_date DATE,					-- 요청일
+			req_emp_id VARCHAR(255),		-- 요청자
+			clo_date DATETIME,				-- 종료일
+			clo_emp_id VARCHAR(255),		-- 종료자
+			ass_emp_id VARCHAR(255),		-- 현재 담당자
+			src_id VARCHAR(255),			-- 상위 ID
+			src_ent_id VARCHAR(255),		-- 상위 Entity ID
+			content LONGTEXT,				-- 내역
+			PRIMARY KEY (id)
+		) ENGINE=InnoDB;
+	</update>
+
+	<insert id="initWorkflowTableField" parameterType="java.util.Map">
+		INSERT INTO ${schema}.TAB_TABLE_FIELD
+		(ID, NAME, LABEL, DESCR, CREATE_DATE, CREATE_EMP_ID, UPDATE_DATE, UPDATE_EMP_ID, USED, ORDER_BY, 
+		 ENT_ID, TAB_ID, TFD_ID, TYPE, REF_ENT_ID, REF_CTY_ID, SYSTEM)
+		VALUES
+		('${tableName}/ID', 'ID', 'ID', 'ID', current_timestamp(), #{userId}, null, null, true, 1, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* ID */
+		('${tableName}/NAME', 'NAME', '이름', '이름', current_timestamp(), #{userId}, null, null, true, 2, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 이름 */
+		('${tableName}/LABEL', 'LABEL', '라벨', '라벨', current_timestamp(), #{userId}, null, null, true, 3, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 라벨 */
+		('${tableName}/DESCR', 'DESCR', '설명', '설명', current_timestamp(), #{userId}, null, null, true, 4, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXTAREA', null, null, true),	/* 설명 */
+		('${tableName}/USED', 'USED', '사용 여부', '사용 여부', current_timestamp(), #{userId}, null, null, true, 5, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_BOOLEAN', 'FLT_TYPE_BOOLEAN_RADIO', null, null, true),	/* 사용 여부 */
+		('${tableName}/ORDER_BY', 'ORDER_BY', '순서', '순서', current_timestamp(), #{userId}, null, null, true, 6, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_NUMBER', 'FLT_TYPE_NUMBER_DEF', null, null, true),	/* 순서 */
+		('${tableName}/CREATE_DATE', 'CREATE_DATE', '등록시간', '등록시간', current_timestamp(), #{userId}, null, null, true, 7, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 등록시간 */
+		('${tableName}/CREATE_EMP_ID', 'CREATE_EMP_ID', '등록자', '등록자', current_timestamp(), #{userId}, null, null, true, 8, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 등록자 */
+		('${tableName}/UPDATE_DATE', 'UPDATE_DATE', '수정시간', '수정시간', current_timestamp(), #{userId}, null, null, true, 9, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 수정시간 */
+		('${tableName}/UPDATE_EMP_ID', 'UPDATE_EMP_ID', '수정자', '수정자', current_timestamp(), #{userId}, null, null, true, 10, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 수정자 */
+
+		('${tableName}/ENT_ID', 'ENT_ID', '엔티티 ID', '엔티티 ID', current_timestamp(), #{userId}, null, null, true, 11, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'ENT', null, true),	/* 엔티티 ID */
+		('${tableName}/TAS_ID', 'TAS_ID', '단계', '단계', current_timestamp(), #{userId}, null, null, true, 12, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'TAS', null, true),	/* 단계 */
+		('${tableName}/REQ_DATE', 'REQ_DATE', '요청일', '요청일', current_timestamp(), #{userId}, null, null, true, 13, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DT', null, null, true),	/* 요청일 */
+		('${tableName}/REQ_EMP_ID', 'REQ_EMP_ID', '요청자', '요청자', current_timestamp(), #{userId}, null, null, true, 14, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 요청자 */
+		('${tableName}/CLO_DATE', 'CLO_DATE', '종료일', '종료일', current_timestamp(), #{userId}, null, null, true, 15, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DT', null, null, true),	/* 종료일 */
+		('${tableName}/CLO_EMP_ID', 'CLO_EMP_ID', '종료자', '종료자', current_timestamp(), #{userId}, null, null, true, 16, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 종료자 */
+		('${tableName}/ASS_EMP_ID', 'ASS_EMP_ID', '현재 담당자', '현재 담당자', current_timestamp(), #{userId}, null, null, true, 17, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 현재 담당자 */
+
+		('${tableName}/SRC_ID', 'SRC_ID', '상위 ID', '상위 ID', current_timestamp(), #{userId}, null, null, true, 18, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 상위 ID */
+		('${tableName}/SRC_ENT_ID', 'SRC_ENT_ID', '상위 Entity ID', '상위 Entity ID', current_timestamp(), #{userId}, null, null, true, 19, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'ENT', null, true),	/* 상위 Entity ID */
+		 ('${tableName}/CONTENT', 'CONTENT', '설명', '설명', current_timestamp(), #{userId}, null, null, true, 20, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXTAREA', null, null, true);	/* 설명 */
+	</insert>
+
+	<update id="createCustomTable" parameterType="java.util.Map">
+		CREATE TABLE IF NOT EXISTS ${schema}.${tableName} (
+			id VARCHAR(255) NOT NULL,
+			name VARCHAR(255) NOT NULL,
+			label VARCHAR(255),
+			descr LONGTEXT,
+			create_date DATETIME NOT NULL,
+			create_emp_id VARCHAR(255) NOT NULL,
+			update_date DATETIME,
+			update_emp_id VARCHAR(255),
+			used BIT NOT NULL,
+			order_by INTEGER NOT NULL,
+			PRIMARY KEY (id)
+		) ENGINE=InnoDB;
+	</update>
+
+	<insert id="initCustomTableField" parameterType="java.util.Map">
+		INSERT INTO ${schema}.TAB_TABLE_FIELD
+		(ID, NAME, LABEL, DESCR, CREATE_DATE, CREATE_EMP_ID, UPDATE_DATE, UPDATE_EMP_ID, USED, ORDER_BY, 
+		 ENT_ID, TAB_ID, TFD_ID, TYPE, REF_ENT_ID, REF_CTY_ID, SYSTEM)
+		VALUES
+		('${tableName}/ID', 'ID', 'ID', 'ID', current_timestamp(), #{userId}, null, null, true, 1, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* ID */
+		('${tableName}/NAME', 'NAME', '이름', '이름', current_timestamp(), #{userId}, null, null, true, 2, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 이름 */
+		('${tableName}/LABEL', 'LABEL', '라벨', '라벨', current_timestamp(), #{userId}, null, null, true, 3, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXT', null, null, true),	/* 라벨 */
+		('${tableName}/DESCR', 'DESCR', '설명', '설명', current_timestamp(), #{userId}, null, null, true, 4, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_STRING', 'FLT_TYPE_STRING_TEXTAREA', null, null, true),	/* 설명 */
+		('${tableName}/USED', 'USED', '사용 여부', '사용 여부', current_timestamp(), #{userId}, null, null, true, 5, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_BOOLEAN', 'FLT_TYPE_BOOLEAN_RADIO', null, null, true),	/* 사용 여부 */
+		('${tableName}/ORDER_BY', 'ORDER_BY', '순서', '순서', current_timestamp(), #{userId}, null, null, true, 6, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_NUMBER', 'FLT_TYPE_NUMBER_DEF', null, null, true),	/* 순서 */
+		('${tableName}/CREATE_DATE', 'CREATE_DATE', '등록시간', '등록시간', current_timestamp(), #{userId}, null, null, true, 7, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 등록시간 */
+		('${tableName}/CREATE_EMP_ID', 'CREATE_EMP_ID', '등록자', '등록자', current_timestamp(), #{userId}, null, null, true, 8, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true),	/* 등록자 */
+		('${tableName}/UPDATE_DATE', 'UPDATE_DATE', '수정시간', '수정시간', current_timestamp(), #{userId}, null, null, true, 9, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_DATE', 'FLT_TYPE_DATE_DTTM', null, null, true),	/* 수정시간 */
+		('${tableName}/UPDATE_EMP_ID', 'UPDATE_EMP_ID', '수정자', '수정자', current_timestamp(), #{userId}, null, null, true, 10, 
+		 #{entId}, #{tableName}, 'FLT_TYPE_ENTITY', 'FLT_TYPE_ENTITY_SELECT', 'EMP', null, true);	/* 수정자 */
+	</insert>
+	<!--
+	Remove List
+	  Entity
+	  Table
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	 -->
+	<update id="dropTable" parameterType="java.lang.String">
+		DROP TABLE IF EXISTS ${schema}.${tableName};
+	</update>
+
+	<!--
+	Rename List
+	  Entity
+	  Table
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	-->
+	<update id="renameTable" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${oldTableName} RENAME ${schema}.${newTableName};
+	</update>
+
+	<select id="existColumn" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM INFORMATION_SCHEMA.COLUMNS
+		 WHERE TABLE_SCHEMA = #{schema}
+		   AND TABLE_NAME = #{tableName}
+		   AND COLUMN_NAME = #{columnName}
+	</select>
+
+	<!--
+	Add Column List
+	  Table_Field
+	-->
+	<update id="addColumn" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${tableName} ADD COLUMN ${columnName} ${columnType};
+	</update>
+
+	<!--
+	Change Column List
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	-->
+	<update id="changeColumn" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${tableName} CHANGE COLUMN ${oldColumnName} ${newColumnName} ${columnType};
+	</update>
+
+	<!--
+	Modify Column List
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	-->
+	<update id="modifyColumn" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${tableName} MODIFY COLUMN ${columnName} ${columnType};
+	</update>
+
+	<!--
+	Change Column List
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	-->
+	<update id="renameColumn" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${tableName} RENAME COLUMN ${oldColumnName} TO ${newColumnName};
+	</update>
+
+	<!--
+	Drop Column List
+	  Table_Field
+	  Entity을 사용하는 모든 Entity(Workflow, Form 등등)
+	-->
+	<update id="dropColumn" parameterType="java.util.Map">
+		ALTER TABLE ${schema}.${tableName} DROP COLUMN ${columnName};
+	</update>
+</mapper>

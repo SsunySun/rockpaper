@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Date.Month Fragment 선언-->
+<th:block th:fragment="fragment">
+	<div th:class="|col-lg-${sub_filter.width} mb-lg-0 mb-6|" class="col-lg-3 mb-lg-0 mb-6">
+		<label th:text="${sub_filter.label}" th:for="${sub_filter.id}">Label</label>
+		<div class="input-group" th:id="${sub_filter.id + 'datetimepicker'}" id='datetimepicker' data-target-input="nearest" th:data-target="${'#' + sub_filter.id + 'datetimepicker'}" data-target="#datetimepicker" data-toggle="datetimepicker">
+			<input type="text" class="form-control datatable-input" th:name="${sub_filter.id}" name="name" th:id="${sub_filter.id}" id="id" readonly="readonly" th:data-target="${'#' + sub_filter.id + 'datetimepicker'}" data-target="#datetimepicker" th:placeholder="${sub_filter.label}" placeholder="placeholder" th:data-col-index="${sub_filter.index}" data-col-index="0" />
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="la la-calendar-check-o"></i></span>
+			</div>
+		</div>
+		<script th:inline="javascript">
+			setDefaultDateValue(/*[[${sub_filter.def_val}]]*/ '', /*[[${sub_filter.index}]]*/ '');
+			$("#[(${sub_filter.id})]datetimepicker").datetimepicker({
+				autoclose: true,
+				locale: 'ko',
+				format: 'yyyy-MM',
+				dayViewHeaderFormat: 'YYYY MMMM',
+				minDate: "2022-01",
+				maxDate: moment().add(0, 'month').format("YYYY-MM"),
+				sideBySide: true,
+				stepping: 30,
+				useCurrent: false
+			});
+		</script>
+	</div>
+</th:block>
+</html>
